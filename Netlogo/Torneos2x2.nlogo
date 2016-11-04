@@ -54,7 +54,6 @@ to-report alwaysDefect
 end
 
 to-report titForTat [decisionesRival turno]
-
   ifelse turno = 0 or (item (turno - 1) decisionesRival) = True
   [
     report True
@@ -66,7 +65,13 @@ end
 
 
 to-report titFor2Tats [decisionesRival turno]
-;ToDo
+  ifelse turno < 2 or ((item (turno - 1) decisionesRival) = True and (item (turno - 2) decisionesRival) = True)
+  [
+    report True
+  ]
+  [
+    report False
+  ]
 end
 
 
@@ -222,7 +227,7 @@ nrondas
 nrondas
 10
 1000
-200
+10
 10
 1
 NIL
@@ -236,7 +241,7 @@ CHOOSER
 estrategia1
 estrategia1
 "Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
-2
+1
 
 CHOOSER
 18
@@ -246,7 +251,7 @@ CHOOSER
 estrategia2
 estrategia2
 "Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
-1
+2
 
 BUTTON
 69
