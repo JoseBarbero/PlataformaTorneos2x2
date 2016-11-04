@@ -85,7 +85,7 @@ to-report joss [decisionesRival turno]
 end
 
 to-report randomSt
-;ToDo
+  ifelse random 2 = 0 [report True] [report False]
 end
 
 to recuentoDePuntos [decisionesA decisionesB]
@@ -135,6 +135,8 @@ to recuentoDePuntos [decisionesA decisionesB]
     dibujarPayOff puntuacionTotalA puntuacionTotalB
     set contadorTurnos contadorTurnos + 1
   ]
+  output-type "Puntuación final Estrategia1:" output-print puntuacionTotalA
+  output-type "Puntuación final Estrategia2:" output-print puntuacionTotalB
 
 end
 
@@ -227,7 +229,7 @@ nrondas
 nrondas
 10
 1000
-10
+200
 10
 1
 NIL
@@ -241,7 +243,7 @@ CHOOSER
 estrategia1
 estrategia1
 "Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
-1
+6
 
 CHOOSER
 18
@@ -290,10 +292,10 @@ PENS
 "Estrategia2" 1.0 0 -5298144 true "" ""
 
 PLOT
-25
-330
-928
-480
+12
+331
+915
+481
 Decisiones
 NIL
 Coopera(1)/No coopera(0)
@@ -307,6 +309,13 @@ true
 PENS
 "Estrategia1" 1.0 0 -14070903 true "" ""
 "Estrategia2" 1.0 0 -5298144 true "" ""
+
+OUTPUT
+9
+238
+412
+286
+15
 
 @#$#@#$#@
 ## WHAT IS IT?
