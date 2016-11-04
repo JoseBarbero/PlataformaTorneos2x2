@@ -8,10 +8,10 @@ to enfrentamiento
   [
     ifelse estrategia1 = "Always Cooperate" [set decisionesA lput alwaysCooperate decisionesA]
     [ifelse estrategia1 = "Always Defect" [set decisionesA lput alwaysDefect decisionesA]
-      [ifelse estrategia1 = "Tit for Tat" [set decisionesA lput (titForTat decisionesB) decisionesA]
-        [ifelse estrategia1 = "Tit for two Tats" [set decisionesA lput (titFor2Tats decisionesB) decisionesA]
+      [ifelse estrategia1 = "Tit for Tat" [set decisionesA lput (titForTat decisionesB turno) decisionesA]
+        [ifelse estrategia1 = "Tit for two Tats" [set decisionesA lput (titFor2Tats decisionesB turno) decisionesA]
           [ifelse estrategia1 = "Friedman" [set decisionesA lput (friedman decisionesB) decisionesA]
-            [ifelse estrategia1 = "Joss" [set decisionesA lput (joss decisionesB) decisionesA]
+            [ifelse estrategia1 = "Joss" [set decisionesA lput (joss decisionesB turno) decisionesA]
               [ifelse estrategia1 = "Random" [set decisionesA lput randomSt decisionesA]
                 [set decisionesA lput False decisionesA]
               ]
@@ -23,10 +23,10 @@ to enfrentamiento
 
     ifelse estrategia2 = "Always Cooperate" [set decisionesB lput alwaysCooperate decisionesB]
     [ifelse estrategia2 = "Always Defect" [set decisionesB lput alwaysDefect decisionesB]
-      [ifelse estrategia2 = "Tit for Tat" [set decisionesB lput (titForTat decisionesA) decisionesB]
-        [ifelse estrategia2 = "Tit for two Tats" [set decisionesB lput (titFor2Tats decisionesA) decisionesB]
+      [ifelse estrategia2 = "Tit for Tat" [set decisionesB lput (titForTat decisionesA turno) decisionesB]
+        [ifelse estrategia2 = "Tit for two Tats" [set decisionesB lput (titFor2Tats decisionesA turno) decisionesB]
           [ifelse estrategia2 = "Friedman" [set decisionesB lput (friedman decisionesA) decisionesB]
-            [ifelse estrategia2 = "Joss" [set decisionesB lput (joss decisionesA) decisionesB]
+            [ifelse estrategia2 = "Joss" [set decisionesB lput (joss decisionesA turno) decisionesB]
               [ifelse estrategia2 = "Random" [set decisionesB lput randomSt decisionesB]
                 [set decisionesB lput False decisionesB]
               ]
@@ -53,12 +53,19 @@ to-report alwaysDefect
   report False
 end
 
-to-report titForTat [decisionesRival]
-;ToDo
+to-report titForTat [decisionesRival turno]
+
+  ifelse turno = 0 or (item (turno - 1) decisionesRival) = True
+  [
+    report True
+  ]
+  [
+    report False
+  ]
 end
 
 
-to-report titFor2Tats [decisionesRival]
+to-report titFor2Tats [decisionesRival turno]
 ;ToDo
 end
 
@@ -68,7 +75,7 @@ to-report friedman [decisionesRival]
 end
 
 
-to-report joss [decisionesRival]
+to-report joss [decisionesRival turno]
 ;ToDo
 end
 
@@ -178,7 +185,6 @@ end
 
 
 
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
@@ -230,7 +236,7 @@ CHOOSER
 estrategia1
 estrategia1
 "Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
-1
+2
 
 CHOOSER
 18
@@ -240,7 +246,7 @@ CHOOSER
 estrategia2
 estrategia2
 "Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
-0
+1
 
 BUTTON
 69
@@ -294,8 +300,8 @@ true
 true
 "" ""
 PENS
-"Estrategia1" 1.0 0 -5298144 true "" ""
-"Estrategia2" 1.0 0 -14070903 true "" ""
+"Estrategia1" 1.0 0 -14070903 true "" ""
+"Estrategia2" 1.0 0 -5298144 true "" ""
 
 @#$#@#$#@
 ## WHAT IS IT?
