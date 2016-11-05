@@ -6,14 +6,16 @@ to enfrentamiento
   let decisionB False
   while [turno < nrondas]
   [
-    ifelse estrategia1 = "Always Cooperate" [set decisionesA lput alwaysCooperate decisionesA]
-    [ifelse estrategia1 = "Always Defect" [set decisionesA lput alwaysDefect decisionesA]
-      [ifelse estrategia1 = "Tit for Tat" [set decisionesA lput (titForTat decisionesB turno) decisionesA]
-        [ifelse estrategia1 = "Tit for two Tats" [set decisionesA lput (titFor2Tats decisionesB turno) decisionesA]
-          [ifelse estrategia1 = "Friedman" [set decisionesA lput (friedman decisionesB) decisionesA]
-            [ifelse estrategia1 = "Joss" [set decisionesA lput (joss decisionesB turno) decisionesA]
-              [ifelse estrategia1 = "Random" [set decisionesA lput randomSt decisionesA]
-                [set decisionesA lput False decisionesA]
+    set decisionA False
+    set decisionB False
+
+    ifelse estrategia1 = "Always Cooperate" [set decisionA alwaysCooperate]
+    [ifelse estrategia1 = "Always Defect" [set decisionA alwaysDefect]
+      [ifelse estrategia1 = "Tit for Tat" [set decisionA (titForTat decisionesB turno)]
+        [ifelse estrategia1 = "Tit for two Tats" [set decisionA (titFor2Tats decisionesB turno)]
+          [ifelse estrategia1 = "Friedman" [set decisionA (friedman decisionesB)]
+            [ifelse estrategia1 = "Joss" [set decisionA (joss decisionesB turno)]
+              [if estrategia1 = "Random" [set decisionA randomSt]
               ]
             ]
           ]
@@ -21,21 +23,21 @@ to enfrentamiento
       ]
     ]
 
-    ifelse estrategia2 = "Always Cooperate" [set decisionesB lput alwaysCooperate decisionesB]
-    [ifelse estrategia2 = "Always Defect" [set decisionesB lput alwaysDefect decisionesB]
-      [ifelse estrategia2 = "Tit for Tat" [set decisionesB lput (titForTat decisionesA turno) decisionesB]
-        [ifelse estrategia2 = "Tit for two Tats" [set decisionesB lput (titFor2Tats decisionesA turno) decisionesB]
-          [ifelse estrategia2 = "Friedman" [set decisionesB lput (friedman decisionesA) decisionesB]
-            [ifelse estrategia2 = "Joss" [set decisionesB lput (joss decisionesA turno) decisionesB]
-              [ifelse estrategia2 = "Random" [set decisionesB lput randomSt decisionesB]
-                [set decisionesB lput False decisionesB]
+    ifelse estrategia2 = "Always Cooperate" [set decisionB alwaysCooperate]
+    [ifelse estrategia2 = "Always Defect" [set decisionB alwaysDefect]
+      [ifelse estrategia2 = "Tit for Tat" [set decisionB (titForTat decisionesA turno)]
+        [ifelse estrategia2 = "Tit for two Tats" [set decisionB (titFor2Tats decisionesA turno)]
+          [ifelse estrategia2 = "Friedman" [set decisionB (friedman decisionesA)]
+            [ifelse estrategia2 = "Joss" [set decisionB (joss decisionesA turno)]
+              [if estrategia2 = "Random" [set decisionB randomSt]
               ]
             ]
           ]
         ]
       ]
     ]
-
+    set decisionesA lput decisionA decisionesA
+    set decisionesB lput decisionB decisionesB
     set turno turno + 1
   ]
   ca
@@ -76,7 +78,13 @@ end
 
 
 to-report friedman [decisionesRival]
-;ToDo
+  ifelse (member? False decisionesRival)
+  [
+    report False
+  ]
+  [
+    report True
+  ]
 end
 
 
@@ -191,13 +199,12 @@ end
 
 
 
-
 @#$#@#$#@
 GRAPHICS-WINDOW
-210
-10
-455
-230
+216
+14
+461
+234
 16
 16
 5.73
@@ -221,10 +228,10 @@ ticks
 30.0
 
 SLIDER
-18
-44
-190
-77
+21
+26
+193
+59
 nrondas
 nrondas
 10
@@ -236,30 +243,30 @@ NIL
 HORIZONTAL
 
 CHOOSER
-18
-77
-190
-122
+21
+59
+193
+104
 estrategia1
 estrategia1
 "Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
 6
 
 CHOOSER
-18
-122
-190
-167
+21
+104
+193
+149
 estrategia2
 estrategia2
 "Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
-2
+4
 
 BUTTON
-69
-172
-132
-205
+74
+157
+137
+190
 Start
 enfrentamiento
 NIL
@@ -273,10 +280,10 @@ NIL
 1
 
 PLOT
-429
-24
-910
-309
+434
+10
+915
+295
 Payoff
 Turnos
 Puntuación
@@ -293,9 +300,9 @@ PENS
 
 PLOT
 12
-331
+318
 915
-481
+468
 Decisiones
 NIL
 Coopera(1)/No coopera(0)
@@ -311,10 +318,10 @@ PENS
 "Estrategia2" 1.0 0 -5298144 true "" ""
 
 OUTPUT
-9
-238
-412
-286
+13
+246
+416
+294
 15
 
 @#$#@#$#@
