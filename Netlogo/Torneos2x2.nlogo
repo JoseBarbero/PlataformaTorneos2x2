@@ -89,7 +89,19 @@ end
 
 
 to-report joss [decisionesRival turno]
-;ToDo
+  ifelse (titForTat decisionesRival turno)
+  [
+    ifelse random 100 < 10
+    [
+      report False
+    ]
+    [
+      report True
+    ]
+  ]
+  [
+    report False
+  ]
 end
 
 to-report randomSt
