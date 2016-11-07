@@ -1,13 +1,88 @@
-;Modelo que permite un enfrentamiento entre dos estrategias predefinidas
-;durante un número n de rondas. Finalmente muestra las decisiones tomadas
-;por ambas estrategias y las puntuaciones finales.
+;Modelo de torneos 2x2 que lee las estrategias presentadas en un fichero .txt
+;y las enfrenta contra el resto de estrategias, contra sí misma y contra una
+;solución aleatoria durante un número determinado de rondas. Finalmente muestra
+;los resultados de la puntuación de cada enfrentamiento y los resultados totales.
 
-to enfrentamiento
+to torneo
+  let estrategias []
+  set estrategias (leerEstrategias "Estrategias.txt")
+  if not member? "Random" estrategias [set estrategias lput "Random" estrategias]
+  ranking (emparejamientos estrategias)
+end
+
+to ranking [puntuaciones]
+  set puntuaciones (ordenacion puntuaciones)
+  let ronda 0
+  while [ronda < length puntuaciones]
+  [
+    type ronda + 1
+    type "º Puesto: "
+    type item 0 item ronda puntuaciones
+    type " con puntuación: "
+    print item 1 item ronda puntuaciones
+    set ronda ronda + 1
+  ]
+end
+
+to-report ordenacion [puntuaciones]
+  ;Algoritmo de ordenación por inserción
+  let p 1
+  let j 0
+  let aux 0
+  while [p < length puntuaciones]
+  [
+    set aux (item p puntuaciones)
+    set j p - 1
+    while [ j >= 0 and (item 1 aux) > (item 1 (item j puntuaciones))]
+    [
+      set puntuaciones replace-item (j + 1) puntuaciones (item j puntuaciones)
+      set j j - 1
+    ]
+    set puntuaciones replace-item (j + 1) puntuaciones aux
+    set p p + 1
+  ]
+  report puntuaciones
+end
+
+to-report emparejamientos [estrategias]
+  let nEstrategia1 0
+  let puntosGlobales [] ;Almacena los puntos acumulados de cada una de las estrategias
+  while [nEstrategia1 < (length estrategias)]
+  [
+    let puntosEstrategia 0 ;Almacena los puntos acumulados por una estrategia
+
+    let nEstrategia2 0
+    while [nEstrategia2 < (length estrategias)]
+    [
+      let resultado []
+      let puntosEnfrentamiento 0
+      set resultado enfrentamiento (item nEstrategia1 estrategias) (item nEstrategia2 estrategias)
+      type "Enfrentamiento "
+      type (item nEstrategia1 estrategias)
+      type " vs "
+      type (item nEstrategia2 estrategias)
+      type " - Resultado: "
+      print resultado
+      set puntosEnfrentamiento (item 0 resultado)
+      set puntosEstrategia puntosEstrategia + puntosEnfrentamiento
+      set nEstrategia2 nEstrategia2 + 1
+    ]
+    let parPuntosEstrategia []
+    set parPuntosEstrategia lput (item nEstrategia1 estrategias) parPuntosEstrategia
+    set parPuntosEstrategia lput puntosEstrategia parPuntosEstrategia
+    set puntosGlobales lput parPuntosEstrategia puntosGlobales
+    set nEstrategia1 nEstrategia1 + 1
+  ]
+  report puntosGlobales
+end
+
+to-report enfrentamiento [estrategia1 estrategia2]
   let turno 0
   let decisionesA []
   let decisionesB []
   let decisionA False
   let decisionB False
+  let puntuaciones []
   while [turno < nrondas]
   [
     set decisionA False
@@ -44,12 +119,19 @@ to enfrentamiento
     set decisionesB lput decisionB decisionesB
     set turno turno + 1
   ]
-  ca
-  type "Decisiones de A: " print decisionesA
-  type "Decisiones de B: " print decisionesB
-  recuentoDePuntos decisionesA decisionesB
+  report recuentoDePuntos decisionesA decisionesB
 end
 
+to-report leerEstrategias [archivo]
+  file-open archivo
+  let estrategias []
+  while [not file-at-end?]
+  [
+    set estrategias lput file-read-line estrategias
+  ]
+  file-close
+  report estrategias
+end
 
 to-report alwaysCooperate
   report True
@@ -112,12 +194,13 @@ to-report randomSt
   ifelse random 2 = 0 [report True] [report False]
 end
 
-to recuentoDePuntos [decisionesA decisionesB]
+to-report recuentoDePuntos [decisionesA decisionesB]
   let contadorTurnos 0
   let puntuacionesA []
   let puntuacionesB []
   let puntuacionTotalA 0
   let puntuacionTotalB 0
+  let resultados []
 
   ;ToDo revisar puntuacion, ahora mismo: 10-6-3-1
   while [contadorTurnos < nrondas]
@@ -155,41 +238,12 @@ to recuentoDePuntos [decisionesA decisionesB]
         ]
       ]
     ]
-    dibujarEleccion (item contadorTurnos decisionesA) (item contadorTurnos decisionesB)
-    dibujarPayOff puntuacionTotalA puntuacionTotalB
     set contadorTurnos contadorTurnos + 1
   ]
-  output-type "Puntuación final Estrategia1:" output-print puntuacionTotalA
-  output-type "Puntuación final Estrategia2:" output-print puntuacionTotalB
-
+  set resultados lput puntuacionTotalA resultados
+  set resultados lput puntuacionTotalB resultados
+  report resultados
 end
-
-to dibujarPayoff [acumulado1 acumulado2]
-  set-current-plot "Payoff"
-  ;ToDo Identificar cada estrategia con su nombre en la gráfica
-  set-current-plot-pen "Estrategia1"
-  plot acumulado1
-  set-current-plot-pen "Estrategia2"
-  plot acumulado2
-end
-
-to dibujarEleccion [decision1 decision2]
-  let valorDecision1 0
-  let valorDecision2 0
-  if decision1 = True [set valorDecision1 1]
-  if decision2 = True [set valorDecision2 1]
-  set-current-plot "Decisiones"
-  ;ToDo Identificar cada estrategia con su nombre en la gráfica
-  set-current-plot-pen "Estrategia1"
-  plot valorDecision1
-  set-current-plot-pen "Estrategia2"
-  plot valorDecision2
-end
-
-
-
-
-
 
 
 
@@ -257,33 +311,13 @@ nrondas
 NIL
 HORIZONTAL
 
-CHOOSER
-21
-59
-193
-104
-estrategia1
-estrategia1
-"Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
-6
-
-CHOOSER
-21
-104
-193
-149
-estrategia2
-estrategia2
-"Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
-4
-
 BUTTON
-74
-157
-137
-190
+72
+63
+135
+96
 Start
-enfrentamiento
+torneo
 NIL
 1
 T
@@ -293,51 +327,6 @@ NIL
 NIL
 NIL
 1
-
-PLOT
-434
-10
-915
-295
-Payoff
-Turnos
-Puntuación
-0.0
-10.0
-0.0
-10.0
-true
-true
-"" ""
-PENS
-"Estrategia1" 1.0 0 -14070903 true "" ""
-"Estrategia2" 1.0 0 -5298144 true "" ""
-
-PLOT
-12
-318
-915
-468
-Decisiones
-NIL
-Coopera(1)/No coopera(0)
-0.0
-1.0
-0.0
-1.0
-true
-true
-"" ""
-PENS
-"Estrategia1" 1.0 0 -14070903 true "" ""
-"Estrategia2" 1.0 0 -5298144 true "" ""
-
-OUTPUT
-13
-246
-416
-294
-15
 
 @#$#@#$#@
 ## WHAT IS IT?
