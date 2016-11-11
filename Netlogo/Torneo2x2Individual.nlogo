@@ -1,55 +1,79 @@
-;Modelo que permite un enfrentamiento entre dos estrategias predefinidas
-;durante un número n de rondas. Finalmente muestra las decisiones tomadas
-;por ambas estrategias y las puntuaciones finales.
+; Modelo que permite un enfrentamiento entre dos estrategias predefinidas
+; durante un número n de rondas. Finalmente muestra las decisiones tomadas
+; por ambas estrategias y las puntuaciones finales.
 
-to enfrentamiento
-  let turno 0
-  let decisionesA []
-  let decisionesB []
-  let decisionA False
-  let decisionB False
-  while [turno < nrondas]
-  [
-    set decisionA False
-    set decisionB False
+breed [players player]
 
-    ifelse estrategia1 = "Always Cooperate" [set decisionA alwaysCooperate]
-    [ifelse estrategia1 = "Always Defect" [set decisionA alwaysDefect]
-      [ifelse estrategia1 = "Tit for Tat" [set decisionA (titForTat decisionesB turno)]
-        [ifelse estrategia1 = "Tit for two Tats" [set decisionA (titFor2Tats decisionesB turno)]
-          [ifelse estrategia1 = "Friedman" [set decisionA (friedman decisionesB)]
-            [ifelse estrategia1 = "Joss" [set decisionA (joss decisionesB turno)]
-              [if estrategia1 = "Random" [set decisionA randomSt]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
+players-own [
+  name
+  my-strategy
+  decision
+  past-decisions
+  opponent
+  payoff ]
 
-    ifelse estrategia2 = "Always Cooperate" [set decisionB alwaysCooperate]
-    [ifelse estrategia2 = "Always Defect" [set decisionB alwaysDefect]
-      [ifelse estrategia2 = "Tit for Tat" [set decisionB (titForTat decisionesA turno)]
-        [ifelse estrategia2 = "Tit for two Tats" [set decisionB (titFor2Tats decisionesA turno)]
-          [ifelse estrategia2 = "Friedman" [set decisionB (friedman decisionesA)]
-            [ifelse estrategia2 = "Joss" [set decisionB (joss decisionesA turno)]
-              [if estrategia2 = "Random" [set decisionB randomSt]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-    set decisionesA lput decisionA decisionesA
-    set decisionesB lput decisionB decisionesB
-    set turno turno + 1
-  ]
-  ca
-  type "Decisiones de A: " print decisionesA
-  type "Decisiones de B: " print decisionesB
-  recuentoDePuntos decisionesA decisionesB
+globals [
+  cooperate_vs_cooperate
+  cooperate_vs_defect
+  defect_vs_cooperate
+  defect_vs_defect
+]
+
+to setup
+  clear-all
+
+  ; Payoffs
+  set cooperate_vs_cooperate 6
+  set cooperate_vs_defect 1
+  set defect_vs_cooperate 10
+  set defect_vs_defect 3
+
+  crearJugadores
+
+  ; Inicializar ticks (=turnos)
+  reset-ticks
+
+  ; Emparejar
+  emparejar
+
 end
 
+to crearJugadores
+  ; Crear players
+  create-players 2 [ set decision False set past-decisions [] set payoff 0 ]
+  ask player 0 [
+    set name "me"
+    set my-strategy mi-estrategia
+  ]
+  ask player 1 [
+    set name "robot"
+    set my-strategy estrategia2
+  ]
+end
+
+to emparejar
+  ask player 0 [ set opponent player 1 ]
+  ask player 1 [ set opponent player 0 ]
+end
+
+; Cada turno un tick (utiliza la variable global ticks como contador de turnos)
+to enfrentamiento
+
+  ask players [
+      set decision runresult my-strategy
+      set past-decisions lput decision past-decisions ]
+
+  ask players [ set payoff (payoff + compute-payoff)]
+
+  ask players [ print (word name ":" decision) ]
+
+  tick
+  if ticks > nrondas - 1 [printPayoffs stop]
+
+end
+
+
+;; Estrategias (todas son turtles-procedures)
 
 to-report alwaysCooperate
   report True
@@ -59,8 +83,8 @@ to-report alwaysDefect
   report False
 end
 
-to-report titForTat [decisionesRival turno]
-  ifelse turno = 0 or (item (turno - 1) decisionesRival) = True
+to-report titForTat
+  ifelse ticks = 0 or (item (ticks - 1) [past-decisions] of opponent) = True
   [
     report True
   ]
@@ -70,8 +94,8 @@ to-report titForTat [decisionesRival turno]
 end
 
 
-to-report titFor2Tats [decisionesRival turno]
-  ifelse turno < 2 or ((item (turno - 1) decisionesRival) = True and (item (turno - 2) decisionesRival) = True)
+to-report titForTwoTats
+  ifelse ticks < 2 or ( ((item (ticks - 1) [past-decisions] of opponent) = True) and ((item (ticks - 2) [past-decisions] of opponent) = True))
   [
     report True
   ]
@@ -81,8 +105,8 @@ to-report titFor2Tats [decisionesRival turno]
 end
 
 
-to-report friedman [decisionesRival]
-  ifelse (member? False decisionesRival)
+to-report friedman
+  ifelse (member? False [past-decisions] of opponent)
   [
     report False
   ]
@@ -92,8 +116,8 @@ to-report friedman [decisionesRival]
 end
 
 
-to-report joss [decisionesRival turno]
-  ifelse (titForTat decisionesRival turno)
+to-report joss
+  ifelse titForTat
   [
     ifelse random 100 < 10
     [
@@ -109,90 +133,33 @@ to-report joss [decisionesRival turno]
 end
 
 to-report randomSt
-  ifelse random 2 = 0 [report True] [report False]
+  report one-of [True False]
 end
 
-to recuentoDePuntos [decisionesA decisionesB]
-  let contadorTurnos 0
-  let puntuacionesA []
-  let puntuacionesB []
-  let puntuacionTotalA 0
-  let puntuacionTotalB 0
 
-  ;ToDo revisar puntuacion, ahora mismo: 10-6-3-1
-  while [contadorTurnos < nrondas]
-  [
-    ifelse item contadorTurnos decisionesA = True and item contadorTurnos decisionesB = True
-    [ set puntuacionesA lput 6 puntuacionesA
-      set puntuacionTotalA puntuacionTotalA + 6
-      set puntuacionesB lput 6 puntuacionesB
-      set puntuacionTotalB puntuacionTotalB + 6
-    ]
-    [
-      ifelse item contadorTurnos decisionesA = True and item contadorTurnos decisionesB = False
-      [
-        set puntuacionesA lput 1  puntuacionesA
-        set puntuacionTotalA puntuacionTotalA + 1
-        set puntuacionesB lput 10 puntuacionesB
-        set puntuacionTotalB puntuacionTotalB + 10
-      ]
-      [
-        ifelse item contadorTurnos decisionesA = False and item contadorTurnos decisionesB = True
-        [
-          set puntuacionesA lput 10 puntuacionesA
-          set puntuacionTotalA puntuacionTotalA + 10
-          set puntuacionesB lput 1 puntuacionesB
-          set puntuacionTotalB puntuacionTotalB + 1
-        ]
-        [
-          if item contadorTurnos decisionesA = False and item contadorTurnos decisionesB = False
-          [
-            set puntuacionesA lput 3 puntuacionesA
-            set puntuacionTotalA puntuacionTotalA + 3
-            set puntuacionesB lput 3 puntuacionesB
-            set puntuacionTotalB puntuacionTotalB + 3
-          ]
-        ]
-      ]
-    ]
-    dibujarEleccion (item contadorTurnos decisionesA) (item contadorTurnos decisionesB)
-    dibujarPayOff puntuacionTotalA puntuacionTotalB
-    set contadorTurnos contadorTurnos + 1
+to-report compute-payoff
+  ifelse decision = True [
+    ifelse [decision] of opponent = True
+     [ report cooperate_vs_cooperate ]
+     [ report cooperate_vs_defect ]
   ]
-  output-type "Puntuación final Estrategia1:" output-print puntuacionTotalA
-  output-type "Puntuación final Estrategia2:" output-print puntuacionTotalB
-
+  [
+    ifelse [decision] of opponent = True
+     [ report defect_vs_cooperate ]
+     [ report defect_vs_defect ]
+  ]
 end
 
-to dibujarPayoff [acumulado1 acumulado2]
-  set-current-plot "Payoff"
-  ;ToDo Identificar cada estrategia con su nombre en la gráfica
-  set-current-plot-pen "Estrategia1"
-  plot acumulado1
-  set-current-plot-pen "Estrategia2"
-  plot acumulado2
+to printPayoffs
+  output-type "Puntuación de "
+  output-type [my-strategy] of player 0
+  output-type ": "
+  output-print [payoff] of player 0
+  output-type "Puntuación de "
+  output-type [my-strategy] of player 1
+  output-type ": "
+  output-print [payoff] of player 1
 end
-
-to dibujarEleccion [decision1 decision2]
-  let valorDecision1 0
-  let valorDecision2 0
-  if decision1 = True [set valorDecision1 1]
-  if decision2 = True [set valorDecision2 1]
-  set-current-plot "Decisiones"
-  ;ToDo Identificar cada estrategia con su nombre en la gráfica
-  set-current-plot-pen "Estrategia1"
-  plot valorDecision1
-  set-current-plot-pen "Estrategia2"
-  plot valorDecision2
-end
-
-
-
-
-
-
-
-
 
 
 
@@ -219,10 +186,10 @@ GRAPHICS-WINDOW
 216
 14
 461
-234
-16
-16
-5.73
+225
+4
+4
+20.0
 1
 10
 1
@@ -232,10 +199,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--16
-16
--16
-16
+-4
+4
+-4
+4
 0
 0
 1
@@ -258,32 +225,32 @@ NIL
 HORIZONTAL
 
 CHOOSER
-21
-59
-193
-104
-estrategia1
-estrategia1
-"Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
+19
+73
+191
+118
+mi-estrategia
+mi-estrategia
+"alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
 6
 
 CHOOSER
-21
-104
-193
-149
+18
+139
+190
+184
 estrategia2
 estrategia2
-"Always Cooperate" "Always Defect" "Tit for Tat" "Tit for two Tats" "Friedman" "Joss" "Random"
+"alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
 4
 
 BUTTON
-74
-157
-137
-190
-Start
-enfrentamiento
+22
+194
+96
+227
+Setup
+setup
 NIL
 1
 T
@@ -310,27 +277,8 @@ true
 true
 "" ""
 PENS
-"Estrategia1" 1.0 0 -14070903 true "" ""
-"Estrategia2" 1.0 0 -5298144 true "" ""
-
-PLOT
-12
-318
-915
-468
-Decisiones
-NIL
-Coopera(1)/No coopera(0)
-0.0
-1.0
-0.0
-1.0
-true
-true
-"" ""
-PENS
-"Estrategia1" 1.0 0 -14070903 true "" ""
-"Estrategia2" 1.0 0 -5298144 true "" ""
+"mi-estrategia" 1.0 0 -14070903 true "" "plot [payoff] of player 0"
+"Estrategia2" 1.0 0 -5298144 true "" "plot [payoff] of player 1"
 
 OUTPUT
 13
@@ -338,6 +286,23 @@ OUTPUT
 416
 294
 15
+
+BUTTON
+111
+195
+192
+228
+Go
+enfrentamiento
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?

@@ -1,138 +1,102 @@
-;Modelo de torneos 2x2 que lee las estrategias presentadas en un fichero .txt
-;y las enfrenta contra el resto de estrategias, contra sí misma y contra una
-;solución aleatoria durante un número determinado de rondas. Finalmente muestra
-;los resultados de la puntuación de cada enfrentamiento y los resultados totales.
+; Modelo que permite un enfrentamiento entre dos estrategias predefinidas
+; durante un número n de rondas. Finalmente muestra las decisiones tomadas
+; por ambas estrategias y las puntuaciones finales.
+
+breed [players player]
+
+players-own [
+  name
+  my-strategy
+  decision
+  past-decisions
+  opponent
+  payoff ]
+
+globals [
+  cooperate_vs_cooperate
+  cooperate_vs_defect
+  defect_vs_cooperate
+  defect_vs_defect
+  estrategias
+]
+
+to setup
+  clear-all
+
+  ; Payoffs
+  set cooperate_vs_cooperate 6
+  set cooperate_vs_defect 1
+  set defect_vs_cooperate 10
+  set defect_vs_defect 3
+
+  ; Nombres de estrategias leídas desde archivo
+  set estrategias []
+  leerEstrategias "Estrategias.txt"
+
+  crearJugadores
+
+  ; Inicializar ticks (=turnos)
+  reset-ticks
+
+end
+
+to crearJugadores
+  ; Crear players
+  create-players length estrategias [ set decision False set past-decisions [] set payoff 0]
+  let cont 0
+  while [cont < length estrategias]
+  [
+    ask player cont [
+      set name item cont estrategias
+      set my-strategy item cont estrategias
+    ]
+    set cont cont + 1
+  ]
+end
 
 to torneo
-  let estrategias []
-  set estrategias (leerEstrategias "Estrategias.txt")
-  if not member? "Random" estrategias [set estrategias lput "Random" estrategias]
-  ranking (emparejamientos estrategias)
-end
-
-to ranking [puntuaciones]
-  set puntuaciones (ordenacion puntuaciones)
-  let ronda 0
-  while [ronda < length puntuaciones]
+  ;Emparejar con el siguiente rival
+  let cont1 0
+  while [cont1 < length estrategias]
   [
-    type ronda + 1
-    type "º Puesto: "
-    type item 0 item ronda puntuaciones
-    type " con puntuación: "
-    print item 1 item ronda puntuaciones
-    set ronda ronda + 1
-  ]
-end
-
-to-report ordenacion [puntuaciones]
-  ;Algoritmo de ordenación por inserción
-  let p 1
-  let j 0
-  let aux 0
-  while [p < length puntuaciones]
-  [
-    set aux (item p puntuaciones)
-    set j p - 1
-    while [ j >= 0 and (item 1 aux) > (item 1 (item j puntuaciones))]
+    let cont2 cont1 ;;Para no repetir emparejamientos
+    while [cont2 < length estrategias]
     [
-      set puntuaciones replace-item (j + 1) puntuaciones (item j puntuaciones)
-      set j j - 1
+      reset-ticks
+      ask player cont1 [set opponent player cont2]
+      ask player cont2 [set opponent player cont1]
+      ask player cont1 [set past-decisions []]
+      ask player cont2 [set past-decisions []]
+      enfrentamiento cont1 cont2
+      set cont2 cont2 + 1
     ]
-    set puntuaciones replace-item (j + 1) puntuaciones aux
-    set p p + 1
+    set cont1 cont1 + 1
   ]
-  report puntuaciones
+  printPayoffs
+  stop
 end
 
-to-report emparejamientos [estrategias]
-  let nEstrategia1 0
-  let puntosGlobales [] ;Almacena los puntos acumulados de cada una de las estrategias
-  while [nEstrategia1 < (length estrategias)]
-  [
-    let puntosEstrategia 0 ;Almacena los puntos acumulados por una estrategia
+; Cada turno un tick (utiliza la variable global ticks como contador de turnos)
+to enfrentamiento[jugador1 jugador2]
+  ask player jugador1 [
+    set decision runresult my-strategy
+    set past-decisions lput decision past-decisions ]
+  ask player jugador2 [
+    set decision runresult my-strategy
+    set past-decisions lput decision past-decisions ]
 
-    let nEstrategia2 0
-    while [nEstrategia2 < (length estrategias)]
-    [
-      let resultado []
-      let puntosEnfrentamiento 0
-      set resultado enfrentamiento (item nEstrategia1 estrategias) (item nEstrategia2 estrategias)
-      type "Enfrentamiento "
-      type (item nEstrategia1 estrategias)
-      type " vs "
-      type (item nEstrategia2 estrategias)
-      type " - Resultado: "
-      print resultado
-      set puntosEnfrentamiento (item 0 resultado)
-      set puntosEstrategia puntosEstrategia + puntosEnfrentamiento
-      set nEstrategia2 nEstrategia2 + 1
-    ]
-    let parPuntosEstrategia []
-    set parPuntosEstrategia lput (item nEstrategia1 estrategias) parPuntosEstrategia
-    set parPuntosEstrategia lput puntosEstrategia parPuntosEstrategia
-    set puntosGlobales lput parPuntosEstrategia puntosGlobales
-    set nEstrategia1 nEstrategia1 + 1
-  ]
-  report puntosGlobales
+  ask player jugador1 [ set payoff (payoff + compute-payoff)]
+  ask player jugador2 [ set payoff (payoff + compute-payoff)]
+
+;  ask player jugador1 [ print (word name ":" decision) ]
+;  ask player jugador2 [ print (word name ":" decision) ]
+  tick
+  ifelse ticks > nrondas - 1 [stop][enfrentamiento jugador1 jugador2]
+
 end
 
-to-report enfrentamiento [estrategia1 estrategia2]
-  let turno 0
-  let decisionesA []
-  let decisionesB []
-  let decisionA False
-  let decisionB False
-  let puntuaciones []
-  while [turno < nrondas]
-  [
-    set decisionA False
-    set decisionB False
 
-    ifelse estrategia1 = "Always Cooperate" [set decisionA alwaysCooperate]
-    [ifelse estrategia1 = "Always Defect" [set decisionA alwaysDefect]
-      [ifelse estrategia1 = "Tit for Tat" [set decisionA (titForTat decisionesB turno)]
-        [ifelse estrategia1 = "Tit for two Tats" [set decisionA (titFor2Tats decisionesB turno)]
-          [ifelse estrategia1 = "Friedman" [set decisionA (friedman decisionesB)]
-            [ifelse estrategia1 = "Joss" [set decisionA (joss decisionesB turno)]
-              [if estrategia1 = "Random" [set decisionA randomSt]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-
-    ifelse estrategia2 = "Always Cooperate" [set decisionB alwaysCooperate]
-    [ifelse estrategia2 = "Always Defect" [set decisionB alwaysDefect]
-      [ifelse estrategia2 = "Tit for Tat" [set decisionB (titForTat decisionesA turno)]
-        [ifelse estrategia2 = "Tit for two Tats" [set decisionB (titFor2Tats decisionesA turno)]
-          [ifelse estrategia2 = "Friedman" [set decisionB (friedman decisionesA)]
-            [ifelse estrategia2 = "Joss" [set decisionB (joss decisionesA turno)]
-              [if estrategia2 = "Random" [set decisionB randomSt]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-    set decisionesA lput decisionA decisionesA
-    set decisionesB lput decisionB decisionesB
-    set turno turno + 1
-  ]
-  report recuentoDePuntos decisionesA decisionesB
-end
-
-to-report leerEstrategias [archivo]
-  file-open archivo
-  let estrategias []
-  while [not file-at-end?]
-  [
-    set estrategias lput file-read-line estrategias
-  ]
-  file-close
-  report estrategias
-end
-
+;; Estrategias (todas son turtles-procedures)
 to-report alwaysCooperate
   report True
 end
@@ -141,8 +105,8 @@ to-report alwaysDefect
   report False
 end
 
-to-report titForTat [decisionesRival turno]
-  ifelse turno = 0 or (item (turno - 1) decisionesRival) = True
+to-report titForTat
+  ifelse ticks = 0 or (item (ticks - 1) [past-decisions] of opponent) = True
   [
     report True
   ]
@@ -152,8 +116,8 @@ to-report titForTat [decisionesRival turno]
 end
 
 
-to-report titFor2Tats [decisionesRival turno]
-  ifelse turno < 2 or ((item (turno - 1) decisionesRival) = True and (item (turno - 2) decisionesRival) = True)
+to-report titForTwoTats
+  ifelse ticks < 2 or ( ((item (ticks - 1) [past-decisions] of opponent) = True) and ((item (ticks - 2) [past-decisions] of opponent) = True))
   [
     report True
   ]
@@ -163,8 +127,8 @@ to-report titFor2Tats [decisionesRival turno]
 end
 
 
-to-report friedman [decisionesRival]
-  ifelse (member? False decisionesRival)
+to-report friedman
+  ifelse (member? False [past-decisions] of opponent)
   [
     report False
   ]
@@ -174,8 +138,8 @@ to-report friedman [decisionesRival]
 end
 
 
-to-report joss [decisionesRival turno]
-  ifelse (titForTat decisionesRival turno)
+to-report joss
+  ifelse titForTat
   [
     ifelse random 100 < 10
     [
@@ -191,65 +155,41 @@ to-report joss [decisionesRival turno]
 end
 
 to-report randomSt
-  ifelse random 2 = 0 [report True] [report False]
+  report one-of [True False]
 end
 
-to-report recuentoDePuntos [decisionesA decisionesB]
-  let contadorTurnos 0
-  let puntuacionesA []
-  let puntuacionesB []
-  let puntuacionTotalA 0
-  let puntuacionTotalB 0
-  let resultados []
 
-  ;ToDo revisar puntuacion, ahora mismo: 10-6-3-1
-  while [contadorTurnos < nrondas]
-  [
-    ifelse item contadorTurnos decisionesA = True and item contadorTurnos decisionesB = True
-    [ set puntuacionesA lput 6 puntuacionesA
-      set puntuacionTotalA puntuacionTotalA + 6
-      set puntuacionesB lput 6 puntuacionesB
-      set puntuacionTotalB puntuacionTotalB + 6
-    ]
-    [
-      ifelse item contadorTurnos decisionesA = True and item contadorTurnos decisionesB = False
-      [
-        set puntuacionesA lput 1  puntuacionesA
-        set puntuacionTotalA puntuacionTotalA + 1
-        set puntuacionesB lput 10 puntuacionesB
-        set puntuacionTotalB puntuacionTotalB + 10
-      ]
-      [
-        ifelse item contadorTurnos decisionesA = False and item contadorTurnos decisionesB = True
-        [
-          set puntuacionesA lput 10 puntuacionesA
-          set puntuacionTotalA puntuacionTotalA + 10
-          set puntuacionesB lput 1 puntuacionesB
-          set puntuacionTotalB puntuacionTotalB + 1
-        ]
-        [
-          if item contadorTurnos decisionesA = False and item contadorTurnos decisionesB = False
-          [
-            set puntuacionesA lput 3 puntuacionesA
-            set puntuacionTotalA puntuacionTotalA + 3
-            set puntuacionesB lput 3 puntuacionesB
-            set puntuacionTotalB puntuacionTotalB + 3
-          ]
-        ]
-      ]
-    ]
-    set contadorTurnos contadorTurnos + 1
+to-report compute-payoff
+  ifelse decision = True [
+    ifelse [decision] of opponent = True
+     [ report cooperate_vs_cooperate ]
+     [ report cooperate_vs_defect ]
   ]
-  set resultados lput puntuacionTotalA resultados
-  set resultados lput puntuacionTotalB resultados
-  report resultados
+  [
+    ifelse [decision] of opponent = True
+     [ report defect_vs_cooperate ]
+     [ report defect_vs_defect ]
+  ]
 end
 
+to printPayoffs
+  ask players[
+    output-type "Puntuación de "
+    output-type name
+    output-type ": "
+    output-print payoff
+  ]
 
+end
 
-
-
-
+to leerEstrategias [archivo]
+  file-open archivo
+  while [not file-at-end?]
+  [
+    set estrategias lput file-read-line estrategias
+  ]
+  file-close
+end
 
 
 
@@ -273,10 +213,10 @@ GRAPHICS-WINDOW
 216
 14
 461
-234
-16
-16
-5.73
+225
+4
+4
+20.0
 1
 10
 1
@@ -286,10 +226,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--16
-16
--16
-16
+-4
+4
+-4
+4
 0
 0
 1
@@ -312,13 +252,54 @@ NIL
 HORIZONTAL
 
 BUTTON
-72
-63
-135
+22
+69
 96
-Start
-torneo
+102
+Setup
+setup
 NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+PLOT
+434
+10
+915
+295
+Payoff
+Turnos
+Puntuación
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" "ask players [\n  create-temporary-plot-pen name\n  set-plot-pen-color color\n  plot payoff \n]"
+PENS
+
+OUTPUT
+9
+234
+412
+505
+15
+
+BUTTON
+111
+70
+192
+103
+Go
+torneo
+T
 1
 T
 OBSERVER
