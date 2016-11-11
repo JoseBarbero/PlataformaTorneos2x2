@@ -180,7 +180,6 @@ end
 
 
 
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 216
@@ -275,10 +274,8 @@ Puntuación
 10.0
 true
 true
-"" ""
+"" "ask players [\n  create-temporary-plot-pen name\n  set-plot-pen-color color\n  plot payoff \n]"
 PENS
-"mi-estrategia" 1.0 0 -14070903 true "" "plot [payoff] of player 0"
-"Estrategia2" 1.0 0 -5298144 true "" "plot [payoff] of player 1"
 
 OUTPUT
 13
