@@ -1,7 +1,7 @@
 ; Modelo que permite un enfrentamiento entre dos estrategias predefinidas
 ; durante un número n de rondas. Finalmente muestra las decisiones tomadas
 ; por ambas estrategias y las puntuaciones finales.
-
+__includes["Alumnos/Estrategias_Alumnos/estrategiaAlumno1.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno2.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno3.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno4.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno5.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno6.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno7.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno8.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno9.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno10.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno11.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno12.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno13.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno14.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno15.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno16.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno17.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno18.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno19.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno20.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno21.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno22.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno23.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno24.nls" "Alumnos/Estrategias_Alumnos/estrategiaAlumno25.nls"]
 breed [players player]
 
 players-own [
@@ -18,6 +18,7 @@ globals [
   defect_vs_cooperate
   defect_vs_defect
   estrategias
+  alumnos
 ]
 
 to setup
@@ -31,9 +32,10 @@ to setup
 
   ; Nombres de estrategias leídas desde archivo
   set estrategias []
-  leerEstrategias "Estrategias.txt"
-
+  leerEstrategias "Alumnos/Estrategias.txt"
+  set alumnos 25
   crearJugadores
+  aislarEstrategias
 
   ; Inicializar ticks (=turnos)
   reset-ticks
@@ -191,15 +193,56 @@ to leerEstrategias [archivo]
   file-close
 end
 
+to aislarEstrategias
+  let archivoModelo ""
+  let archivoEstrategia ""
+  ;let estrategiaDefault "to-report estrategiaAlumno [decisionesRival ronda] let decision False report decision end"
 
+  let cont 1
+  while [cont <= 25]
+  [
+    set archivoModelo (word "Alumnos/Modelos_Alumnos/ModeloAlumno" cont ".nlogo")
+    set archivoEstrategia (word "Alumnos/Estrategias_Alumnos/estrategiaAlumno" cont ".nls")
+    let finalizado False
+    let dentroDelMetodo False
+    let linea ""
 
+    ;Reset del archivo
+    if file-exists? archivoEstrategia
+    [
+      file-close
+      file-delete archivoEstrategia
+      file-open archivoEstrategia
+      file-print word "; Estrategia del alumno " cont
+      file-close
+    ]
+    file-open archivoModelo
+    while [not file-at-end? and finalizado = False]
+    [
+      set linea file-read-line
+      if linea = "to-report estrategiaAlumno"
+      [
+        set dentroDelMetodo True
+        set linea word linea cont
+      ]
 
-
-
-
-
-
-
+      if dentroDelMetodo = True
+      [
+        file-open archivoEstrategia
+        file-print linea
+        file-close
+        if linea = "end"
+        [
+          set dentroDelMetodo False
+          set finalizado True
+        ]
+      ]
+      file-open archivoModelo
+    ]
+    file-close-all
+    set cont cont + 1
+  ]
+end
 
 
 

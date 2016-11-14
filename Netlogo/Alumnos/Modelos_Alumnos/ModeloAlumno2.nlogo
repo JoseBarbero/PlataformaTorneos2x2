@@ -196,6 +196,7 @@ end
 
 
 
+
 @#$#@#$#@
 GRAPHICS-WINDOW
 216
@@ -246,7 +247,7 @@ CHOOSER
 118
 mi-estrategia
 mi-estrategia
-"estrategiaAlumno" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
+"estrategiaPropia" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
 0
 
 CHOOSER
@@ -256,7 +257,7 @@ CHOOSER
 184
 estrategia2
 estrategia2
-"estrategiaAlumno" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
+"estrategiaPropia" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
 4
 
 BUTTON
