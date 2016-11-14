@@ -2,6 +2,24 @@
 ; durante un número n de rondas. Finalmente muestra las decisiones tomadas
 ; por ambas estrategias y las puntuaciones finales.
 
+to-report estrategiaPropia
+  let eleccion False
+  ;Participante, escribe aquí el código de tu estrategia
+  ; !!! - No se permite modificar el código fuera de las líneas marcadas.
+  ; 1 - Puedes acceder a las decisiones propias o del oponente a través del campo past-decisions.
+  ; 2 - El método debe retornar la decisión que tomará la estrategia en la ronda
+  ;     actual a través de la variable elección. Sea True si colabora o False si no lo hace.
+  ;-----------------------------|INICIO|----------------------------
+
+
+
+
+
+
+  ;------------------------------|FIN|------------------------------
+  report eleccion
+end
+
 breed [players player]
 
 players-own [
@@ -179,7 +197,6 @@ end
 
 
 
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 216
@@ -230,8 +247,8 @@ CHOOSER
 118
 mi-estrategia
 mi-estrategia
-"alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
-6
+"estrategiaPropia" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
+0
 
 CHOOSER
 18
@@ -240,8 +257,8 @@ CHOOSER
 184
 estrategia2
 estrategia2
-"alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
-4
+"estrategiaPropia" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
+0
 
 BUTTON
 22
