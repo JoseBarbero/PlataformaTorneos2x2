@@ -5,7 +5,7 @@ if ($con->connect_error){
 }else{
 	$email=$_POST["email"];
 	$password=$_POST["password"];
-	
+	//TODO CIFRADO DE CONTRASEÑA
 	$sql = "SELECT id FROM users WHERE email='$email' AND password='$password'";
 	$result = $con->query($sql);
 	if ($result->num_rows>0){

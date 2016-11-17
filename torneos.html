@@ -21,13 +21,13 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Plataforma de Torneos 2x2</a>
+					<a class="navbar-brand" href="index.html">Plataforma de Torneos 2x2</a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="menusuperior">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Inicio </a></li>
-						<li><a href="#">Torneos</a></li>
+						<li class="active"><a href="index.html">Inicio </a></li>
+						<li><a href="torneos.html">Torneos</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -91,10 +91,58 @@
 		<div class="row">
 			<section class="posts col-md-9">
 				<article class="post clearfix">
-					<h2 class="post-title">Torneos</h2>
-					<p class="post-content"></p>
+					<h2 class="post-title">Torneo 1</h2>
+					<p class="post-content">
+						<section class="posts col-md-12">
+							<form class="form-horizontal" role="form" action="join.php" method="post" accept-charset="UTF-8" id="joinForm">
+								<div class="form-group">
+									<label for="nombre" class="col-sm-4 control-label">Nombre</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="apellidos" class="col-sm-4 control-label">Apellidos</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="estrategia" class="col-sm-4 control-label">Nombre de la estrategia</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" id="estrategia" name="estrategia" placeholder="Estrategia" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="numSala" class="col-sm-4 control-label">Número de torneo</label>
+									<div class="col-sm-1">
+										<select class=form-control id="numSala" name="numSala" >
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-block">Unirse al torneo</button>
+								</div>
+							</form>
+						</section>
+					</p>
 				</article>
 			</section>
+			<aside class="col-md-3 hidden-xs midden-sm">
+				<h4>Torneos</h4>
+				<div class="list-group">
+					<a href="torneos.html" class="list-group-item">Torneo 1</a> 
+					<a href="torneos.html" class="list-group-item">Torneo 2</a> 
+					<a href="torneos.html" class="list-group-item">Torneo 3</a> 
+					<a href="torneos.html" class="list-group-item">Torneo 4</a> 
+					<a href="torneos.html" class="list-group-item">Torneo 5</a>
+				</div>
+			</aside>
 		</div>
 	</section>
 
@@ -108,7 +156,7 @@
 				</div>
 				<div class="col-xs-5">
 					<ul class="list-inline text-right">
-						<li><a href="#">Inicio</a></li>
+						<li><a href="index.html">Inicio</a></li>
 						<li><a href="#">Contacto</a></li>
 					</ul>
 				</div>
