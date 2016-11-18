@@ -2,6 +2,25 @@
 ; durante un número n de rondas. Finalmente muestra las decisiones tomadas
 ; por ambas estrategias y las puntuaciones finales.
 
+; (!) - El alumno debe modificar el método "estrategiaAlumno" con su propia estrategia de la
+;     manera que se indica en el comentario
+
+breed [players player]
+players-own [
+  name
+  my-strategy
+  decision
+  past-decisions
+  opponent
+  payoff
+]
+globals [
+  cooperate_vs_cooperate
+  cooperate_vs_defect
+  defect_vs_cooperate
+  defect_vs_defect
+]
+
 to-report estrategiaAlumno
   let eleccion False
   ; PARTICIPANTE, ESCRIBE AQUÍ EL CÓDIGO DE TU ESTRATEGIA
@@ -19,23 +38,6 @@ to-report estrategiaAlumno
   ;------------------------------|FIN|------------------------------
   report eleccion
 end
-
-breed [players player]
-
-players-own [
-  name
-  my-strategy
-  decision
-  past-decisions
-  opponent
-  payoff ]
-
-globals [
-  cooperate_vs_cooperate
-  cooperate_vs_defect
-  defect_vs_cooperate
-  defect_vs_defect
-]
 
 to setup
   clear-all
@@ -76,10 +78,26 @@ end
 
 ; Cada turno un tick (utiliza la variable global ticks como contador de turnos)
 to enfrentamiento
-
+  ; Prescindimos de runresult hasta que netlogo web soporte esta funcionalidad
+  ; ask players [
+  ;     set decision runresult my-strategy
+  ;     set past-decisions lput decision past-decisions ]
   ask players [
-      set decision runresult my-strategy
-      set past-decisions lput decision past-decisions ]
+    ifelse my-strategy = "alwaysCooperate"[set decision alwaysCooperate set past-decisions lput decision past-decisions]
+    [ifelse my-strategy = "alwaysDefect"[set decision alwaysDefect set past-decisions lput decision past-decisions]
+      [ifelse my-strategy = "titForTat"[set decision titForTat set past-decisions lput decision past-decisions]
+        [ifelse my-strategy = "titForTwoTats"[set decision titForTwoTats set past-decisions lput decision past-decisions]
+          [ifelse my-strategy = "friedman"[set decision friedman set past-decisions lput decision past-decisions]
+            [ifelse my-strategy = "joss"[set decision joss set past-decisions lput decision past-decisions]
+              [ifelse my-strategy = "estrategiaAlumno"[set decision estrategiaAlumno set past-decisions lput decision past-decisions]
+                [if my-strategy = "randomSt"[set decision randomSt set past-decisions lput decision past-decisions]]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
 
   ask players [ set payoff (payoff + compute-payoff)]
 
@@ -194,8 +212,6 @@ end
 
 
 
-
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 216
@@ -257,7 +273,7 @@ CHOOSER
 estrategia2
 estrategia2
 "estrategiaAlumno" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
-4
+3
 
 BUTTON
 22
