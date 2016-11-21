@@ -29,6 +29,10 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+.html-embebido{
+	height: 100vh;
+    width : 100%;
+}
 /* Footer */
 .container-footer {
 	color: #9d9d9d;
@@ -36,4 +40,1564 @@
 	background-color: #222;
 	border-color: #080808;
 	position: relative;
+}
+/* Netlogo */
+.CodeMirror {
+  /* Set height, width, borders, and global font properties here */
+  font-family: monospace;
+  height: 300px;
+  color: black;
+}
+
+/* PADDING */
+
+.CodeMirror-lines {
+  padding: 4px 0; /* Vertical padding around content */
+}
+.CodeMirror pre {
+  padding: 0 4px; /* Horizontal padding of content */
+}
+
+.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
+  background-color: white; /* The little square between H and V scrollbars */
+}
+
+/* GUTTER */
+
+.CodeMirror-gutters {
+  border-right: 1px solid #ddd;
+  background-color: #f7f7f7;
+  white-space: nowrap;
+}
+.CodeMirror-linenumbers {}
+.CodeMirror-linenumber {
+  padding: 0 3px 0 5px;
+  min-width: 20px;
+  text-align: right;
+  color: #999;
+  white-space: nowrap;
+}
+
+.CodeMirror-guttermarker { color: black; }
+.CodeMirror-guttermarker-subtle { color: #999; }
+
+/* CURSOR */
+
+.CodeMirror-cursor {
+  border-left: 1px solid black;
+  border-right: none;
+  width: 0;
+}
+/* Shown when moving in bi-directional text */
+.CodeMirror div.CodeMirror-secondarycursor {
+  border-left: 1px solid silver;
+}
+.cm-fat-cursor .CodeMirror-cursor {
+  width: auto;
+  border: 0;
+  background: #7e7;
+}
+.cm-fat-cursor div.CodeMirror-cursors {
+  z-index: 1;
+}
+
+.cm-animate-fat-cursor {
+  width: auto;
+  border: 0;
+  -webkit-animation: blink 1.06s steps(1) infinite;
+  -moz-animation: blink 1.06s steps(1) infinite;
+  animation: blink 1.06s steps(1) infinite;
+  background-color: #7e7;
+}
+@-moz-keyframes blink {
+  0% {}
+  50% { background-color: transparent; }
+  100% {}
+}
+@-webkit-keyframes blink {
+  0% {}
+  50% { background-color: transparent; }
+  100% {}
+}
+@keyframes blink {
+  0% {}
+  50% { background-color: transparent; }
+  100% {}
+}
+
+/* Can style cursor different in overwrite (non-insert) mode */
+.CodeMirror-overwrite .CodeMirror-cursor {}
+
+.cm-tab { display: inline-block; text-decoration: inherit; }
+
+.CodeMirror-ruler {
+  border-left: 1px solid #ccc;
+  position: absolute;
+}
+
+/* DEFAULT THEME */
+
+.cm-s-default .cm-header {color: blue;}
+.cm-s-default .cm-quote {color: #090;}
+.cm-negative {color: #d44;}
+.cm-positive {color: #292;}
+.cm-header, .cm-strong {font-weight: bold;}
+.cm-em {font-style: italic;}
+.cm-link {text-decoration: underline;}
+.cm-strikethrough {text-decoration: line-through;}
+
+.cm-s-default .cm-keyword {color: #708;}
+.cm-s-default .cm-atom {color: #219;}
+.cm-s-default .cm-number {color: #164;}
+.cm-s-default .cm-def {color: #00f;}
+.cm-s-default .cm-variable,
+.cm-s-default .cm-punctuation,
+.cm-s-default .cm-property,
+.cm-s-default .cm-operator {}
+.cm-s-default .cm-variable-2 {color: #05a;}
+.cm-s-default .cm-variable-3 {color: #085;}
+.cm-s-default .cm-comment {color: #a50;}
+.cm-s-default .cm-string {color: #a11;}
+.cm-s-default .cm-string-2 {color: #f50;}
+.cm-s-default .cm-meta {color: #555;}
+.cm-s-default .cm-qualifier {color: #555;}
+.cm-s-default .cm-builtin {color: #30a;}
+.cm-s-default .cm-bracket {color: #997;}
+.cm-s-default .cm-tag {color: #170;}
+.cm-s-default .cm-attribute {color: #00c;}
+.cm-s-default .cm-hr {color: #999;}
+.cm-s-default .cm-link {color: #00c;}
+
+.cm-s-default .cm-error {color: #f00;}
+.cm-invalidchar {color: #f00;}
+
+.CodeMirror-composing { border-bottom: 2px solid; }
+
+/* Default styles for common addons */
+
+div.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}
+div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
+.CodeMirror-matchingtag { background: rgba(255, 150, 0, .3); }
+.CodeMirror-activeline-background {background: #e8f2ff;}
+
+/* STOP */
+
+/* The rest of this file contains styles related to the mechanics of
+   the editor. You probably shouldn't touch them. */
+
+.CodeMirror {
+  position: relative;
+  overflow: hidden;
+  background: white;
+}
+
+.CodeMirror-scroll {
+  overflow: scroll !important; /* Things will break if this is overridden */
+  /* 30px is the magic margin used to hide the element's real scrollbars */
+  /* See overflow: hidden in .CodeMirror */
+  margin-bottom: -30px; margin-right: -30px;
+  padding-bottom: 30px;
+  height: 100%;
+  outline: none; /* Prevent dragging from highlighting the element */
+  position: relative;
+}
+.CodeMirror-sizer {
+  position: relative;
+  border-right: 30px solid transparent;
+}
+
+/* The fake, visible scrollbars. Used to force redraw during scrolling
+   before actual scrolling happens, thus preventing shaking and
+   flickering artifacts. */
+.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
+  position: absolute;
+  z-index: 6;
+  display: none;
+}
+.CodeMirror-vscrollbar {
+  right: 0; top: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.CodeMirror-hscrollbar {
+  bottom: 0; left: 0;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+.CodeMirror-scrollbar-filler {
+  right: 0; bottom: 0;
+}
+.CodeMirror-gutter-filler {
+  left: 0; bottom: 0;
+}
+
+.CodeMirror-gutters {
+  position: absolute; left: 0; top: 0;
+  min-height: 100%;
+  z-index: 3;
+}
+.CodeMirror-gutter {
+  white-space: normal;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: -30px;
+  /* Hack to make IE7 behave */
+  *zoom:1;
+  *display:inline;
+}
+.CodeMirror-gutter-wrapper {
+  position: absolute;
+  z-index: 4;
+  background: none !important;
+  border: none !important;
+}
+.CodeMirror-gutter-background {
+  position: absolute;
+  top: 0; bottom: 0;
+  z-index: 4;
+}
+.CodeMirror-gutter-elt {
+  position: absolute;
+  cursor: default;
+  z-index: 4;
+}
+.CodeMirror-gutter-wrapper {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.CodeMirror-lines {
+  cursor: text;
+  min-height: 1px; /* prevents collapsing before first draw */
+}
+.CodeMirror pre {
+  /* Reset some styles that the rest of the page might have set */
+  -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
+  border-width: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  white-space: pre;
+  word-wrap: normal;
+  line-height: inherit;
+  color: inherit;
+  z-index: 2;
+  position: relative;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-variant-ligatures: none;
+  font-variant-ligatures: none;
+}
+.CodeMirror-wrap pre {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: normal;
+}
+
+.CodeMirror-linebackground {
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  z-index: 0;
+}
+
+.CodeMirror-linewidget {
+  position: relative;
+  z-index: 2;
+  overflow: auto;
+}
+
+.CodeMirror-widget {}
+
+.CodeMirror-code {
+  outline: none;
+}
+
+/* Force content-box sizing for the elements where we expect it */
+.CodeMirror-scroll,
+.CodeMirror-sizer,
+.CodeMirror-gutter,
+.CodeMirror-gutters,
+.CodeMirror-linenumber {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.CodeMirror-measure {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.CodeMirror-cursor { position: absolute; }
+.CodeMirror-measure pre { position: static; }
+
+div.CodeMirror-cursors {
+  visibility: hidden;
+  position: relative;
+  z-index: 3;
+}
+div.CodeMirror-dragcursors {
+  visibility: visible;
+}
+
+.CodeMirror-focused div.CodeMirror-cursors {
+  visibility: visible;
+}
+
+.CodeMirror-selected { background: #d9d9d9; }
+.CodeMirror-focused .CodeMirror-selected { background: #d7d4f0; }
+.CodeMirror-crosshair { cursor: crosshair; }
+.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection { background: #d7d4f0; }
+.CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection { background: #d7d4f0; }
+
+.cm-searching {
+  background: #ffa;
+  background: rgba(255, 255, 0, .4);
+}
+
+/* IE7 hack to prevent it from returning funny offsetTops on the spans */
+.CodeMirror span { *vertical-align: text-bottom; }
+
+/* Used to force a border model for a node */
+.cm-force-border { padding-right: .1px; }
+
+@media print {
+  /* Hide the cursor when printing */
+  .CodeMirror div.CodeMirror-cursors {
+    visibility: hidden;
+  }
+}
+
+/* See issue #2901 */
+.cm-tab-wrap-hack:after { content: ''; }
+
+/* Help users use markselection to safely style text background */
+span.CodeMirror-selectedtext { background: none; }
+</style>
+    <style>.CodeMirror-dialog {
+  position: absolute;
+  left: 0; right: 0;
+  background: inherit;
+  z-index: 15;
+  padding: .1em .8em;
+  overflow: hidden;
+  color: inherit;
+}
+
+.CodeMirror-dialog-top {
+  border-bottom: 1px solid #eee;
+  top: 0;
+}
+
+.CodeMirror-dialog-bottom {
+  border-top: 1px solid #eee;
+  bottom: 0;
+}
+
+.CodeMirror-dialog input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 20em;
+  color: inherit;
+  font-family: monospace;
+}
+
+.CodeMirror-dialog button {
+  font-size: 70%;
+}
+</style>
+    <style>/*
+ * This file should contain generally useful css classes - "round the corners", "add the font", etc.
+ * Where possible, css for certain elements should be moved out, although there are clearly some exceptions.
+ */
+
+.hidden {
+  display: none;
+}
+
+.rounded {
+  border-radius: 10px;
+}
+
+.contained {
+  height: 92%;
+  min-height: 92%;
+}
+
+.normal_font {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.monospace_font {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.invisible {
+  opacity:0;
+  width: 0;
+  z-index: -1;
+}
+
+.text_input_margin {
+  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.center {
+  display: block;
+  margin: auto;
+}
+
+.spacious-entry {
+  padding: 8px 8px;
+}
+
+.index-button {
+  margin: 2%;
+  border: 2px solid #347999;
+  border-radius: 6px;
+  background-color: #DDF4FB;
+  transition: background-color 0.25s;
+  text-align: center;
+}
+
+.index-button:hover {
+  background-color: #E8FFFF;
+}
+
+.index-button > h2 {
+  margin-top: 3%;
+  margin-bottom: 0;
+}
+
+.icon-button {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 256px;
+  max-height: 256px;
+  margin: auto;
+}
+
+.index-link {
+  max-width: 300px;
+  min-width: 200px;
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.index-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.properties-list {
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.properties-list > li {
+  margin: auto;
+  padding-left: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid #5499B9;
+}
+
+.server-error {
+  margin-top: 20px;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: center;
+}
+
+div.link-header {
+  margin-left: -27px;
+  margin-bottom: 20px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.anchor-header {
+  visibility: hidden;
+  display: block;
+  margin-top: -20px;
+  padding-bottom: 20px;
+}
+
+.anchor-header:target {
+  margin-top: -40px;
+  padding-bottom: 40px;
+}
+
+div.link-header:hover > a > img.link-img {
+  visibility: visible;
+}
+
+div.link-header > h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+img.link-img {
+  top: 50%;
+  max-width: 20px;
+  visibility: hidden;
+}
+
+/*
+
+ Flexbox stuff
+
+ Much of this could be inlined in styles, but we do this to allow the autoprefixer access to it --JAB 3/30/15
+
+ */
+
+.dynamic-row {
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+
+.dynamic-column-holder {
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.flex1 {
+  -ms-flex: 1;
+      flex: 1;
+}
+
+.flex2 {
+  -ms-flex: 2;
+      flex: 2;
+}
+
+.flex3 {
+  -ms-flex: 3;
+      flex: 3;
+}
+
+.flex-column {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+
+.flex-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+}
+/*# sourceMappingURL=classes.css.map */</style>
+    <style>/*
+ * General-purpose widget styles, applied regardless of what the widget "theme" is
+ */
+
+.netlogo-model {
+    display: -ms-flexbox;
+    display: flex;
+    padding: 15px;
+    -ms-flex-flow: column;
+        flex-flow: column;
+    font-size: 12px;
+    font-family: "Lucida Grande", sans-serif;
+    outline: none;
+}
+
+.netlogo-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row;
+        flex-flow: row;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+}
+
+.netlogo-widget {
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
+    background-color: #CCC;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.netlogo-command,.netlogo-input {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.netlogo-command:hover,.netlogo-input:hover {
+  box-shadow: 0 0 6px 3px rgba(15, 15, 15, .40);
+  cursor:     pointer;
+  z-index:    3;
+}
+
+.netlogo-command.netlogo-disabled:hover {
+  box-shadow: none;
+  cursor:     default;
+}
+
+.netlogo-tab-area {
+  margin-top: 25px;
+}
+
+.netlogo-tab {
+  display: block;
+  background-color: #BCBCE5;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDEiPjxwb2x5Z29uIHBvaW50cz0iMCwwIDIsMCAxLDEiIGZpbGw9InJnYig4Myw4Myw4MykiLz4gPC9zdmc+");
+  background-position: 97% 50%;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  border-width: 2px;
+  border-bottom-width: 0;
+  border-style: solid;
+  padding: 7px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.netlogo-tab.netlogo-active {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDEiPjxwb2x5Z29uIHBvaW50cz0iMCwxIDIsMSAxLDAiIGZpbGw9InJnYig4Myw4Myw4MykiLz4gPC9zdmc+");
+}
+
+.netlogo-tab:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.netlogo-tab:last-child, .netlogo-tab-content:last-child {
+  border-radius: 0px 0px 10px 10px;
+  border-bottom-width: 2px;
+}
+
+.netlogo-tab:hover  {
+  background-color: #D3D3EE;
+}
+
+.netlogo-tab.netlogo-active:hover  {
+  background-color: #9E99FD;
+}
+
+.netlogo-tab input[type=checkbox] {
+  display: none;
+}
+
+.netlogo-tab-text {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.netlogo-tab-content {
+  margin-top: 0;
+  border: 0 solid #242479;
+  border-left-width: 2px;
+  border-right-width: 2px;
+}
+
+.unselectable {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.growing {
+  -webkit-animation-name: grow;
+          animation-name: grow;
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+}
+
+.shrinking {
+  -webkit-animation-name: grow;
+          animation-name: grow;
+  -webkit-animation-direction: reverse;
+          animation-direction: reverse;
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
+  -webkit-animation-timing-function: ease-in;
+          animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes grow {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 100%;
+  }
+}
+
+@keyframes grow {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 100%;
+  }
+}
+
+.netlogo-model-text {
+    background-color: white;
+}
+
+.netlogo-model-masthead {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  margin: 0 10px 0 0;
+  width: 350px;
+}
+
+.netlogo-model-masthead > form {
+  margin: 0 auto;
+}
+
+.netlogo-model-title {
+  background-color: initial;
+  margin: 0 70px;
+  overflow: hidden;
+  padding: 0 8px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.netlogo-title-input {
+  font-size: 1.5em;
+  font-weight: bold;
+  letter-spacing: normal;
+  margin: 0 5%;
+  text-align: center;
+  width: 350px;
+}
+
+.netlogo-code-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column;
+        flex-flow: column;
+    background-color: white;
+    margin-top: 0;
+}
+
+.netlogo-ugly-button {
+  text-align: center;
+  background-color: rgb(240, 240, 240);
+  border-color: rgb(238, 238, 238);
+}
+
+.netlogo-recompilation-button {
+  width: 30%;
+  margin: 12px auto;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.netlogo-info-editor {
+  border: 1px solid black;
+  height: 500px;
+}
+
+.netlogo-toggle-edit-mode {
+  display: block;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.netlogo-info {
+  -ms-flex: 1;
+      flex: 1;
+  margin-top: 0;
+  padding-top: 10px;
+  padding: 15px;
+}
+
+.netlogo-command-center {
+  -ms-flex: 1;
+      flex: 1;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  height: 175px;
+  padding: 6px 8px;
+}
+
+.netlogo-command-center-editor {
+  height: 1.25em;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+}
+
+.netlogo-command-center-editor .CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+}
+
+.netlogo-output-widget {
+  display: -ms-flexbox;
+  display: flex;
+  padding: 5px;
+}
+
+.netlogo-output-area {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  background-color: white;
+  margin: 0px;
+  overflow: auto;
+}
+
+.netlogo-command-center-input {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.netlogo-speed-slider {
+  background-color: transparent;
+  border: none;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  margin: 15px auto 0 auto;
+  width: 75%;
+}
+
+.netlogo-widget input[type=range]::-ms-tooltip {
+  display: none;
+}
+
+.netlogo-speed-slider input {
+  border: none;
+  width: 100%;
+}
+
+.netlogo-model input[type=range] {
+    cursor: pointer;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+
+.netlogo-model input[type=range]:active {
+    cursor: pointer;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+}
+
+.netlogo-tick-counter {
+    background-color: #F4F4F4;
+    font-size: 13px;
+    margin: 3px;
+    border: none;
+    height: 15px;
+}
+
+.netlogo-button {
+    border: inherit;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-align: center;
+        align-items: center;
+    padding: 0px;
+}
+
+.netlogo-disabled {
+  color: grey;
+}
+
+.netlogo-button.clear-button {
+    padding: 5px;
+}
+
+.netlogo-button .netlogo-label {
+    /* For some reason, Safari doesn't like justify-content in buttons,
+       we have to resort to putting a span in the button that can then be
+       centered.
+       BCH 11/14/2014 */
+    margin: auto;
+}
+
+.netlogo-action-key {
+  color:    grey;
+  position: absolute;
+  right:    6px;
+  top:      5px;
+}
+
+.netlogo-action-key.netlogo-focus {
+  color: black;
+}
+
+.netlogo-button:active, .netlogo-forever-button.netlogo-active {
+    background-color: gray;
+    color: white;
+}
+
+.netlogo-forever-button .netlogo-forever-icon {
+  background-image:  url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQzOC41NDIgNDM4LjU0MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDM4LjU0MiA0MzguNTQyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTQyNy40MDgsMTkuNjk3Yy03LjgwMy0zLjIzLTE0LjQ2My0xLjkwMi0xOS45ODYsMy45OTlsLTM3LjExNiwzNi44MzRDMzQ5Ljk0LDQxLjMwNSwzMjYuNjcyLDI2LjQxMiwzMDAuNSwxNS44NDggICBDMjc0LjMyOCw1LjI4NSwyNDcuMjUxLDAuMDAzLDIxOS4yNzEsMC4wMDNjLTI5LjY5MiwwLTU4LjA1Miw1LjgwOC04NS4wOCwxNy40MTdjLTI3LjAzLDExLjYxLTUwLjM0NywyNy4yMTUtNjkuOTUxLDQ2LjgyICAgYy0xOS42MDUsMTkuNjA3LTM1LjIxNCw0Mi45MjEtNDYuODI0LDY5Ljk0OUM1LjgwNywxNjEuMjE5LDAsMTg5LjU3NSwwLDIxOS4yNzFjMCwyOS42ODcsNS44MDcsNTguMDUsMTcuNDE3LDg1LjA3OSAgIGMxMS42MTMsMjcuMDMxLDI3LjIxOCw1MC4zNDcsNDYuODI0LDY5Ljk1MmMxOS42MDQsMTkuNTk5LDQyLjkyMSwzNS4yMDcsNjkuOTUxLDQ2LjgxOGMyNy4wMjgsMTEuNjExLDU1LjM4OCwxNy40MTksODUuMDgsMTcuNDE5ICAgYzMyLjczNiwwLDYzLjg2NS02Ljg5OSw5My4zNjMtMjAuN2MyOS41LTEzLjc5NSw1NC42MjUtMzMuMjYsNzUuMzc3LTU4LjM4NmMxLjUyLTEuOTAzLDIuMjM0LTQuMDQ1LDIuMTM2LTYuNDI0ICAgYy0wLjA4OS0yLjM3OC0wLjk5OS00LjMyOS0yLjcxMS01Ljg1MmwtMzkuMTA4LTM5LjM5OWMtMi4xMDEtMS43MTEtNC40NzMtMi41NjYtNy4xMzktMi41NjZjLTMuMDQ1LDAuMzgtNS4yMzIsMS41MjYtNi41NjYsMy40MjkgICBjLTEzLjg5NSwxOC4wODYtMzAuOTMsMzIuMDcyLTUxLjEwNyw0MS45NzdjLTIwLjE3Myw5Ljg5NC00MS41ODYsMTQuODM5LTY0LjIzNywxNC44MzljLTE5Ljc5MiwwLTM4LjY4NC0zLjg1NC01Ni42NzEtMTEuNTY0ICAgYy0xNy45ODktNy43MDYtMzMuNTUxLTE4LjEyNy00Ni42ODItMzEuMjYxYy0xMy4xMy0xMy4xMzUtMjMuNTUxLTI4LjY5MS0zMS4yNjEtNDYuNjgyYy03LjcwOC0xNy45ODctMTEuNTYzLTM2Ljg3NC0xMS41NjMtNTYuNjcxICAgYzAtMTkuNzk1LDMuODU4LTM4LjY5MSwxMS41NjMtNTYuNjc0YzcuNzA3LTE3Ljk4NSwxOC4xMjctMzMuNTQ3LDMxLjI2MS00Ni42NzhjMTMuMTM1LTEzLjEzNCwyOC42OTMtMjMuNTU1LDQ2LjY4Mi0zMS4yNjUgICBjMTcuOTgzLTcuNzA3LDM2Ljg3OS0xMS41NjMsNTYuNjcxLTExLjU2M2MzOC4yNTksMCw3MS40NzUsMTMuMDM5LDk5LjY0NiwzOS4xMTZsLTM5LjQwOSwzOS4zOTQgICBjLTUuOTAzLDUuNzExLTcuMjMxLDEyLjI3OS00LjAwMSwxOS43MDFjMy4yNDEsNy42MTQsOC44NTYsMTEuNDIsMTYuODU0LDExLjQyaDEyNy45MDZjNC45NDksMCw5LjIzLTEuODA3LDEyLjg0OC01LjQyNCAgIGMzLjYxMy0zLjYxNiw1LjQyLTcuODk4LDUuNDItMTIuODQ3VjM2LjU1QzQzOC41NDIsMjguNTU4LDQzNC44NCwyMi45NDMsNDI3LjQwOCwxOS42OTd6IiBmaWxsPSIjMDAwMDAwIi8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);
+  background-repeat: no-repeat;
+  background-size:   10px 10px;
+  bottom:            5px;
+  height:            10px;
+  position:          absolute;
+  right:             5px;
+  width:             10px;
+}
+
+.netlogo-disabled .netlogo-forever-icon {
+  background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQzOC41NDIgNDM4LjU0MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDM4LjU0MiA0MzguNTQyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTQyNy40MDgsMTkuNjk3Yy03LjgwMy0zLjIzLTE0LjQ2My0xLjkwMi0xOS45ODYsMy45OTlsLTM3LjExNiwzNi44MzRDMzQ5Ljk0LDQxLjMwNSwzMjYuNjcyLDI2LjQxMiwzMDAuNSwxNS44NDggICBDMjc0LjMyOCw1LjI4NSwyNDcuMjUxLDAuMDAzLDIxOS4yNzEsMC4wMDNjLTI5LjY5MiwwLTU4LjA1Miw1LjgwOC04NS4wOCwxNy40MTdjLTI3LjAzLDExLjYxLTUwLjM0NywyNy4yMTUtNjkuOTUxLDQ2LjgyICAgYy0xOS42MDUsMTkuNjA3LTM1LjIxNCw0Mi45MjEtNDYuODI0LDY5Ljk0OUM1LjgwNywxNjEuMjE5LDAsMTg5LjU3NSwwLDIxOS4yNzFjMCwyOS42ODcsNS44MDcsNTguMDUsMTcuNDE3LDg1LjA3OSAgIGMxMS42MTMsMjcuMDMxLDI3LjIxOCw1MC4zNDcsNDYuODI0LDY5Ljk1MmMxOS42MDQsMTkuNTk5LDQyLjkyMSwzNS4yMDcsNjkuOTUxLDQ2LjgxOGMyNy4wMjgsMTEuNjExLDU1LjM4OCwxNy40MTksODUuMDgsMTcuNDE5ICAgYzMyLjczNiwwLDYzLjg2NS02Ljg5OSw5My4zNjMtMjAuN2MyOS41LTEzLjc5NSw1NC42MjUtMzMuMjYsNzUuMzc3LTU4LjM4NmMxLjUyLTEuOTAzLDIuMjM0LTQuMDQ1LDIuMTM2LTYuNDI0ICAgYy0wLjA4OS0yLjM3OC0wLjk5OS00LjMyOS0yLjcxMS01Ljg1MmwtMzkuMTA4LTM5LjM5OWMtMi4xMDEtMS43MTEtNC40NzMtMi41NjYtNy4xMzktMi41NjZjLTMuMDQ1LDAuMzgtNS4yMzIsMS41MjYtNi41NjYsMy40MjkgICBjLTEzLjg5NSwxOC4wODYtMzAuOTMsMzIuMDcyLTUxLjEwNyw0MS45NzdjLTIwLjE3Myw5Ljg5NC00MS41ODYsMTQuODM5LTY0LjIzNywxNC44MzljLTE5Ljc5MiwwLTM4LjY4NC0zLjg1NC01Ni42NzEtMTEuNTY0ICAgYy0xNy45ODktNy43MDYtMzMuNTUxLTE4LjEyNy00Ni42ODItMzEuMjYxYy0xMy4xMy0xMy4xMzUtMjMuNTUxLTI4LjY5MS0zMS4yNjEtNDYuNjgyYy03LjcwOC0xNy45ODctMTEuNTYzLTM2Ljg3NC0xMS41NjMtNTYuNjcxICAgYzAtMTkuNzk1LDMuODU4LTM4LjY5MSwxMS41NjMtNTYuNjc0YzcuNzA3LTE3Ljk4NSwxOC4xMjctMzMuNTQ3LDMxLjI2MS00Ni42NzhjMTMuMTM1LTEzLjEzNCwyOC42OTMtMjMuNTU1LDQ2LjY4Mi0zMS4yNjUgICBjMTcuOTgzLTcuNzA3LDM2Ljg3OS0xMS41NjMsNTYuNjcxLTExLjU2M2MzOC4yNTksMCw3MS40NzUsMTMuMDM5LDk5LjY0NiwzOS4xMTZsLTM5LjQwOSwzOS4zOTQgICBjLTUuOTAzLDUuNzExLTcuMjMxLDEyLjI3OS00LjAwMSwxOS43MDFjMy4yNDEsNy42MTQsOC44NTYsMTEuNDIsMTYuODU0LDExLjQyaDEyNy45MDZjNC45NDksMCw5LjIzLTEuODA3LDEyLjg0OC01LjQyNCAgIGMzLjYxMy0zLjYxNiw1LjQyLTcuODk4LDUuNDItMTIuODQ3VjM2LjU1QzQzOC41NDIsMjguNTU4LDQzNC44NCwyMi45NDMsNDI3LjQwOCwxOS42OTd6IiBmaWxsPSIjODA4MDgwIi8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);
+}
+
+.netlogo-button-agent-context {
+  font-size: 11px;
+  left:      8px;
+  position:  absolute;
+  top:       5px;
+}
+
+.netlogo-disabled .netlogo-button-agent-content {
+  color: #808080;
+}
+
+.netlogo-text-box {
+    background-color: white;
+    border: none;
+    margin: 0;
+    white-space: pre-wrap;
+    font-family: "Lucida Grande", sans-serif;
+}
+
+.netlogo-switcher {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+}
+
+.netlogo-slider {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.netlogo-slider:hover {
+    cursor: default;
+}
+
+.netlogo-slider input[type=range] {
+  background-color: transparent;
+  height: 22px;
+  margin: 0px;
+  margin-bottom: -5px;
+  margin-top: 2px;
+  padding: 0px;
+  width: 100%;
+}
+
+.netlogo-label {
+  margin: 0 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.netlogo-slider-label {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+
+.netlogo-slider-label .netlogo-label {
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+  min-width: 0;
+}
+
+.netlogo-slider-label .netlogo-slider-value {
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+}
+
+.netlogo-slider-label input[type=number] {
+    margin: 0px;
+    border: 1px;
+    padding: 0px;
+}
+
+.netlogo-monitor {
+    padding: 2px 4px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column;
+        flex-flow: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+}
+
+.netlogo-monitor > .netlogo-value {
+  background-color: white;
+  min-height: 11px;
+  padding: 2px 2px;
+}
+
+.netlogo-value {
+    overflow: hidden;
+}
+
+.netlogo-code {
+  border: 1px solid black;
+}
+
+.netlogo-code-tab {
+  height: 500px;
+}
+
+.netlogo-input-box {
+    padding: 2px 4px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column;
+        flex-flow: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+}
+
+.netlogo-multiline-input {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  margin:    4px;
+  resize:    none;
+}
+
+.netlogo-chooser {
+    padding: 2px 4px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column;
+        flex-flow: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+}
+
+.netlogo-plot {
+    -moz-box-sizing: content-box;
+         box-sizing: content-box; /* otherwise border gets cut off -- BCH 11/9/2014 */
+    border: 1px solid black;
+}
+
+.netlogo-forever-button > input {
+    display: none;
+}
+
+.netlogo-subheader {
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column;
+      flex-flow: column;
+  -ms-flex-positive: 0;
+      flex-grow: 0;
+  white-space: nowrap;
+}
+
+.netlogo-export-wrapper {
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-positive: 0;
+      flex-grow: 0;
+  white-space: nowrap;
+}
+
+.netlogo-widget-error {
+  color: red;
+}
+
+.netlogo-widget-error:hover {
+  cursor: pointer;
+}
+
+.CodeMirror {
+  height: auto;
+}
+/*# sourceMappingURL=widgets.css.map */</style>
+    <style>/*
+ * Style for things relevant to the widget/interface editor
+ */
+
+.netlogo-interface-unlocker {
+  height: 20px;
+  margin: auto 0;
+  outline: none;
+  width: 20px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADu0lEQVR4Xu1b0VHcMBDddQMhFeRSQUgFOTo4KgiW+A+pAKgg8I+sUAGXCnJXQUgFuXRAGvBmlhGZA05aS9YZz0WaYRjGsqx92n270hMIAzVr7T4AfGjbdoqIEwDgv9fbLRGtqqpaAMCyruvbIaaG2/yItXYPAD4R0REAsNExbYWIXwHgsq7ru5gXY/puDQBr7SkRnQAAg9Cn3SHiRV3X530G8b2bHQB2dSK6SVhxyT72iMPcoZEVAGPMESJayZI+z4mo1lpzaGRp2QBwLn+WZVbCIIh4lisksgAwxMo/xSSXJ/QG4OrqalZVFcd8p0ZEvxFxTkTM7Cv+jYj7iLhHRDNEfNNpIABo2/bw+Ph43rX/pn69AOA0R0S/OjL9EhFPJBJzJHrBNUMHwxi8t33SZC8AjDE3iDgLTZSI/lRVNavrmguczs1aO23bdo6Ir4Tx51rrw84DP+mYDABPkIi+C5P7WVXVNHWF2MPatl0g4rvQdxDxIBbgh/GSAWiaho2f+iZGRL2Mfxi3IwgLpdRBihckAWCtnbjY3/hN5/a88lnqeeYF5wnecHBcsIoFIQkAY8wJIn4JrP651jprTWCMOUPE08A3P2utmTyjWhIATdMwoW1kabf6k9S4983ehQKXwz4vWCqlvCHpGzcVAArAfK2U4t1f9tY0DZfAH30DK6Wi7Yl+weXpH75J5ChOfGNLRRcivo/lnRQAgukPEV/ndv+1jBAk35R0mB2AFDeMiZWmabzhNwgAUgZ4SQCIKDoTRHuAlI5eGIDo9FsAiIk/7ls8QKjISggkFCMxXhjKAkRUOCB2D1JIMMb9/ksSdCe+6xsQlrhCMlfU0VfsAoQOYfiQ1f3cD0tE15KGIIaAlPYSDBjslS6kWACQlqN4gFD4SAC+5PMSAh0Ko8IBkosWDtgeB1wS0b1uwOIoX6WRFiP2+Sg5gNVhpxU+Ek2c+MFaYGd1WAJklACEzu266I2S0evPRwcA64Va66fX4x7ZZIxh8SOLF4wOAAD4ppQKyukh1Slm9d1eQDwfGDoNivLVrgPAjO8VTiTVeRc8gLeo3hsd0p2DnQDAGfFMQJWEz1jjx8oBDwcVz8hpGxXnGLNAAYAR2CShS9L3ToXApmowdxU4ag7YdJFBunixUx7gk89Cqk8BIAGBUWaB0IbIGHMr3QqNwWGUAPA/RPmus+XcB4yZBPmavO8GKW+V+/6P0T8nGasHxHhxr74FgHIsLl+YGPpApJdLx75cQqCEQAmB0R2KxoZxr/6FAzpwwF8eSx5uwugU8AAAAABJRU5ErkJggg==');
+  background-size: contain;
+}
+
+.netlogo-interface-unlocker:hover {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADQElEQVR4Xu2a8bFNMRDGv1cBKuBVgArQARWgAlSAClABKkAFngpQATqgAubn5c7cuXOym01yzsu7k515f7y5e5Lsl91vN9mcaDu5JemOpLuSbkji/335JumnpDNJXyTx/+pysvIMVyU9kfQoGR2ZDjDeSXoj6Xfkw4jumgA8l/RUEiC0CMa/lvSyZZDct2sAgGt/qNhxzz484kHv0OgNAK7+1rOk8ffHKTQahzn/vCcAuPyLLqvyB2GeLiHRC4Atdv4Qli6e0AOA+ynm/X071/gl6WNiduIakoM3IEvGul46UOIExqqWVgBY9I9Cpie3kxW8/A4YsD41gyeAd9qSJlsBgO3ZNUv+JB0KnIhQMLG7V5yP0CE7VEkLACzwszPr91T51RYyeBjA3XTmuZf0wiC0AIDxgJCTVuN345aAAEiAEJZaAKjlif2c4PaA48V76YLhBYy0wgEugFRDUgsAZPbKmIkc3bsmYDxqjZw8S+S5CQDsRo6l2X08pDbucwYQCuxwzgvIMlZILo5b6wF/DZjfp9NfaCcKlTkdPjR0w/aEP0hFy1djEaSkpuLEGNsrum5HeacGAC/9XVvB/XeYeOQbTodrAFAzZmEE/Fezwm8TALwMcJEAhDNBzWK9dFQzZi8PCKffmsVOAJyCpAbU6QEBBCwSnCEQLcFr3HVywOQA+1RW41UBCjALoVU4gBvf/QMI5Sh/OYlefUWMR9c68XFa3L8T4GDGASorJbvlxXzUgC31XY+YABRsx/QAh/ULMLwwlRkCXmE0OaDAOScHrMQBPH3Z9Q249+cpTW8ZkgPoDnO5edg0AQQuUyPdYQ+wIQGw7u28C1fP4MPfhwOAfuHh87jDRVPK9vKC4QD4VNBOt7pOl94DStpXRw0AO2g1TrzGx6X3AAywXnR4bw6OAgCMWGqgeo3PqPHoD0eCOyOWFrZGxTkBGPUwtNRC91rfRxUCS9Vg7ypwaA5YeshAhWg9vDgqD8jdQ1htrwlABQJDZgHrQMQR2XsVGsFhSACs80DPc8CwJMj7wdwL0t2z+cguW7pDekAv40rGmQCMWgmW7F4PnekB0wOcV+uzM1QQaGuc0wum7aIyOWBygMMB/wCoI9hBlHmMqwAAAABJRU5ErkJggg==');
+}
+
+.netlogo-interface-unlocker.interface-unlocked {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADbklEQVR4Xu2b4VXbMBSFdbVA2w3aCZpOUJgAOkGRPABlgtIJSv9HMp0AMkHDBIUJChuEAcjreSGhqWPJsi2wfSyfk3+SrPfp6j5ZUiBG/mDk8YsEIClgYASstR+5ywAmQojXRHQrhLgFcK+Uuq4bTu+nQJ7nHOQBER0COKwI8JaI5gAutdazEBi9BpDn+TERnfJIhwRTKHMN4EQpNffV7SWAPM8nRHQhhHjbIPBiFVbEJ6XUoqyt3gEwxhwByCMEvt0EewRD2PGIXgEwxnwB8D1y8JvmFgD2ixB6A6DuyBPRHQA2vQmAV4HQGMIHpRRnjtXTCwDrOf/LZ3ZEdA/gnH/FUeRM8fDwsCel5CzxuQIGmyMrYeUJvQBgrf0thOC87npmAI5cRrZdKc/zveVyeQbgvasxIvqWZRlnl+4BVEmfiFSWZeeBEl8VW68duM6Box5PhXcMtHMFWGv/uNIdEZ1kWXZWJ/jtssYYlrtLCT+11kedAmC5EhHP/bJnprWuWvl52bASlsslp8Ayk1xord90CsBay6N7XLpAeZTok1u3UMEpgK+Od+x3DcAl/9ajX5gKPOfLVPCjawBUNjJNjM+nEGvtpcMQrzoDsM79nP52nrVDt5b/pmFjjGsadArAaYBa66gDM51OD6WU/HG1C7upubSt58sAsQH43hWVdB0oCYBnDZAUENkD0hTwqC15QB3jilm2Nya42WePGVxIW7yvT0SuL729TRsA7tp+E3g9wFpbuhwNCeIlymxvXjR9XwLwuM1eqjaMQQE+5SQASQEjMMEXmwJEdANgUfOwwmvuMbLAswPgwKWUvG//dPbm2YSolc16D4BPbKSUk7LFim/TM5RC7wEIIZwbmBXb3kEMeg+gqoNts0xV+0EUPYVirANWJyxl7/BtfIZ2fAgA+MISHznvXD4wxlwE3OsZfhYQQuycu8cwQCYzCAVwR4sqsNby5aTVlbY2z2AAFDcyR6eAIoDRLITW8/Qmy7L/bnhUXXwInRZDmQJXWuunbSwOLsYiaEgmuLMWGBUAl0zbrgIHo4DRAwg1tCblhmKCTWILqpMAbF1qDCJWs1CMr8Gar6xXPCkgKeDfvd562gkrnaZAjMVKGOtmpZ7dA/irrVnXXqaWlHJe9cenNj3p7IZIm07HrJsAxKQ5xLZGr4C/ICqoLrwEHLcAAAAASUVORK5CYII=')
+}
+
+.netlogo-interface-unlocker.interface-unlocked:hover {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAC3klEQVR4Xu2b8TUEMRDGv6sAHVABKuAqQAWoABWgAlSAClABVwEqQAdUwPtW1tu3l2STzaxNLsl7+5cke/ObL5PZSUyQeZtkbj8KgKKA9AhsqZ+8AWAZwLt6vgC8+JqTwhKgkTsAdtVjs5EwngDcA3hwgRE7gCMAZ8rTLvY0+1ANJwqIcWysACjvOwCrvlZr+lMRewA+dXPFCOAAwLWA4c0puDQIYS5GxAbgGMCFsPH1dFTAtA0hJgC+nv9Q0Z/LZckRGiFsqnHVkFgA0IjHjmDHbe5GPW0pc6fYVrvEfgcMjqUSqpgQC4BnAIRgatzSqBBtIGsNIohLAOuW+c7V7hIFgC7pHyqvO6q86kZFUC3MH3SNINcINAYFvFm2O+7j9GbfRrmblHBLVY0NgHLl2tc1yp7ZX0irU2VdkKQKVsYGQO8y29M1SpT7d2hjJnlqmGQ6NgCT/CW837SZ3tap4GpsAN8Gz/QJfDal8ONIFxBnYwLgtsftb0j513OblsGoAGwBUNoxDKb8uJpr0i/yCVj/CcD4rgLAx2XCfYsCLEmQtDLLEjDBlibts0rKEohlCdR1dh/vSfRlImT60qM66lZXfkLeaY0BpnQ05IWSY/+KFwGTZg/AqDYGwRwUYBRPAVAUUJaAaAx4VaVrn8OKruAusQsMHgNoOMvbzQMLWy2uy+jm36MHwBMbelxXwLQVPV0hRA/AVsC05fsLA6DLQ6F5Rtf8riC1/STygOqExfArbIVP1x8ePQAawiNn3QUlFiJDT3eSADB37q6+9EynPq7eZ78kAOhUwLs5Ep/ayQBoV5cktsCkFNAGkE0iRC8xE2zf8Oi6+OAaB5JYAjN1R6dplEQSlMwS0OUCWQEwyTQ0C0xGAdkDcA1offolEQT7GOY6pgCoLzW6EvPpJ/E16PO+Pn2LAooCfv9rZJBWlkA5GBlQXkKaZV2BzyBtzBsigxjkO2kB4Ets0fpnr4Af4sW1RwixQEAAAAAASUVORK5CYII=')
+}
+
+.netlogo-widget.interface-unlocked {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.netlogo-widget.interface-unlocked:hover {
+  box-shadow: 0 0 6px 3px rgba(15, 15, 15, .40);
+  cursor:     default;
+  z-index:    3;
+}
+
+.context-menu-item {
+  border-bottom: solid 1px #dfdfdf;
+  color:         #0066aa;
+  cursor:        pointer;
+  font-size:     18px;
+  padding:       5px;
+  -webkit-user-select:   none;
+     -moz-user-select:   none;
+      -ms-user-select:   none;
+          user-select:   none;
+}
+
+.context-menu-item:hover {
+  background-color: #0066aa;
+  color:            white;
+}
+
+.context-menu-item:last-child {
+  border-bottom: none;
+}
+
+.context-menu-list {
+  list-style: none;
+  margin:     0;
+  padding:    0;
+}
+
+.widget-context-menu {
+  background-color: white;
+  border:           solid 1px #dfdfdf;
+  box-shadow:       1px 1px 2px #cfcfcf;
+  display:          none;
+  margin:           0;
+  padding:          8px 10px;
+  position:         absolute;
+  width:            200px;
+  z-index:          10;
+}
+
+.widget-edit-popup {
+  background-color: white;
+  border:           1px solid black;
+  border-radius:    5px;
+  box-shadow:       0 0 10px rgba(0,0,0,0.5);
+  padding:          10px 10px 0 10px;
+  position:         absolute;
+  outline:          none;
+  width:            450px;
+  z-index:          100;
+}
+
+.widget-edit-form {
+  margin-bottom: 10px;
+}
+
+.widget-edit-form label {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.widget-edit-form-title {
+  cursor:        default;
+  font-weight:   bold;
+  margin-bottom: 10px;
+  text-align:    center;
+  -webkit-user-select:   none;
+     -moz-user-select:   none;
+      -ms-user-select:   none;
+          user-select:   none;
+}
+
+.widget-edit-form-button-container {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.widget-edit-closer {
+  color:       #7F7F7F;
+  cursor:      pointer;
+  font-weight: bold;
+  position:    absolute;
+  right:       10px;
+  top:         10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.widget-edit-closer:hover {
+  color: black;
+}
+
+.widget-edit-text {
+  font-size: 20px;
+}
+
+.widget-edit-checkbox {
+  height: 13px;
+}
+
+.widget-edit-input-label {
+  margin-right: 10px;
+  white-space:  nowrap;
+}
+
+.widget-edit-input {
+  width: 100%;
+}
+
+.widget-edit-input[type="number"] {
+  text-align: right;
+}
+
+.widget-edit-hint-text {
+  font-size:   12px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.widget-edit-dropdown {
+  font-size: 14px;
+  height:    20px;
+  margin:    0 10px;
+}
+
+.widget-edit-textbox {
+  font-size: 14px;
+  height:    115px;
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.widget-edit-fieldset {
+  border-radius: 8px;
+}
+
+.widget-edit-legend {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+/*# sourceMappingURL=ui-editor.css.map */</style>
+    <style>.netlogo-command {
+  background-color: #BACFF3;
+}
+.netlogo-command.netlogo-active, .netlogo-command:active {
+  background-color: #1F6A99;
+  color: #BACFF3;
+}
+.netlogo-button.netlogo-disabled:active, .netlogo-forever-button.netlogo-disabled.netlogo-active {
+  background-color: #BCBCE5;
+  color: #888888;
+}
+.netlogo-input {
+  background-color: #8FE585;
+}
+.netlogo-output {
+  background-color: #FFFF9A;
+  border: 1px solid #E7E741;
+}
+
+.netlogo-slider-label .netlogo-label {
+  background-color: #8FE585;
+}
+
+.netlogo-slider-label .netlogo-slider-value {
+  background-color: #8FE585;
+}
+
+.netlogo-tab {
+  background-color: #BCBCE5;
+  border-color: #242479;
+  font-size: 16px;
+}
+
+.netlogo-tab.netlogo-active {
+  background-color: #7C76fD;
+}
+
+.netlogo-tab:active {
+  background-color: #7C76fD;
+}
+
+.netlogo-view-container {
+  background-color: #F4F4F4;
+  border: 1px solid #CCCCCC;
+}
+/*# sourceMappingURL=netlogoweb.css.map */</style>
+    <style>.cm-s-netlogo-default .cm-reporter {
+    color: #660096;
+}
+.cm-s-netlogo-default .cm-command {
+    color: #0000AA;
+}
+.cm-s-netlogo-default .cm-keyword {
+    color: #007F69;
+}
+.cm-s-netlogo-default .cm-comment {
+    color: #5A5A5A;
+}
+.cm-s-netlogo-default .cm-string,
+.cm-s-netlogo-default .cm-number,
+.cm-s-netlogo-default .cm-constant {
+    color: #963700;
+}
+/*# sourceMappingURL=netlogo-syntax.css.map */</style>
+    <style>/*
+ * Styles for that sweet loading spinner with turtles
+ */
+
+#loading-overlay {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.spinner-img {
+  height: auto;
+  width: 10px;
+  z-index: 11;
+  position: absolute;
+}
+
+#spinner {
+  height: 50px;
+  width:  50px;
+  -webkit-transform-origin: 60% 60%;
+          transform-origin: 60% 60%;
+  -webkit-animation-name: spin;
+          animation-name: spin;
+  -webkit-animation-duration: 1.75s;
+          animation-duration: 1.75s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
+  z-index: 11;
+}
+
+.turtle1 {
+  top: 29%;
+  left: 29%;
+}
+
+.turtle2 {
+  top: 20%;
+  left: 50%;
+}
+
+.turtle3 {
+  top: 29%;
+  left: 71%;
+}
+
+.turtle4 {
+  top:  50%;
+  left: 80%;
+}
+
+.turtle5 {
+  top:  71%;
+  left: 71%;
+}
+
+.turtle6 {
+  top:  80%;
+  left: 50%;
+}
+
+.turtle7 {
+  top:  71%;
+  left: 29%;
+}
+
+.turtle8 {
+  top: 50%;
+  left: 20%;
+}
+
+@-webkit-keyframes spin {
+  from {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+  }
+  to {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+  }
+  to {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+  }
+}
+/*# sourceMappingURL=spinner.css.map */</style>
+    <style>/*
+ * styles to use with the "error alert" component
+ */
+
+.dark-overlay {
+  background-color:rgba(0, 0, 0, 0.7);
+  width:100%;
+  height:100%;
+  z-index:10;
+  top:0;
+  left:0;
+  position: fixed;
+}
+
+#alert-overlay {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#alert-dialog {
+  -ms-flex-align: center;
+      align-items: center;
+  background-color: whitesmoke;
+  border: 2px black solid;
+  border-radius: 10px;
+  display:-ms-flexbox;
+  display:flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  margin: 0 50px;
+  min-width: 350px;
+  opacity: 1;
+  z-index: 15;
+}
+
+#alert-title {
+  margin-bottom: 5px;
+}
+
+.alert-text {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.standalone-text {
+  color: #555555;
+  display: none;
+  text-align: center;
+  max-width: 600px;
+}
+
+#alert-dismiss-container {
+  border-top: 1px solid lightgray;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.alert-button {
+  font-size: 14px;
+  height: 25px;
+  min-width: 50%;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  background-color: #e6e6e6;
 }
