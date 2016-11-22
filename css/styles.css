@@ -1099,6 +1099,7 @@ img.link-img {
 
 .netlogo-code-tab {
   height: 500px;
+  overflow: scroll;
 }
 
 .netlogo-input-box {
