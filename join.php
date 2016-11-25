@@ -27,7 +27,10 @@
 			{
 				die('Error: ' . mysql_error());
 			}else{
+				session_start();
+				$_SESSION['participante'] = $numParticipante;
 				header('Location: participar.html');
+
 			}
 		}
 	}

@@ -2,7 +2,9 @@
 
 	if(!empty($_POST['data'])){
 	$data = $_POST['data'];
-	$fname = mktime() . ".nlogo"; //Todo Guardar Con el número de participante
+	session_start();
+	$numParticipante = $_SESSION['participante'];
+	$fname = "ModeloAlumno" . $numParticipante . ".nlogo";
 
 	$file = fopen("Netlogo/Alumnos/Modelos_Alumnos/" .$fname, 'w');
 	fwrite($file, $data);
