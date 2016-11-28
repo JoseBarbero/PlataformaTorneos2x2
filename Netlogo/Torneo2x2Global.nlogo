@@ -33,7 +33,7 @@ to setup
   ; Nombres de estrategias leídas desde archivo
   set estrategias []
   leerEstrategias "Alumnos/Estrategias.txt"
-  set alumnos 25
+  set alumnos 0
   crearJugadores
   aislarEstrategias
 
@@ -75,6 +75,7 @@ to torneo
     set cont1 cont1 + 1
   ]
   printPayoffs
+  resultados
   stop
 end
 
@@ -90,8 +91,6 @@ to enfrentamiento[jugador1 jugador2]
   ask player jugador1 [ set payoff (payoff + compute-payoff)]
   ask player jugador2 [ set payoff (payoff + compute-payoff)]
 
-;  ask player jugador1 [ print (word name ":" decision) ]
-;  ask player jugador2 [ print (word name ":" decision) ]
   tick
   ifelse ticks > nrondas - 1 [stop][enfrentamiento jugador1 jugador2]
 
@@ -181,15 +180,17 @@ to printPayoffs
     output-type ": "
     output-print payoff
   ]
-
 end
 
 to leerEstrategias [archivo]
   file-open archivo
+  let nLineas 0
   while [not file-at-end?]
   [
     set estrategias lput file-read-line estrategias
+    set nLineas nLineas + 1
   ]
+  set alumnos nLineas
   file-close
 end
 
@@ -244,8 +245,24 @@ to aislarEstrategias
   ]
 end
 
-
-
+to resultados
+  let archivoResultados "Alumnos/Resultados.csv"
+  ifelse file-exists? archivoResultados
+    [
+      file-close
+      file-delete archivoResultados
+      file-open archivoResultados
+    ]
+    [
+      file-open archivoResultados
+    ]
+    ask players[
+        file-type name
+        file-type ","
+        file-print payoff
+      ]
+  file-close
+end
 
 
 
@@ -325,7 +342,7 @@ Puntuación
 10.0
 true
 true
-"" "ask players [\n  create-temporary-plot-pen name\n  set-plot-pen-color color\n  plot payoff \n]"
+"" ";ask players [\n;  create-temporary-plot-pen name\n;  set-plot-pen-color color\n;  plot payoff \n;]"
 PENS
 
 OUTPUT
