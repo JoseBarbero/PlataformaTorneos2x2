@@ -328,30 +328,6 @@ NIL
 NIL
 1
 
-PLOT
-434
-10
-915
-295
-Payoff
-Turnos
-Puntuación
-0.0
-10.0
-0.0
-10.0
-true
-true
-"" ";ask players [\n;  create-temporary-plot-pen name\n;  set-plot-pen-color color\n;  plot payoff \n;]"
-PENS
-
-OUTPUT
-9
-234
-412
-505
-15
-
 BUTTON
 111
 70
