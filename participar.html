@@ -61023,7 +61023,7 @@ into the sorting code and caused a 25% performance hit in BZ Benchmark. --JAB (4
 
     SessionLite.prototype.exportnlogo = function() {
       var exportBlob, exportName, exportedNLogo;
-      exportName = "a.nlogo";
+      exportName = "ModeloTorneo.nlogo";
       if (exportName != null) {
         exportedNLogo = this.getNlogo();
         if (exportedNLogo.success) {
@@ -61036,9 +61036,11 @@ into the sorting code and caused a 25% performance hit in BZ Benchmark. --JAB (4
 		xhr.open( 'post', 'guardarModelo.php', true );
 		xhr.send(data);
 		if (window.confirm("Su respuesta ha sido enviada correctamente. A continuación puede descargar una copia si lo desea.")){
+			window.location.href = "torneos.html";
 			return saveAs(exportBlob, exportName);
+		}else{
+			window.location.href = "torneos.html";
 		}
-		window.location.href = "torneos.html";
       } else {
       	return this.alertCompileError(exportedNLogo.result);
       	}
