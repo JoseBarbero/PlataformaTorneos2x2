@@ -266,8 +266,6 @@ end
 
 
 
-
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 216
@@ -692,6 +690,16 @@ NetLogo 5.3.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="torneo" repetitions="1" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>torneo</go>
+    <metric>count turtles</metric>
+    <enumeratedValueSet variable="nrondas">
+      <value value="200"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default

@@ -2,6 +2,25 @@
 ; durante un número n de rondas. Finalmente muestra las decisiones tomadas
 ; por ambas estrategias y las puntuaciones finales.
 
+; (!) - El alumno debe modificar el método "estrategiaAlumno" con su propia estrategia de la
+;     manera que se indica en el comentario
+
+breed [players player]
+players-own [
+  name
+  my-strategy
+  decision
+  past-decisions
+  opponent
+  payoff
+]
+globals [
+  cooperate_vs_cooperate
+  cooperate_vs_defect
+  defect_vs_cooperate
+  defect_vs_defect
+]
+
 to-report estrategiaAlumno
   let eleccion False
   ; PARTICIPANTE, ESCRIBE AQUÍ EL CÓDIGO DE TU ESTRATEGIA
@@ -19,23 +38,6 @@ to-report estrategiaAlumno
   ;------------------------------|FIN|------------------------------
   report eleccion
 end
-
-breed [players player]
-
-players-own [
-  name
-  my-strategy
-  decision
-  past-decisions
-  opponent
-  payoff ]
-
-globals [
-  cooperate_vs_cooperate
-  cooperate_vs_defect
-  defect_vs_cooperate
-  defect_vs_defect
-]
 
 to setup
   clear-all
@@ -76,10 +78,26 @@ end
 
 ; Cada turno un tick (utiliza la variable global ticks como contador de turnos)
 to enfrentamiento
-
+  ; Prescindimos de runresult hasta que netlogo web soporte esta funcionalidad
+  ; ask players [
+  ;     set decision runresult my-strategy
+  ;     set past-decisions lput decision past-decisions ]
   ask players [
-      set decision runresult my-strategy
-      set past-decisions lput decision past-decisions ]
+    ifelse my-strategy = "alwaysCooperate"[set decision alwaysCooperate set past-decisions lput decision past-decisions]
+    [ifelse my-strategy = "alwaysDefect"[set decision alwaysDefect set past-decisions lput decision past-decisions]
+      [ifelse my-strategy = "titForTat"[set decision titForTat set past-decisions lput decision past-decisions]
+        [ifelse my-strategy = "titForTwoTats"[set decision titForTwoTats set past-decisions lput decision past-decisions]
+          [ifelse my-strategy = "friedman"[set decision friedman set past-decisions lput decision past-decisions]
+            [ifelse my-strategy = "joss"[set decision joss set past-decisions lput decision past-decisions]
+              [ifelse my-strategy = "estrategiaAlumno"[set decision estrategiaAlumno set past-decisions lput decision past-decisions]
+                [if my-strategy = "randomSt"[set decision randomSt set past-decisions lput decision past-decisions]]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
 
   ask players [ set payoff (payoff + compute-payoff)]
 
@@ -194,27 +212,24 @@ end
 
 
 
-
-
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 216
 14
-461
-225
-4
-4
-20.0
-1
+416
+240
+-1
+-1
+20
+RESERVED
 10
+RESERVED
+RESERVED
+RESERVED
+RESERVED
 1
 1
-1
-0
-1
-1
-1
+RESERVED
 -4
 4
 -4
@@ -223,7 +238,7 @@ GRAPHICS-WINDOW
 0
 1
 ticks
-30.0
+30
 
 SLIDER
 21
@@ -236,7 +251,7 @@ nrondas
 1000
 200
 10
-1
+RESERVED
 NIL
 HORIZONTAL
 
@@ -247,7 +262,7 @@ CHOOSER
 118
 mi-estrategia
 mi-estrategia
-"estrategiaPropia" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
+"estrategiaAlumno" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
 0
 
 CHOOSER
@@ -257,8 +272,8 @@ CHOOSER
 184
 estrategia2
 estrategia2
-"estrategiaPropia" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
-4
+"estrategiaAlumno" "alwaysCooperate" "alwaysDefect" "titForTat" "titForTwoTats" "friedman" "joss" "randomSt"
+3
 
 BUTTON
 22
@@ -268,13 +283,13 @@ BUTTON
 Setup
 setup
 NIL
-1
-T
+RESERVED
+RESERVED
 OBSERVER
+RESERVED
 NIL
-NIL
-NIL
-NIL
+RESERVED
+RESERVED
 1
 
 PLOT
@@ -285,14 +300,15 @@ PLOT
 Payoff
 Turnos
 Puntuación
-0.0
-10.0
-0.0
-10.0
+0
+10
+0
+10
 true
 true
 "" "ask players [\n  create-temporary-plot-pen name\n  set-plot-pen-color color\n  plot payoff \n]"
 PENS
+
 
 OUTPUT
 13
@@ -309,15 +325,14 @@ BUTTON
 Go
 enfrentamiento
 T
-1
-T
+RESERVED
+RESERVED
 OBSERVER
+RESERVED
 NIL
-NIL
-NIL
-NIL
+RESERVED
+RESERVED
 1
-
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -659,25 +674,22 @@ false
 0
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
-
 @#$#@#$#@
-NetLogo 5.3.1
+NetLogo 5.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 default
-0.0
--0.2 0 0.0 1.0
-0.0 1 1.0 0.0
-0.2 0 0.0 1.0
+0
+-0.2 0 0 1
+0 1 1 0
+0.2 0 0 1
 link direction
 true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
-
 @#$#@#$#@
-0
 @#$#@#$#@
