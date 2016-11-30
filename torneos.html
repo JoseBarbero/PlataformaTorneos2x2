@@ -91,7 +91,7 @@
 		<div class="row">
 			<section class="posts col-md-9">
 				<article class="post clearfix">
-					<h2 class="post-title">Torneo 1</h2>
+					<h2 class="post-title">Inscripción</h2>
 					<p class="post-content">
 						<section class="posts col-md-12">
 							<form class="form-horizontal" role="form" action="join.php" method="post" accept-charset="UTF-8" id="joinForm">
@@ -126,21 +126,46 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-block">Unirse al torneo</button>
+									<div class="col-sm-offset-4">
+										<button type="submit" class="btn btn-primary btn-xl pull-center">Unirse al torneo</button>
+									</div>
 								</div>
 							</form>
 						</section>
 					</p>
 				</article>
 			</section>
-			<aside class="col-md-3 hidden-xs midden-sm">
+			<aside class="col-md-3 midden-sm">
 				<h4>Torneos</h4>
 				<div class="list-group">
-					<a href="torneos.html" class="list-group-item">Torneo 1</a> 
-					<a href="torneos.html" class="list-group-item">Torneo 2</a> 
-					<a href="torneos.html" class="list-group-item">Torneo 3</a> 
-					<a href="torneos.html" class="list-group-item">Torneo 4</a> 
-					<a href="torneos.html" class="list-group-item">Torneo 5</a>
+					<a class="list-group-item">Torneo 1 
+						<button id="FinTorneo1" class="btn btn-xs btn-danger pull-right">Finalizar Torneo</button>				 
+						<span id="participantesSala1" class="badge pull-right">0</span>
+					</a>
+					<a class="list-group-item">Torneo 2
+						<button id="FinTorneo2" class="btn btn-xs btn-danger pull-right">Finalizar Torneo</button>
+						<span id="participantesSala2" class="badge pull-right">0</span>
+					</a>
+					<a class="list-group-item">Torneo 3 
+						<button id="FinTorneo3" class="btn btn-xs btn-danger pull-right">Finalizar Torneo</button>
+						<span id="participantesSala3" class="badge pull-right">0</span>
+					</a>
+					<a class="list-group-item">Torneo 4 
+						<button id="FinTorneo4" class="btn btn-xs btn-danger pull-right">Finalizar Torneo</button>
+						<span id="participantesSala4" class="badge pull-right">0</span>
+					</a>
+					<a class="list-group-item">Torneo 5 
+						<button id="FinTorneo5" class="btn btn-xs btn-danger pull-right">Finalizar Torneo</button>
+						<span id="participantesSala5" class="badge pull-right">0</span>
+					</a>
+				</div>
+				<h4>Torneos Finalizados</h4>
+				<div class="list-group">
+					<a href="#" class="list-group-item">Torneo 23/4/2014 </a>
+					<a href="#" class="list-group-item">Torneo 23/4/2014 </a>
+					<a href="#" class="list-group-item">Torneo 23/4/2014 </a>
+					<a href="#" class="list-group-item">Torneo 23/4/2014 </a>
+					<a href="#" class="list-group-item">...</a>
 				</div>
 			</aside>
 		</div>
@@ -165,5 +190,43 @@
 	</footer>
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$.get('tipoUsuario.php', function(data) {
+	    	var tipoUsuario = data;
+	    	$(document).ready(function () {
+				if(tipoUsuario == "Profesor"){
+					$("#FinTorneo1").show();
+			    	$("#FinTorneo2").show();
+			    	$("#FinTorneo3").show();
+			    	$("#FinTorneo4").show();
+			    	$("#FinTorneo5").show();
+				} else {
+					$("#FinTorneo1").hide();
+			    	$("#FinTorneo2").hide();
+			    	$("#FinTorneo3").hide();
+			    	$("#FinTorneo4").hide();
+			    	$("#FinTorneo5").hide();
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		for (var i=1; i<=5; i++) {
+			var idSpan = "#participantesSala".concat(i);
+    		$.ajax({
+				url: "participantesSala.php",
+				data: { sala: i},
+				type: "GET",
+				context: $(idSpan),
+				success: function(data) { 
+					console.log(i);
+					var numParticipantes = data;
+		    		$(this).text(numParticipantes);
+	    		}
+	    	});	
+		}
+	</script>
+
+
 </body>
 </html>

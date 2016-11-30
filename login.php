@@ -13,6 +13,7 @@
 		session_start();
 		$_SESSION['userEmail'] = $email;
 		$_SESSION['userID'] = $idUser;
+		$_SESSION['tipoUser'] = "Profesor";
 		header('Location: torneos.html');
 	}else{
 		//TODO mostrar que no existen usuarios con esa combinación
