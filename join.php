@@ -14,15 +14,13 @@
 	if(is_null($idTorneo)){
 		die('No existe ningún torneo creado en esa sala.');
 	} else {
-
-		$resultNumParticipantes = mysql_query("SELECT COUNT(*) as numParticipantes FROM participantes WHERE idTorneo = '$idTorneo'");
-		$info = mysql_fetch_assoc($resultNumParticipantes);
-		$numParticipante=$info["numParticipantes"] + 1;
+		$resultNumParticipantes = mysql_query("SELECT * FROM participantes WHERE idTorneo = '$idTorneo'");
+		$numParticipante=mysql_num_rows($resultNumParticipantes) + 1;
 		if ($numParticipante > 25){
 			//TODO mostrar un mensaje sin cerrar la página
 			die('Lo sentimos, el torneo no admite más participantes.');
 		}else{
-			$insertParticipante="INSERT INTO participantes VALUES ('$nombre', '$apellidos', '$estrategia', '$idTorneo', '$numParticipante')";
+			$insertParticipante="INSERT INTO participantes VALUES ('$nombre', '$apellidos', '$estrategia', '$idTorneo', '$numParticipante', 'correo', 0)";
 			if (!mysql_query($insertParticipante))
 			{
 				die('Error: ' . mysql_error());
@@ -30,7 +28,6 @@
 				session_start();
 				$_SESSION['participante'] = $numParticipante;
 				header('Location: participar.html');
-
 			}
 		}
 	}
