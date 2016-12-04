@@ -6,12 +6,16 @@
 	mysql_connect("localhost", "root", "") or 
 	    	die("Error de conexión: " . mysql_error()); 
 	mysql_select_db("torneos2x2db");
-	$result = mysql_query("SELECT numeroParticipante, participantes.idTorneo FROM participantes INNER JOIN salas ON participantes.idTorneo=salas.idTorneo WHERE idSala = '$sala'");
 
+	$torneo = mysql_query("SELECT idTorneo FROM salas WHERE idSala = '$sala'");
+	while ($row = mysql_fetch_array($torneo, MYSQL_ASSOC)) { 
+   		$idTorneo = $row["idTorneo"]; 
+   	}
+
+	$result = mysql_query("SELECT numeroParticipante, participantes.idTorneo FROM participantes INNER JOIN salas ON participantes.idTorneo=salas.idTorneo WHERE idSala = '$sala'");
 	//Meter en el txt una linea por cada participante y el random.
 	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) { 
    		$numParticipante = $row["numeroParticipante"];
-   		$idTorneo = $row["idTorneo"];
    		$estrategia = "estrategiaAlumno" . $numParticipante . "\n";
 		fwrite($fileEstrategias, $estrategia);
 	}
@@ -35,21 +39,21 @@
 			}
 		}
 	}
-	
+
 	//Marcar torneo como finalizado
-	$updateFinalizado="UPDATE torneos SET finalizado=true WHERE id=$idTorneo";
+	$updateFinalizado="UPDATE torneos SET finalizado=1 WHERE id='$idTorneo'";
 	if (!mysql_query($updateFinalizado))
 	{
 		die('Error: ' . mysql_error());
 	}
 
 	//Eliminar el torneo de la sala.
-	$updateSala="UPDATE salas SET idTorneo=null WHERE idSala=$sala";
+	$updateSala="UPDATE salas SET idTorneo=null WHERE idSala='$sala'";
 	if (!mysql_query($updateSala))
 	{
 		die('Error: ' . mysql_error());
 	}
-
+	
 	//Redirección
 	header('Location: Torneos.html');
 ?>

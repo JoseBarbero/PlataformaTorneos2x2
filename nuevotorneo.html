@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<title>Plataforma de torneos 2x2</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+	<header>
+		<!-- Navbar por defecto de Bootstrap -->
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#menusuperior"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">Plataforma de Torneos 2x2</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="menusuperior">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="index.html">Inicio </a></li>
+						<li><a href="torneos.html">Torneos</a></li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">Inicio de sesión <span class="caret"></span></a>
+							<ul class="dropdown-menu login-form">
+								<li>
+									<div class="row">
+										<div class="col-md-12">
+											<form class="form" role="form" action="login.php"
+												method="post" accept-charset="UTF-8" id="login">
+												<div class="form-group">
+													<label class="sr-only" for="email">Email</label> <input
+														type="email" class="form-control" id="email" name="email"
+														placeholder="Email" required>
+												</div>
+												<div class="form-group">
+													<label class="sr-only" for="password">Contraseña</label> <input
+														type="password" class="form-control" id="password"
+														name="password" placeholder="Password" required>
+												</div>
+												<div class="form-group">
+													<button type="submit" class="btn btn-primary btn-block">Log
+														in</button>
+												</div>
+											</form>
+										</div>
+										<div class="bottom text-center">
+											<a href="register.html"><b>Quiero registrarme</b></a>
+										</div>
+									</div>
+								</li>
+							</ul></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false" style="display: none;">Perfil <span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Mi perfil</a></li>
+								<li><a href="#">Nuevo torneo</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Cerrar sesión</a></li>
+							</ul></li>
+
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+	</header>
+	<section class="jumbotron">
+		<div class="container">
+			<h1 class="fuentetit-jumbotron">Plataforma de Torneos 2x2</h1>
+			<p class="fuentesubt-jumbotron">Trabajo de fin de Grado, Jose
+				Antonio Barbero, Universidad de Burgos</p>
+		</div>
+	</section>
+
+	<section class="main container">
+		<form class="form-horizontal" role="form" accept-charset="UTF-8" id="torneoForm">
+			<h2 class="title">Nuevo Torneo</h2>
+			<div class="form-group">
+				<label for="nombreTorneo" class="col-sm-4 control-label">Nombre</label>
+				<div class="col-sm-5">
+					<input type="text" id="nombreTorneo" name="nombreTorneo" placeholder="Nombre del Torneo"
+						class="form-control" autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="numSala" class="col-sm-4 control-label">Número de sala</label>
+				<div class="col-sm-1">
+					<select class=form-control id="numSala" name="numSala" >
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-3 col-sm-offset-4 ">
+					<button id="buttonForm" class="btn btn-primary btn-block">Enviar</button>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	<footer>
+		<div class="container container-footer">
+			<div class="row">
+				<div class="col-xs-7">
+					<p>Jose Antonio Barbero Aparicio. Grado en Ingeniería
+						Informática. Universidad de Burgos. 2016.</p>
+				</div>
+				<div class="col-xs-5">
+					<ul class="list-inline text-right">
+						<li><a href="index.html">Inicio</a></li>
+						<li><a href="#">Contacto</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$('#buttonForm').click(function() { 
+        	$.ajax({
+	            url: 'iniciarTorneo.php',
+	            type: 'GET',
+	            data: {	'nombreTorneo': $('#nombreTorneo').val(), 
+	            		'numSala': $('#numSala').val()},
+		        success: function (result) {
+                	window.location.replace("torneos.html");
+                	alert("El torneo se ha creado correctamente.");
+		        }
+        	});
+		});
+	</script>
+</body>
+</html>

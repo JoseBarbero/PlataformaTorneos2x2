@@ -33,8 +33,9 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="index.html">Inicio </a></li>
 						<li><a href="torneos.html">Torneos</a></li>
+						<li><a href="nuevotorneo.html">Nuevo Torneo</a></li>
 					</ul>
-
+			
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -119,7 +120,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="numSala" class="col-sm-4 control-label">Número de torneo</label>
+									<label for="numSala" class="col-sm-4 control-label">Número de sala</label>
 									<div class="col-sm-1">
 										<select class=form-control id="numSala" name="numSala" >
 											<option>1</option>
@@ -251,8 +252,48 @@
 		$('#FinTorneo1').on('confirmed.bs.confirmation', function() { 
         	$.ajax({
 	            url: 'FinalizarTorneo.php',
-	            type: 'POST',
+	            type: 'GET',
 	            data: {'sala': 1},
+	            success: function (result) {
+	              alert("El torneo ha concluido correctamente.");
+	            }
+        	});
+		});
+		$('#FinTorneo2').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 2},
+	            success: function (result) {
+	              alert("El torneo ha concluido correctamente.");
+	            }
+        	});
+		});
+		$('#FinTorneo3').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 3},
+	            success: function (result) {
+	              alert("El torneo ha concluido correctamente.");
+	            }
+        	});
+		});
+		$('#FinTorneo4').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 4},
+	            success: function (result) {
+	              alert("El torneo ha concluido correctamente.");
+	            }
+        	});
+		});
+		$('#FinTorneo5').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 5},
 	            success: function (result) {
 	              alert("El torneo ha concluido correctamente.");
 	            }
