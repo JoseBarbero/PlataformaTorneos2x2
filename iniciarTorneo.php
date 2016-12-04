@@ -11,8 +11,8 @@
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	if ($tipoUser == "Profesor"){
 
+	if (strcmp($tipoUser, "Profesor") == 0){
 		//Comprobar que no exista un torneo en esa sala
 		$selectTorneoSala = "SELECT idTorneo FROM salas WHERE idSala='$sala'";
 		$result = $conn->query($selectTorneoSala);
@@ -29,7 +29,7 @@
 
 					//Añadir torneo a la sala
 					$idTorneo = $conn->insert_id;
-					$updateSala="UPDATE salas SET idTorneo=$idTorneo WHERE idSala=$sala";
+					$updateSala="UPDATE salas SET idTorneo=$idTorneo WHERE idSala='$sala'";
 					if ($conn->query($updateSala) === FALSE) {
 						echo "Error: " . $updateSala . "<br>" . $conn->error;
 					}

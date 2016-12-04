@@ -139,7 +139,7 @@
 		$('#buttonForm').click(function() { 
         	$.ajax({
 	            url: 'iniciarTorneo.php',
-	            type: 'GET',
+	            type: 'POST',
 	            data: {	'nombreTorneo': $('#nombreTorneo').val(), 
 	            		'numSala': $('#numSala').val()},
 		        success: function (result) {
