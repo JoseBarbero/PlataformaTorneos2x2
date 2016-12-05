@@ -48,7 +48,7 @@
 		}
 
 		//Marcar torneo como finalizado
-		$updateFinalizado="UPDATE torneos SET finalizado=1 WHERE id='$idTorneo'";
+		$updateFinalizado="UPDATE torneos SET finalizado=1, fechaFin=CURDATE() WHERE id='$idTorneo'";
 		if (!mysql_query($updateFinalizado))
 		{
 			die('Error: ' . mysql_error());
@@ -60,10 +60,10 @@
 		{
 			die('Error: ' . mysql_error());
 		}
-		//Redirección
 		echo ("El torneo ha finalizado correctamente.");
-	} else {
+	}elseif($idUserCreador == 0){
+		echo ("No existe ningún torneo en esa sala actualmente.");
+	}else{
 		echo ("Solo el creador de un torneo puede finalizarlo.");
 	}
-
 ?>

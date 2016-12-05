@@ -22,7 +22,7 @@
 					echo "<script type='text/javascript'>alert('Ya existe un torneo creado en esa sala')</script>";
 		        } else {
 		        	//Introducir en base de datos (como no finalizado)
-					$insertTorneo = "INSERT INTO torneos VALUES (DEFAULT, '$nombreTorneo', '$idUser', 0)";
+					$insertTorneo = "INSERT INTO torneos VALUES (DEFAULT, '$nombreTorneo', '$idUser', 0, CURDATE(),'0000-00-00')";
 					if ($conn->query($insertTorneo) === FALSE) {
 						echo "Error: " . $insertTorneo . "<br>" . $conn->error;   
 					}
