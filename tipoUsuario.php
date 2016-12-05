@@ -1,3 +1,4 @@
 <?php
-	echo $_SESSION['tipoUser'] = "Profesor";
+	session_start();
+	echo $_SESSION['tipoUser'];
 ?>

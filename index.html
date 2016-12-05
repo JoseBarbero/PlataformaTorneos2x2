@@ -28,10 +28,11 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="index.html">Inicio </a></li>
 						<li><a href="torneos.html">Torneos</a></li>
+						<li id="nuevoTorneo"><a href="nuevotorneo.html">Nuevo Torneo</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
+						<li class="dropdown" id="iniciarSesion"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">Inicio de sesión <span class="caret"></span></a>
 							<ul class="dropdown-menu login-form">
@@ -62,15 +63,14 @@
 									</div>
 								</li>
 							</ul></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
+						<li id="perfil" class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false" style="display: none;">Perfil <span
+							aria-expanded="false">Perfil <span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Mi perfil</a></li>
-								<li><a href="#">Nuevo torneo</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="#">Cerrar sesión</a></li>
+								<li id="cerrarSesion"><a href="#">Cerrar sesión</a></li>
 							</ul></li>
 
 					</ul>
@@ -99,12 +99,42 @@
 			</section>
 			<aside class="col-md-3 hidden-xs midden-sm">
 				<h4>Torneos</h4>
-				<div class="list-group">
-					<a href="torneos.html" class="list-group-item">Torneo 1</a> 
-					<a href="torneos.html" class="list-group-item">Torneo 2</a> 
-					<a href="torneos.html" class="list-group-item">Torneo 3</a> 
-					<a href="torneos.html" class="list-group-item">Torneo 4</a> 
-					<a href="torneos.html" class="list-group-item">Torneo 5</a>
+				<div id="listadoTorneos" class="list-group">
+					<a class="list-group-item">Torneo 1 
+						<button id="FinTorneo1" class="btn btn-xs btn-danger pull-right" 
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala1" class="badge pull-right">0</span>
+					</a>
+					<a class="list-group-item">Torneo 2
+						<button id="FinTorneo2" class="btn btn-xs btn-danger pull-right"
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala2" class="badge pull-right">0</span>
+					</a>
+					<a class="list-group-item">Torneo 3 
+						<button id="FinTorneo3" class="btn btn-xs btn-danger pull-right"
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala3" class="badge pull-right">0</span>
+					</a>
+					<a class="list-group-item">Torneo 4 
+						<button id="FinTorneo4" class="btn btn-xs btn-danger pull-right"
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala4" class="badge pull-right">0</span>
+					</a>
+					<a class="list-group-item">Torneo 5 
+						<button id="FinTorneo5" class="btn btn-xs btn-danger pull-right"
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala5" class="badge pull-right">0</span>
+					</a>
 				</div>
 			</aside>
 		</div>
@@ -128,5 +158,108 @@
 	</footer>
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$.get('tipoUsuario.php', function(data) {
+	    	var tipoUsuario = data;
+	    	$(document).ready(function () {
+				if(tipoUsuario == "Profesor"){
+					$("#FinTorneo1").show();
+			    	$("#FinTorneo2").show();
+			    	$("#FinTorneo3").show();
+			    	$("#FinTorneo4").show();
+			    	$("#FinTorneo5").show();
+			    	$("#perfil").show();
+			    	$("#iniciarSesion").hide();
+			    	$("#nuevoTorneo").show();
+				} else {
+					$("#FinTorneo1").hide();
+			    	$("#FinTorneo2").hide();
+			    	$("#FinTorneo3").hide();
+			    	$("#FinTorneo4").hide();
+			    	$("#FinTorneo5").hide();
+			    	$("#perfil").hide();
+			    	$("#iniciarSesion").show();
+			    	$("#nuevoTorneo").hide();
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		for (var i=1; i<=5; i++) {
+			var idSpan = "#participantesSala".concat(i);
+    		$.ajax({
+				url: "participantesSala.php",
+				data: { sala: i},
+				type: "GET",
+				context: $(idSpan),
+				success: function(data) { 
+					var numParticipantes = data;
+		    		$(this).text(numParticipantes);
+	    		}
+	    	});	
+		}
+	</script>
+	<script type="text/javascript">
+		$('#FinTorneo1').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 1},
+	            success: function (result) {
+	              alert("El torneo ha concluido correctamente.");
+	            }
+        	});
+		});
+		$('#FinTorneo2').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 2},
+	            success: function (result) {
+	              alert("El torneo ha concluido correctamente.");
+	            }
+        	});
+		});
+		$('#FinTorneo3').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 3},
+	            success: function (result) {
+	              alert("El torneo ha concluido correctamente.");
+	            }
+        	});
+		});
+		$('#FinTorneo4').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 4},
+	            success: function (result) {
+	              alert("El torneo ha concluido correctamente.");
+	            }
+        	});
+		});
+		$('#FinTorneo5').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 5},
+	            success: function (result) {
+	              alert("El torneo ha concluido correctamente.");
+	            }
+        	});
+		});
+	</script>
+	<script type="text/javascript">
+		$('#cerrarSesion').click(function() { 
+			$.ajax({
+				type: "GET",
+				url: "cerrarSesion.php",
+	            success: function (result) {
+	              location.reload();
+	            }});	
+		});
+	</script>
 </body>
 </html>
