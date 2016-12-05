@@ -212,6 +212,7 @@
 				url: 'registro.php',
 				data: $('#formRegistro').serialize(),
 				success: function () {
+					window.location.replace("index.html");
 					alert('Registro completado.');
 				}
 			});
