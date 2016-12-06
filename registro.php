@@ -33,4 +33,5 @@
 	} else {
 		echo "<script type='text/javascript'>alert('Las contraseñas no coinciden.')</script>";
 	}
+	$conn->close();
 ?>

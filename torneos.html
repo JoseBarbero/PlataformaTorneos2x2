@@ -179,12 +179,8 @@
 					</a>
 				</div>
 				<h4>Torneos Finalizados</h4>
-				<div class="list-group">
-					<a href="#" class="list-group-item">Torneo 23/4/2014 </a>
-					<a href="#" class="list-group-item">Torneo 23/4/2014 </a>
-					<a href="#" class="list-group-item">Torneo 23/4/2014 </a>
-					<a href="#" class="list-group-item">Torneo 23/4/2014 </a>
-					<a href="#" class="list-group-item">...</a>
+				<div id="torneosFinalizados" class="list-group" style="height: 200px; overflow: scroll;">
+					
 				</div>
 			</aside>
 		</div>
@@ -311,6 +307,16 @@
 				url: "cerrarSesion.php",
 	            success: function (result) {
 	              location.reload();
+	            }});	
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() { 
+			$.ajax({
+				type: "GET",
+				url: "torneosFinalizados.php",
+	            success: function (result) {
+	              $("#torneosFinalizados").html(result); 
 	            }});	
 		});
 	</script>
