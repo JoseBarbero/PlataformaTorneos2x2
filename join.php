@@ -1,6 +1,8 @@
 <?php
+
 	$nombre=$_POST["nombre"];
 	$apellidos=$_POST["apellidos"];
+	$email=$_POST["email"];
 	$estrategia=$_POST["estrategia"];
 	$numSala=$_POST["numSala"];
 
@@ -17,10 +19,9 @@
 		$resultNumParticipantes = mysql_query("SELECT * FROM participantes WHERE idTorneo = '$idTorneo'");
 		$numParticipante=mysql_num_rows($resultNumParticipantes) + 1;
 		if ($numParticipante > 25){
-			//TODO mostrar un mensaje sin cerrar la página
-			die('Lo sentimos, el torneo no admite más participantes.');
+			echo ('Lo sentimos, el torneo no admite más participantes.');
 		}else{
-			$insertParticipante="INSERT INTO participantes VALUES ('$nombre', '$apellidos', '$estrategia', '$idTorneo', '$numParticipante', 'correo', 0)";
+			$insertParticipante="INSERT INTO participantes VALUES ('$nombre', '$apellidos', '$estrategia', '$idTorneo', '$numParticipante', '$email', 0)";
 			if (!mysql_query($insertParticipante))
 			{
 				die('Error: ' . mysql_error());

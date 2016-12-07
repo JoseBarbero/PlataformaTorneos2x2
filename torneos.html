@@ -112,6 +112,13 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label for="email" class="col-sm-4 control-label">Email</label>
+									<div class="col-sm-5">
+										<input type="email" id="inputEmail" name="email" placeholder="Email"
+											class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
 									<label for="estrategia" class="col-sm-4 control-label">Nombre de la estrategia</label>
 									<div class="col-sm-5">
 										<input type="text" class="form-control" id="estrategia" name="estrategia" placeholder="Estrategia" required>
@@ -320,6 +327,39 @@
 	            }});	
 		});
 	</script>
-	
+	<script type="text/javascript">
+		$(document).ready(function() { 
+			$.ajax({
+				type: "GET",
+				url: "parametrosSesion.php",
+				data: {'parametroSesion': "nombre"},
+	            success: function (result) {
+	              document.getElementById("nombre").value = result;
+	            }});	
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() { 
+			$.ajax({
+				type: "GET",
+				url: "parametrosSesion.php",
+				data: {'parametroSesion': "apellidos"},
+	            success: function (result) {
+            		document.getElementById("apellidos").value = result;
+	            }});	
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() { 
+			$.ajax({
+				type: "GET",
+				url: "parametrosSesion.php",
+				data: {'parametroSesion': "email"},
+	            success: function (result) {
+	              document.getElementById("inputEmail").value = result;
+	            }});	
+		});
+	</script>
+
 </body>
 </html>
