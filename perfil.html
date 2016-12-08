@@ -87,9 +87,21 @@
 	</section>
 
 	<section class="main container">
-		<h4>
+		<h2>
 			Torneos en los que has participado:
-		</h4>
+		</h2>
+		<div class="row">
+			<section class="posts col-md-9">
+				<article class="post clearfix">
+					<p class="post-content">
+					<section class="posts col-md-12">
+						<div id="listadoResultados" class="list-group">
+						</div>
+					</section>
+					</p>
+				</article>
+			</section>
+		</div>
 	</section>
 
 
@@ -134,6 +146,17 @@
 				url: "cerrarSesion.php",
 	            success: function (result) {
 	              location.reload();
+	            }});	
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() { 
+			$.ajax({
+				type: "GET",
+				data: {'user': 1},
+				url: "resultadosTorneos.php",
+	            success: function (result) {
+	              $("#listadoResultados").html(result); 
 	            }});	
 		});
 	</script>

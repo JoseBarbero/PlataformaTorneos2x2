@@ -290,6 +290,7 @@
 		$(document).ready(function() { 
 			$.ajax({
 				type: "GET",
+				data: {'user': -1},
 				url: "resultadosTorneos.php",
 	            success: function (result) {
 	              $("#listadoResultados").html(result); 
