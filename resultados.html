@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<title>Plataforma de torneos 2x2</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body onload="confirmations()">
+	<script type="text/javascript">
+		function confirmations(){
+			$('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});
+		}	
+	</script>
+	<header>
+		<!-- Navbar por defecto de Bootstrap -->
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#menusuperior"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">Plataforma de Torneos 2x2</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="menusuperior">
+					<ul class="nav navbar-nav">
+						<li><a href="index.html">Inicio </a></li>
+						<li class="active"><a href="torneos.html">Torneos</a></li>
+						<li id="nuevoTorneo"><a href="nuevotorneo.html">Nuevo Torneo</a></li>
+					</ul>
+					
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown" id="iniciarSesion"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">Inicio de sesión <span class="caret"></span></a>
+							<ul class="dropdown-menu login-form">
+								<li>
+									<div class="row">
+										<div class="col-md-12">
+											<form class="form" role="form" action="login.php"
+												method="post" accept-charset="UTF-8" id="login">
+												<div class="form-group">
+													<label class="sr-only" for="email">Email</label> <input
+														type="email" class="form-control" id="email" name="email"
+														placeholder="Email" required>
+												</div>
+												<div class="form-group">
+													<label class="sr-only" for="password">Contraseña</label> <input
+														type="password" class="form-control" id="password"
+														name="password" placeholder="Password" required>
+												</div>
+												<div class="form-group">
+													<button type="submit" class="btn btn-primary btn-block">Log
+														in</button>
+												</div>
+											</form>
+										</div>
+										<div class="bottom text-center">
+											<a href="register.html"><b>Quiero registrarme</b></a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li id="perfil" class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">Perfil <span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="perfil.html">Mi perfil</a></li>
+								<li role="separator" class="divider"></li>
+								<li id="cerrarSesion"><a href="#">Cerrar sesión</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<section class="jumbotron">
+		<div class="container">
+			<h1 class="fuentetit-jumbotron">Plataforma de Torneos 2x2</h1>
+			<p class="fuentesubt-jumbotron">Trabajo de fin de Grado, Jose
+				Antonio Barbero, Universidad de Burgos</p>
+		</div>
+	</section>
+
+	<section class="main container">
+		<div class="row">
+			<section class="posts col-md-9">
+				<article class="post clearfix">
+					<h2 class="post-title">Torneos finalizados:</h2>
+					<p class="post-content">
+					<section class="posts col-md-12">
+						<div id="listadoResultados" class="list-group">
+						</div>
+					</section>
+					</p>
+				</article>
+			</section>
+			<aside class="col-md-3 midden-sm">
+				<h4>Torneos</h4>
+				<div id="listadoTorneos" class="list-group">
+					<a class="list-group-item">Torneo 1 
+						<button id="FinTorneo1" class="btn btn-xs btn-danger pull-right" 
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala1" class="badge pull-right">0/25</span>
+					</a>
+					<a class="list-group-item">Torneo 2
+						<button id="FinTorneo2" class="btn btn-xs btn-danger pull-right"
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala2" class="badge pull-right">0/25</span>
+					</a>
+					<a class="list-group-item">Torneo 3 
+						<button id="FinTorneo3" class="btn btn-xs btn-danger pull-right"
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala3" class="badge pull-right">0/25</span>
+					</a>
+					<a class="list-group-item">Torneo 4 
+						<button id="FinTorneo4" class="btn btn-xs btn-danger pull-right"
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala4" class="badge pull-right">0/25</span>
+					</a>
+					<a class="list-group-item">Torneo 5 
+						<button id="FinTorneo5" class="btn btn-xs btn-danger pull-right"
+						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
+						data-btn-ok-label="Sí" data-btn-cancel-label="No"
+						data-singleton="true" data-popout="true">Finalizar Torneo</button>
+						<span id="participantesSala5" class="badge pull-right">0/25</span>
+					</a>
+				</div>
+				<h4>Torneos Finalizados</h4>
+				<div id="torneosFinalizados" class="list-group" style="height: 200px; overflow: scroll;">
+					
+				</div>
+			</aside>
+		</div>
+	</section>
+
+
+	<footer>
+		<div class="container container-footer">
+			<div class="row">
+				<div class="col-xs-7">
+					<p>Jose Antonio Barbero Aparicio. Grado en Ingeniería
+						Informática. Universidad de Burgos. 2016.</p>
+				</div>
+				<div class="col-xs-5">
+					<ul class="list-inline text-right">
+						<li><a href="index.html">Inicio</a></li>
+						<li><a href="#">Contacto</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap-confirmation.js"></script>
+	<script type="text/javascript">
+		$.get('tipoUsuario.php', function(data) {
+	    	var tipoUsuario = data;
+	    	$(document).ready(function () {
+				if(tipoUsuario == "Profesor"){
+					$("#FinTorneo1").show();
+			    	$("#FinTorneo2").show();
+			    	$("#FinTorneo3").show();
+			    	$("#FinTorneo4").show();
+			    	$("#FinTorneo5").show();
+			    	$("#perfil").show();
+			    	$("#iniciarSesion").hide();
+			    	$("#nuevoTorneo").show();
+				} else {
+					$("#FinTorneo1").hide();
+			    	$("#FinTorneo2").hide();
+			    	$("#FinTorneo3").hide();
+			    	$("#FinTorneo4").hide();
+			    	$("#FinTorneo5").hide();
+			    	$("#perfil").hide();
+			    	$("#iniciarSesion").show();
+			    	$("#nuevoTorneo").hide();
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		for (var i=1; i<=5; i++) {
+			var idSpan = "#participantesSala".concat(i);
+    		$.ajax({
+				url: "participantesSala.php",
+				data: { sala: i},
+				type: "GET",
+				context: $(idSpan),
+				success: function(data) { 
+					var numParticipantes = data;
+		    		$(this).text(numParticipantes);
+	    		}
+	    	});	
+		}
+	</script>
+	<script type="text/javascript">
+		$('#FinTorneo1').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 1},
+	            success: function (result) {
+	              alert(result);
+	            }
+        	});
+		});
+		$('#FinTorneo2').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 2},
+	            success: function (result) {
+	              alert(result);
+	            }
+        	});
+		});
+		$('#FinTorneo3').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 3},
+	            success: function (result) {
+	              alert(result);
+	            }
+        	});
+		});
+		$('#FinTorneo4').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 4},
+	            success: function (result) {
+	              alert(result);
+	            }
+        	});
+		});
+		$('#FinTorneo5').on('confirmed.bs.confirmation', function() { 
+        	$.ajax({
+	            url: 'FinalizarTorneo.php',
+	            type: 'GET',
+	            data: {'sala': 5},
+	            success: function (result) {
+	              alert(result);
+	            }
+        	});
+		});
+	</script>
+	<script type="text/javascript">
+		$('#cerrarSesion').click(function() { 
+			$.ajax({
+				type: "GET",
+				url: "cerrarSesion.php",
+	            success: function (result) {
+	              location.reload();
+	            }});	
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() { 
+			$.ajax({
+				type: "GET",
+				url: "torneosFinalizados.php",
+	            success: function (result) {
+	              $("#torneosFinalizados").html(result); 
+	            }});	
+		});
+	</script>
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() { 
+			$.ajax({
+				type: "GET",
+				url: "resultadosTorneos.php",
+	            success: function (result) {
+	              $("#listadoResultados").html(result); 
+	            }});	
+		});
+	</script>
+
+</body>
+</html>
