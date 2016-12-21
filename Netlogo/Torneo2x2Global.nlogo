@@ -29,6 +29,7 @@ to setup
   set cooperate_vs_defect 1
   set defect_vs_cooperate 10
   set defect_vs_defect 3
+  leerPayoffs "Alumnos/Payoffs.txt"
 
   ; Nombres de estrategias leídas desde archivo
   set estrategias []
@@ -194,6 +195,15 @@ to leerEstrategias [archivo]
   file-close
 end
 
+to leerPayoffs [archivo]
+  file-open archivo
+  set cooperate_vs_cooperate read-from-string file-read-line
+  set cooperate_vs_defect read-from-string file-read-line
+  set defect_vs_cooperate read-from-string file-read-line
+  set defect_vs_defect read-from-string file-read-line
+  file-close
+end
+
 to aislarEstrategias
   let archivoModelo ""
   let archivoEstrategia ""
@@ -263,9 +273,6 @@ to resultados
       ]
   file-close
 end
-
-
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 216

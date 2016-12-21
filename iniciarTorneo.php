@@ -5,6 +5,10 @@
 	$tipoUser = $_SESSION["tipoUser"];
 	$nombreTorneo = $_POST['nombreTorneo'];
 	$sala = $_POST['numSala'];
+	$reward = $_POST['reward'];
+	$sucker = $_POST['sucker'];
+	$defect = $_POST['defect'];
+	$punishment = $_POST['punishment'];
 
 	$conn = mysqli_connect("localhost","root","","torneos2x2db");
 	if (mysqli_connect_errno())
@@ -19,7 +23,7 @@
 		if ($result->num_rows > 0) {
 		    while($row = $result->fetch_assoc()) {
 		        if ($row["idTorneo"] > 0){
-					echo "<script type='text/javascript'>alert('Ya existe un torneo creado en esa sala')</script>";
+					echo "Ya existe un torneo creado en esa sala.";
 		        } else {
 		        	//Introducir en base de datos (como no finalizado)
 					$insertTorneo = "INSERT INTO torneos VALUES (DEFAULT, '$nombreTorneo', '$idUser', 0, CURDATE(),'0000-00-00')";
@@ -29,19 +33,26 @@
 
 					//Añadir torneo a la sala
 					$idTorneo = $conn->insert_id;
-					$updateSala="UPDATE salas SET idTorneo=$idTorneo WHERE idSala='$sala'";
+					$updateSala="UPDATE salas SET idTorneo='$idTorneo' WHERE idSala='$sala'";
 					if ($conn->query($updateSala) === FALSE) {
 						echo "Error: " . $updateSala . "<br>" . $conn->error;
 					}
+
+					//Añadir payoffs del torneo
+					$insertPayoffs = "INSERT INTO payoffs VALUES ('$idTorneo', '$reward', '$sucker', '$defect', '$punishment')";
+					if ($conn->query($insertPayoffs) === FALSE) {
+						echo "Error: " . $insertPayoffs . "<br>" . $conn->error;
+					}
+
 		        }
 		    }
 		} else {
-			echo "<script type='text/javascript'>alert('La sala seleccionada no existe')</script>";
+			echo "La sala seleccionada no existe.";
 		}
 		$result->close();
 	}else{
-		echo "<script type='text/javascript'>alert('Debes estar logeado como profesor para crear un torneo.')</script>";
+		echo "Debes estar logeado como profesor para crear un torneo.";
 	}
 	$conn->close();
-	echo "<script type='text/javascript'>alert('Torneo creado correctamente.')</script>";
+	echo "Torneo creado correctamente.";
 ?>

@@ -110,6 +110,34 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Cooperar-Cooperar</label>
+				<div class="col-sm-5">
+					<input type="number" id="reward" name="reward" placeholder="Mutual Cooperation Reward"
+						class="form-control" autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Cooperar-Traicionar</label>
+				<div class="col-sm-5">
+					<input type="number" id="sucker" name="sucker" placeholder="Sucker's Payoff"
+						class="form-control" autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Traicionar-Cooperar</label>
+				<div class="col-sm-5">
+					<input type="number" id="defect" name="defect" placeholder="Temptation to defect"
+						class="form-control" autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Traicionar-Traicionar</label>
+				<div class="col-sm-5">
+					<input type="number" id="punishment" name="punishment" placeholder="Punishment for mutual defection"
+						class="form-control" autofocus>
+				</div>
+			</div>
+			<div class="form-group">
 				<div class="col-sm-3 col-sm-offset-4 ">
 					<button id="buttonForm" class="btn btn-primary btn-block">Enviar</button>
 				</div>
@@ -157,10 +185,14 @@
 	            url: 'iniciarTorneo.php',
 	            type: 'POST',
 	            data: {	'nombreTorneo': $('#nombreTorneo').val(), 
-	            		'numSala': $('#numSala').val()},
+	            		'numSala': $('#numSala').val(),
+	            		'reward': $('#reward').val(),
+	            		'sucker': $('#sucker').val(),
+	            		'defect': $('#defect').val(),
+	            		'punishment': $('#punishment').val()},
 		        success: function (result) {
                 	window.location.replace("torneos.html");
-                	alert("El torneo se ha creado correctamente.");
+                	alert(result);
 		        }
         	});
 		});
