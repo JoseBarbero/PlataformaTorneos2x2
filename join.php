@@ -5,7 +5,8 @@
 	$email=$_POST["email"];
 	$estrategia=$_POST["estrategia"];
 	$numSala=$_POST["numSala"];
-
+	session_start();
+	$_SESSION['sala']=$numSala;
 	mysql_connect("localhost", "root", "") or 
     	die("Could not connect: " . mysql_error()); 
 	mysql_select_db("torneos2x2db"); 

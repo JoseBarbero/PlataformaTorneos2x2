@@ -13,6 +13,13 @@
 	$fileEstrategias = fopen("Netlogo/Alumnos/Estrategias.txt", "w") or die("Unable to open file!");
 
 
+
+	//Pasar estrategias de la sala que corresponda al directorio de Netlogo
+	for ($i = 1; $i <= 25; $i++) {
+    	copy("Netlogo/Alumnos/Sala" . $sala ."/ModeloAlumno" . $i . ".nlogo", "Netlogo/Alumnos/Modelos_Alumnos/ModeloAlumno" . $i . ".nlogo");
+	}
+
+
 	$selectTorneo = "SELECT idTorneo FROM salas WHERE idSala = '$sala'";
 	$result = $conn->query($selectTorneo);
 	if ($result->num_rows > 0) {

@@ -1,5 +1,2 @@
 estrategiaAlumno1
-estrategiaAlumno2
-estrategiaAlumno3
-estrategiaAlumno4
 randomSt
