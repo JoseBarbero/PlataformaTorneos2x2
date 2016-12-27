@@ -6,6 +6,7 @@
 	$password = $_POST['passwordReg'];
 	$cpassword = $_POST['c_password'];
 	$radio = $_POST['optradio'];
+	$passwordHash = password_hash($password, PASSWORD_BCRYPT);
 	if($password == $cpassword){
 
 		$conn = mysqli_connect("localhost","root","","torneos2x2db");
@@ -23,7 +24,7 @@
 		$selectCorreo = "SELECT id FROM users WHERE email='$email'";
 		$result = $conn->query($selectCorreo);
 		if ($result->num_rows == 0) {
-			$insertUser = "INSERT INTO users VALUES (DEFAULT, '$username', '$nombre', '$apellidos', '$email', '$password', '$rol')";
+			$insertUser = "INSERT INTO users VALUES (DEFAULT, '$username', '$nombre', '$apellidos', '$email', '$passwordHash', '$rol')";
 			if ($conn->query($insertUser) === FALSE) {
 				echo "Error: " . $insertUser . "<br>" . $conn->error;   
 			}
