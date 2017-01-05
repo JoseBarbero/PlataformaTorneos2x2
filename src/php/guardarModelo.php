@@ -7,7 +7,7 @@
 	$sala = $_SESSION['sala'];
 	$fname = "ModeloAlumno" . $numParticipante . ".nlogo";
 
-	$file = fopen("Netlogo/Alumnos/Sala" . $sala . "/" .$fname, 'w');
+	$file = fopen("../../Netlogo/Alumnos/Sala" . $sala . "/" .$fname, 'w');
 	fwrite($file, $data);
 	fclose($file);
 	}

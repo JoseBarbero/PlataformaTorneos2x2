@@ -23,13 +23,13 @@
 				}else{
 					$_SESSION['tipoUser'] = "Alumno";
 				}
-				header('Location: torneos.html');
+				header('Location: ../torneos.html');
 			} else {
 			echo "Nombre de usuario o contraseña incorrectos.";
 			}
 		}
 	}else{
 		echo "Nombre de usuario incorrecto.";
-		header('Location: index.html');
+		header('Location: ../index.html');
 	}
 ?>

@@ -29,7 +29,7 @@
 			}else{
 				session_start();
 				$_SESSION['participante'] = $numParticipante;
-				header('Location: participar.html');
+				header('Location: ../participar.html');
 			}
 		}
 	}

@@ -5,12 +5,11 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 <title>Plataforma de torneos 2x2</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
 	<header>
-		<!-- Navbar por defecto de Bootstrap -->
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -21,14 +20,14 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="index.html">Plataforma de Torneos 2x2</a>
+					<a class="navbar-brand" href="../index.html">Plataforma de Torneos 2x2</a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="menusuperior">
 					<ul class="nav navbar-nav">
-						<li><a href="index.html">Inicio </a></li>
+						<li><a href="../index.html">Inicio </a></li>
 						<li><a href="torneos.html">Torneos</a></li>
-						<li class="active" id="nuevoTorneo"><a href="nuevotorneo.html">Nuevo Torneo</a></li>
+						<li id="nuevoTorneo"><a href="nuevotorneo.html">Nuevo Torneo</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -39,7 +38,7 @@
 								<li>
 									<div class="row">
 										<div class="col-md-12">
-											<form class="form" role="form" action="login.php"
+											<form class="form" role="form" action="php/login.php"
 												method="post" accept-charset="UTF-8" id="login">
 												<div class="form-group">
 													<label class="sr-only" for="email">Email</label> <input
@@ -88,62 +87,23 @@
 	</section>
 
 	<section class="main container">
-		<form class="form-horizontal" role="form" accept-charset="UTF-8" id="torneoForm">
-			<h2 class="title">Nuevo Torneo</h2>
-			<div class="form-group">
-				<label for="nombreTorneo" class="col-sm-4 control-label">Nombre</label>
-				<div class="col-sm-5">
-					<input type="text" id="nombreTorneo" name="nombreTorneo" placeholder="Nombre del Torneo"
-						class="form-control" autofocus>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="numSala" class="col-sm-4 control-label">Número de sala</label>
-				<div class="col-sm-1">
-					<select class=form-control id="numSala" name="numSala" >
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Cooperar-Cooperar</label>
-				<div class="col-sm-5">
-					<input type="number" id="reward" name="reward" placeholder="Mutual Cooperation Reward"
-						class="form-control" autofocus>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Cooperar-Traicionar</label>
-				<div class="col-sm-5">
-					<input type="number" id="sucker" name="sucker" placeholder="Sucker's Payoff"
-						class="form-control" autofocus>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Traicionar-Cooperar</label>
-				<div class="col-sm-5">
-					<input type="number" id="defect" name="defect" placeholder="Temptation to defect"
-						class="form-control" autofocus>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Traicionar-Traicionar</label>
-				<div class="col-sm-5">
-					<input type="number" id="punishment" name="punishment" placeholder="Punishment for mutual defection"
-						class="form-control" autofocus>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-3 col-sm-offset-4 ">
-					<button id="buttonForm" class="btn btn-primary btn-block">Enviar</button>
-				</div>
-			</div>
-		</form>
+		<h2>
+			Torneos en los que has participado:
+		</h2>
+		<div class="row">
+			<section class="posts col-md-9">
+				<article class="post clearfix">
+					<p class="post-content">
+					<section class="posts col-md-12">
+						<div id="listadoResultados" class="list-group">
+						</div>
+					</section>
+					</p>
+				</article>
+			</section>
+		</div>
 	</section>
+
 
 	<footer>
 		<div class="container container-footer">
@@ -154,17 +114,17 @@
 				</div>
 				<div class="col-xs-5">
 					<ul class="list-inline text-right">
-						<li><a href="index.html">Inicio</a></li>
+						<li><a href="../index.html">Inicio</a></li>
 						<li><a href="#">Contacto</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</footer>
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		$.get('tipoUsuario.php', function(data) {
+		$.get('php/tipoUsuario.php', function(data) {
 	    	var tipoUsuario = data;
 	    	$(document).ready(function () {
 				if(tipoUsuario == "Profesor"){
@@ -180,30 +140,23 @@
 		});
 	</script>
 	<script type="text/javascript">
-		$('#buttonForm').click(function() { 
-        	$.ajax({
-	            url: 'iniciarTorneo.php',
-	            type: 'POST',
-	            data: {	'nombreTorneo': $('#nombreTorneo').val(), 
-	            		'numSala': $('#numSala').val(),
-	            		'reward': $('#reward').val(),
-	            		'sucker': $('#sucker').val(),
-	            		'defect': $('#defect').val(),
-	            		'punishment': $('#punishment').val()},
-		        success: function (result) {
-                	window.location.replace("torneos.html");
-                	alert(result);
-		        }
-        	});
-		});
-	</script>
-	<script type="text/javascript">
 		$('#cerrarSesion').click(function() { 
 			$.ajax({
 				type: "GET",
-				url: "cerrarSesion.php",
+				url: "php/cerrarSesion.php",
 	            success: function (result) {
 	              location.reload();
+	            }});	
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() { 
+			$.ajax({
+				type: "GET",
+				data: {'user': 1},
+				url: "php/resultadosTorneos.php",
+	            success: function (result) {
+	              $("#listadoResultados").html(result); 
 	            }});	
 		});
 	</script>

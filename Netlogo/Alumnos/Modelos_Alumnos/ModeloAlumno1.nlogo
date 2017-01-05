@@ -30,10 +30,10 @@ to-report estrategiaAlumno
   ;     actual a través de la variable elección. Sea True si colabora o False si no lo hace.
   ;-----------------------------|INICIO|----------------------------
 
+	;-----
 
 
 
-  ; PRUEBA DE MOVIMIENTO SALA 2
 
   ;------------------------------|FIN|------------------------------
   report eleccion

@@ -10,13 +10,13 @@
 	session_start();
 	$sala = $_GET['sala'];
 	$user = $_SESSION['userID'];
-	$fileEstrategias = fopen("Netlogo/Alumnos/Estrategias.txt", "w") or die("Unable to open file!");
+	$fileEstrategias = fopen("../../Netlogo/Alumnos/Estrategias.txt", "w") or die("Unable to open file!");
 
 
 
 	//Pasar estrategias de la sala que corresponda al directorio de Netlogo
 	for ($i = 1; $i <= 25; $i++) {
-    	copy("Netlogo/Alumnos/Sala" . $sala ."/ModeloAlumno" . $i . ".nlogo", "Netlogo/Alumnos/Modelos_Alumnos/ModeloAlumno" . $i . ".nlogo");
+    	copy("../../Netlogo/Alumnos/Sala" . $sala ."/ModeloAlumno" . $i . ".nlogo", "../../Netlogo/Alumnos/Modelos_Alumnos/ModeloAlumno" . $i . ".nlogo");
 	}
 
 
@@ -57,7 +57,7 @@
 	   	$resultPayoffs = $conn->query($selectPayoffs);
 	   	$row = $resultPayoffs->fetch_assoc();
 
-	   	$filePayoffs = fopen("Netlogo/Alumnos/Payoffs.txt", "w") or die("Unable to open file!");
+	   	$filePayoffs = fopen("../../Netlogo/Alumnos/Payoffs.txt", "w") or die("Unable to open file!");
 	   	fwrite($filePayoffs, $row["mutualcoop"] . "\n");
 		fwrite($filePayoffs, $row["suckerspayoff"] . "\n");
 		fwrite($filePayoffs, $row["mutualdefect"] . "\n");
@@ -68,7 +68,7 @@
 		exec('php ejecutarTorneo.php');
 
 		//Guardar resultados en la base de datos
-		$csv = array_map('str_getcsv', file('Netlogo/Alumnos/Resultados.csv'));
+		$csv = array_map('str_getcsv', file('../../Netlogo/Alumnos/Resultados.csv'));
 		foreach ($csv as &$par) {
 		    //Extracción del número de participante
 			preg_match_all('!\d+!', $par[0], $num);

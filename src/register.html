@@ -5,8 +5,8 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 <title>Plataforma de torneos 2x2</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
 	<header>
@@ -20,12 +20,12 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="index.html">Plataforma de Torneos 2x2</a>
+					<a class="navbar-brand" href="../index.html">Plataforma de Torneos 2x2</a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="menusuperior">
 					<ul class="nav navbar-nav">
-						<li><a href="index.html">Inicio </a></li>
+						<li><a href="../index.html">Inicio </a></li>
 						<li><a href="torneos.html">Torneos</a></li>
 						<li id="nuevoTorneo"><a href="nuevotorneo.html">Nuevo Torneo</a></li>
 					</ul>
@@ -38,7 +38,7 @@
 								<li>
 									<div class="row">
 										<div class="col-md-12">
-											<form class="form" role="form" action="login.php"
+											<form class="form" role="form" action="php/login.php"
 												method="post" accept-charset="UTF-8" id="login">
 												<div class="form-group">
 													<label class="sr-only" for="email">Email</label> <input
@@ -87,21 +87,65 @@
 	</section>
 
 	<section class="main container">
-		<h2>
-			Torneos en los que has participado:
-		</h2>
-		<div class="row">
-			<section class="posts col-md-9">
-				<article class="post clearfix">
-					<p class="post-content">
-					<section class="posts col-md-12">
-						<div id="listadoResultados" class="list-group">
-						</div>
-					</section>
-					</p>
-				</article>
-			</section>
-		</div>
+		<form id="formRegistro" class="form-horizontal" role="form">
+			<h2 class="title">Formulario de Registro</h2>
+			<div class="form-group">
+				<label for="username" class="col-sm-4 control-label">Nombre de Usuario</label>
+				<div class="col-sm-5">
+					<input type="text" id="username" name="username" placeholder="Nombre de usuario"
+						class="form-control" autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="nombre" class="col-sm-4 control-label">Nombre</label>
+				<div class="col-sm-5">
+					<input type="text" id="nombre" name="nombre" placeholder="Nombre"
+						class="form-control" autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="apellidos" class="col-sm-4 control-label">Apellidos</label>
+				<div class="col-sm-5">
+					<input type="text" id="apellidos" name="apellidos" placeholder="Apellidos"
+						class="form-control" autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-sm-4 control-label">Email</label>
+				<div class="col-sm-5">
+					<input type="email" id="email" name="email" placeholder="Email"
+						class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-4 control-label">Contraseña</label>
+				<div class="col-sm-5">
+					<input type="password" id="passwordReg" name="passwordReg" placeholder="Contraseña"
+						class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="cpassword" class="col-sm-4 control-label">Confirmar contraseña</label>
+				<div class="col-sm-5">
+					<input type="password" name="c_password"
+						id="c_password" class="form-control"
+						placeholder="Escriba de nuevo su contraseña">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="rol" class="col-sm-4 control-label">Rol</label>
+				<div class="col-sm-5">
+					<label class="radio-inline"><input id="radioAlumno" type="radio" value="alumno" checked="checked" name="optradio">Alumno</label>
+					<label class="radio-inline"><input id="radioProfesor" type="radio" value="profesor" name="optradio">Profesor</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-3 col-sm-offset-4 ">
+					<button type="submit" class="btn btn-primary btn-block">Enviar</button>
+				</div>
+			</div>
+		</form>
 	</section>
 
 
@@ -114,17 +158,17 @@
 				</div>
 				<div class="col-xs-5">
 					<ul class="list-inline text-right">
-						<li><a href="index.html">Inicio</a></li>
+						<li><a href="../index.html">Inicio</a></li>
 						<li><a href="#">Contacto</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</footer>
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		$.get('tipoUsuario.php', function(data) {
+		$.get('php/tipoUsuario.php', function(data) {
 	    	var tipoUsuario = data;
 	    	$(document).ready(function () {
 				if(tipoUsuario == "Profesor"){
@@ -143,21 +187,35 @@
 		$('#cerrarSesion').click(function() { 
 			$.ajax({
 				type: "GET",
-				url: "cerrarSesion.php",
+				url: "php/cerrarSesion.php",
 	            success: function (result) {
 	              location.reload();
-	            }});	
+	            }});
 		});
 	</script>
 	<script type="text/javascript">
-		$(document).ready(function() { 
+		$(document).ready(function(){
+		    $('#c_password').focusout(function(){
+		        var pass1 = $('#passwordReg').val();
+		        var pass2 = $('#c_password').val();
+		        if(pass1 != pass2){
+		            alert("Las contraseñas no coinciden");
+		        }
+
+		    });
+		});
+	</script>
+	<script type="text/javascript">
+		$('#formRegistro').submit(function () {
 			$.ajax({
-				type: "GET",
-				data: {'user': 1},
-				url: "resultadosTorneos.php",
-	            success: function (result) {
-	              $("#listadoResultados").html(result); 
-	            }});	
+				type: 'POST',
+				url: 'php/registro.php',
+				data: $('#formRegistro').serialize(),
+				success: function () {
+					window.location.replace("../index.html");
+					alert('Registro completado.');
+				}
+			});
 		});
 	</script>
 </body>

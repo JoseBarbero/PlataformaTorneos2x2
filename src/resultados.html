@@ -5,8 +5,8 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 <title>Plataforma de torneos 2x2</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body onload="confirmations()">
 	<script type="text/javascript">
@@ -26,12 +26,12 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="index.html">Plataforma de Torneos 2x2</a>
+					<a class="navbar-brand" href="../index.html">Plataforma de Torneos 2x2</a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="menusuperior">
 					<ul class="nav navbar-nav">
-						<li><a href="index.html">Inicio </a></li>
+						<li><a href="../index.html">Inicio </a></li>
 						<li class="active"><a href="torneos.html">Torneos</a></li>
 						<li id="nuevoTorneo"><a href="nuevotorneo.html">Nuevo Torneo</a></li>
 					</ul>
@@ -44,7 +44,7 @@
 								<li>
 									<div class="row">
 										<div class="col-md-12">
-											<form class="form" role="form" action="login.php"
+											<form class="form" role="form" action="php/login.php"
 												method="post" accept-charset="UTF-8" id="login">
 												<div class="form-group">
 													<label class="sr-only" for="email">Email</label> <input
@@ -95,54 +95,12 @@
 		<div class="row">
 			<section class="posts col-md-9">
 				<article class="post clearfix">
-					<h2 class="post-title">Inscripción</h2>
+					<h2 class="post-title">Torneos finalizados:</h2>
 					<p class="post-content">
-						<section class="posts col-md-12">
-							<form class="form-horizontal" role="form" action="join.php" method="post" accept-charset="UTF-8" id="joinForm">
-								<div class="form-group">
-									<label for="nombre" class="col-sm-4 control-label">Nombre</label>
-									<div class="col-sm-5">
-										<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="apellidos" class="col-sm-4 control-label">Apellidos</label>
-									<div class="col-sm-5">
-										<input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="email" class="col-sm-4 control-label">Email</label>
-									<div class="col-sm-5">
-										<input type="email" id="inputEmail" name="email" placeholder="Email"
-											class="form-control">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="estrategia" class="col-sm-4 control-label">Nombre de la estrategia</label>
-									<div class="col-sm-5">
-										<input type="text" class="form-control" id="estrategia" name="estrategia" placeholder="Estrategia" required>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="numSala" class="col-sm-4 control-label">Número de sala</label>
-									<div class="col-sm-1">
-										<select class=form-control id="numSala" name="numSala" >
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-4">
-										<button type="submit" class="btn btn-primary btn-xl pull-center">Unirse al torneo</button>
-									</div>
-								</div>
-							</form>
-						</section>
+					<section class="posts col-md-12">
+						<div id="listadoResultados" class="list-group">
+						</div>
+					</section>
 					</p>
 				</article>
 			</section>
@@ -203,7 +161,7 @@
 				</div>
 				<div class="col-xs-5">
 					<ul class="list-inline text-right">
-						<li><a href="index.html">Inicio</a></li>
+						<li><a href="../index.html">Inicio</a></li>
 						<li><a href="#">Contacto</a></li>
 					</ul>
 				</div>
@@ -211,11 +169,11 @@
 		</div>
 	</footer>
 
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/bootstrap-confirmation.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../js/bootstrap-confirmation.js"></script>
 	<script type="text/javascript">
-		$.get('tipoUsuario.php', function(data) {
+		$.get('php/tipoUsuario.php', function(data) {
 	    	var tipoUsuario = data;
 	    	$(document).ready(function () {
 				if(tipoUsuario == "Profesor"){
@@ -244,7 +202,7 @@
 		for (var i=1; i<=5; i++) {
 			var idSpan = "#participantesSala".concat(i);
     		$.ajax({
-				url: "participantesSala.php",
+				url: "php/participantesSala.php",
 				data: { sala: i},
 				type: "GET",
 				context: $(idSpan),
@@ -258,7 +216,7 @@
 	<script type="text/javascript">
 		$('#FinTorneo1').on('confirmed.bs.confirmation', function() { 
         	$.ajax({
-	            url: 'FinalizarTorneo.php',
+	            url: 'php/FinalizarTorneo.php',
 	            type: 'GET',
 	            data: {'sala': 1},
 	            success: function (result) {
@@ -268,7 +226,7 @@
 		});
 		$('#FinTorneo2').on('confirmed.bs.confirmation', function() { 
         	$.ajax({
-	            url: 'FinalizarTorneo.php',
+	            url: 'php/FinalizarTorneo.php',
 	            type: 'GET',
 	            data: {'sala': 2},
 	            success: function (result) {
@@ -278,7 +236,7 @@
 		});
 		$('#FinTorneo3').on('confirmed.bs.confirmation', function() { 
         	$.ajax({
-	            url: 'FinalizarTorneo.php',
+	            url: 'php/FinalizarTorneo.php',
 	            type: 'GET',
 	            data: {'sala': 3},
 	            success: function (result) {
@@ -288,7 +246,7 @@
 		});
 		$('#FinTorneo4').on('confirmed.bs.confirmation', function() { 
         	$.ajax({
-	            url: 'FinalizarTorneo.php',
+	            url: 'php/FinalizarTorneo.php',
 	            type: 'GET',
 	            data: {'sala': 4},
 	            success: function (result) {
@@ -298,7 +256,7 @@
 		});
 		$('#FinTorneo5').on('confirmed.bs.confirmation', function() { 
         	$.ajax({
-	            url: 'FinalizarTorneo.php',
+	            url: 'php/FinalizarTorneo.php',
 	            type: 'GET',
 	            data: {'sala': 5},
 	            success: function (result) {
@@ -311,7 +269,7 @@
 		$('#cerrarSesion').click(function() { 
 			$.ajax({
 				type: "GET",
-				url: "cerrarSesion.php",
+				url: "php/cerrarSesion.php",
 	            success: function (result) {
 	              location.reload();
 	            }});	
@@ -321,42 +279,21 @@
 		$(document).ready(function() { 
 			$.ajax({
 				type: "GET",
-				url: "torneosFinalizados.php",
+				url: "php/torneosFinalizados.php",
 	            success: function (result) {
 	              $("#torneosFinalizados").html(result); 
 	            }});	
 		});
 	</script>
-	<script type="text/javascript">
-		$(document).ready(function() { 
-			$.ajax({
-				type: "GET",
-				url: "parametrosSesion.php",
-				data: {'parametroSesion': "nombre"},
-	            success: function (result) {
-	              document.getElementById("nombre").value = result;
-	            }});	
-		});
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() { 
 			$.ajax({
 				type: "GET",
-				url: "parametrosSesion.php",
-				data: {'parametroSesion': "apellidos"},
+				data: {'user': -1},
+				url: "php/resultadosTorneos.php",
 	            success: function (result) {
-            		document.getElementById("apellidos").value = result;
-	            }});	
-		});
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() { 
-			$.ajax({
-				type: "GET",
-				url: "parametrosSesion.php",
-				data: {'parametroSesion': "email"},
-	            success: function (result) {
-	              document.getElementById("inputEmail").value = result;
+	              $("#listadoResultados").html(result); 
 	            }});	
 		});
 	</script>

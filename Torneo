@@ -1,5 +1,5 @@
 #!/bin/bash 
-java -Xmx1024m -Dfile.encoding=UTF-8 -cp NetLogo.jar \
+java -Xmx1024m -Dfile.encoding=UTF-8 -cp js/netlogojars/NetLogo.jar \
   org.nlogo.headless.Main \
   --model Netlogo/Torneo2x2Global.nlogo \
   --experiment torneo 
