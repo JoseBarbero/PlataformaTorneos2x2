@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-01-2017 a las 19:22:29
+-- Tiempo de generación: 07-01-2017 a las 19:28:15
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -104,7 +104,18 @@ INSERT INTO `participantes` (`nombre`, `apellidos`, `nombreEstrategia`, `idTorne
 ('profesor', 'profesor', 'A', 111, 1, 'profesor@profesor.com', 0),
 ('profesor', 'profesor', 'k', 112, 1, 'profesor@profesor.com', 0),
 ('profesor', 'profesor', '1', 113, 1, 'profesor@profesor.com', 0),
-('profesor', 'profesor', '3', 114, 1, 'profesor@profesor.com', 0);
+('profesor', 'profesor', '3', 114, 1, 'profesor@profesor.com', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'es1', 115, 1, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'Estra', 115, 2, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', '3', 115, 3, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'EstrategiaPrueba', 118, 1, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', '2', 118, 2, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'A', 119, 1, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'B', 119, 2, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'A', 120, 1, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'B', 120, 2, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'C', 120, 3, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'A', 121, 1, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 2295);
 
 -- --------------------------------------------------------
 
@@ -159,24 +170,31 @@ INSERT INTO `payoffs` (`idTorneo`, `mutualcoop`, `suckerspayoff`, `mutualdefect`
 (111, 0, 0, 0, 0),
 (112, 0, 0, 0, 0),
 (113, 0, 0, 0, 0),
-(114, 0, 0, 0, 0);
+(114, 0, 0, 0, 0),
+(115, 0, 0, 0, 0),
+(116, 1, 2, 3, 4),
+(117, 0, 0, 0, 0),
+(118, 6, 1, 10, 3),
+(119, 1, 2, 3, 4),
+(120, 5, 6, 7, 8),
+(121, 1, 2, 3, 4);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Salas`
+-- Estructura de tabla para la tabla `salas`
 --
 
-CREATE TABLE `Salas` (
+CREATE TABLE `salas` (
   `idSala` int(11) NOT NULL,
   `idTorneo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `Salas`
+-- Volcado de datos para la tabla `salas`
 --
 
-INSERT INTO `Salas` (`idSala`, `idTorneo`) VALUES
+INSERT INTO `salas` (`idSala`, `idTorneo`) VALUES
 (1, NULL),
 (2, NULL),
 (3, NULL),
@@ -186,10 +204,10 @@ INSERT INTO `Salas` (`idSala`, `idTorneo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Torneos`
+-- Estructura de tabla para la tabla `torneos`
 --
 
-CREATE TABLE `Torneos` (
+CREATE TABLE `torneos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `idUserCreador` int(11) NOT NULL,
@@ -199,10 +217,10 @@ CREATE TABLE `Torneos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `Torneos`
+-- Volcado de datos para la tabla `torneos`
 --
 
-INSERT INTO `Torneos` (`id`, `nombre`, `idUserCreador`, `finalizado`, `fechaInicio`, `fechaFin`) VALUES
+INSERT INTO `torneos` (`id`, `nombre`, `idUserCreador`, `finalizado`, `fechaInicio`, `fechaFin`) VALUES
 (1, 'Torneo de prueba', 1, 1, '0000-00-00', '0000-00-00'),
 (2, 'nombreTorneo', 1, 1, '0000-00-00', '0000-00-00'),
 (3, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
@@ -316,7 +334,14 @@ INSERT INTO `Torneos` (`id`, `nombre`, `idUserCreador`, `finalizado`, `fechaInic
 (111, 'a', 16, 1, '2016-12-24', '2016-12-24'),
 (112, 'm', 16, 0, '2016-12-24', '0000-00-00'),
 (113, 'T', 16, 1, '2016-12-24', '2016-12-24'),
-(114, '1', 16, 1, '2016-12-24', '2016-12-24');
+(114, '1', 16, 1, '2016-12-24', '2016-12-24'),
+(115, 'a', 19, 1, '2017-01-03', '2017-01-05'),
+(116, '', 19, 1, '2017-01-05', '2017-01-05'),
+(117, '1', 19, 1, '2017-01-05', '2017-01-05'),
+(118, 'Torneo', 19, 1, '2017-01-05', '2017-01-05'),
+(119, 'A', 19, 1, '2017-01-05', '2017-01-05'),
+(120, 'A', 19, 1, '2017-01-05', '2017-01-05'),
+(121, 'a', 19, 1, '2017-01-05', '2017-01-05');
 
 -- --------------------------------------------------------
 
@@ -343,7 +368,8 @@ INSERT INTO `users` (`id`, `username`, `nombre`, `apellidos`, `email`, `password
 (15, 'alumno', 'alumno', 'alumno', 'alumno@alu.ubu.es', 'alumno', 0),
 (16, 'profesor', 'profesor', 'profesor', 'profesor@profesor.com', 'profesor', 1),
 (18, 'PruebaRegistroEncrip', 'PruebaRegistroEncrip', 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', '$2y$10$5MVfKyU8EJw9P', 1),
-(19, 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.com', '$2y$10$rjF0zzofuX5fBA17YaAT4OxZlvv./mI9oM0NM6o0qyjLkwNokQgZO', 1);
+(19, 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.com', '$2y$10$rjF0zzofuX5fBA17YaAT4OxZlvv./mI9oM0NM6o0qyjLkwNokQgZO', 1),
+(20, 'profesor', 'profesor', 'profesor', 'profesor@ubu.es', '$2y$10$swfy/16zC5C9./9VXCWn/ud1.jxYWB9Ygpmt9QsnGDOrUafd8XYOq', 1);
 
 --
 -- Índices para tablas volcadas
@@ -362,15 +388,15 @@ ALTER TABLE `payoffs`
   ADD PRIMARY KEY (`idTorneo`);
 
 --
--- Indices de la tabla `Salas`
+-- Indices de la tabla `salas`
 --
-ALTER TABLE `Salas`
+ALTER TABLE `salas`
   ADD PRIMARY KEY (`idSala`);
 
 --
--- Indices de la tabla `Torneos`
+-- Indices de la tabla `torneos`
 --
-ALTER TABLE `Torneos`
+ALTER TABLE `torneos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -384,15 +410,15 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT de la tabla `Torneos`
+-- AUTO_INCREMENT de la tabla `torneos`
 --
-ALTER TABLE `Torneos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+ALTER TABLE `torneos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
