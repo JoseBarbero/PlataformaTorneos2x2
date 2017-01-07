@@ -227,6 +227,15 @@
 			    	$("#perfil").show();
 			    	$("#iniciarSesion").hide();
 			    	$("#nuevoTorneo").show();
+			    }else if (tipoUsuario == "Alumno"){
+			    	$("#FinTorneo1").hide();
+			    	$("#FinTorneo2").hide();
+			    	$("#FinTorneo3").hide();
+			    	$("#FinTorneo4").hide();
+			    	$("#FinTorneo5").hide();
+			    	$("#perfil").show();
+			    	$("#iniciarSesion").hide();
+			    	$("#nuevoTorneo").hide();
 				} else {
 					$("#FinTorneo1").hide();
 			    	$("#FinTorneo2").hide();
@@ -339,7 +348,7 @@
 		});
 	</script>
 	<script type="text/javascript">
-		$(document).ready(function() { 
+		$(document).ready(function() {
 			$.ajax({
 				type: "GET",
 				url: "php/parametrosSesion.php",
@@ -350,7 +359,7 @@
 		});
 	</script>
 	<script type="text/javascript">
-		$(document).ready(function() { 
+		$(document).ready(function() {
 			$.ajax({
 				type: "GET",
 				url: "php/parametrosSesion.php",
