@@ -1,5 +1,3 @@
-<?
-/*
 Plataforma Torneos 2x2
 Plataforma Torneos 2x2 es una aplicación destinada a la simulación
 de torneos de tipo 2x2 en una plataforma web.
@@ -25,19 +23,3 @@ Jose Antonio Barbero
    University of Burgos, Spain. 
    e-mail: jba0040@alu.ubu.es
 */
-	$conn = mysqli_connect("localhost","root","","torneos2x2db");
-	if (mysqli_connect_errno())
-	{
-		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	}
-
-	$selectTorneos = "SELECT nombre, fechaFin FROM torneos WHERE finalizado=1";
-	$result = $conn->query($selectTorneos);
-
-	$divHtml ='';
-	while($row = $result->fetch_assoc()) {
-		$divHtml .= '<a href="resultados.html" class="list-group-item">' . $row["nombre"] . " - " . $row["fechaFin"] . '</a>';
-	}
-	echo $divHtml;
-	$conn->close();
-?>
