@@ -142,7 +142,7 @@
 
 			<div class="form-group">
 				<div class="col-sm-3 col-sm-offset-4 ">
-					<button type="submit" class="btn btn-primary btn-block">Enviar</button>
+					<button name="buttonFormRegister" type="submit" class="btn btn-primary btn-block">Enviar</button>
 				</div>
 			</div>
 		</form>
@@ -206,14 +206,22 @@
 		});
 	</script>
 	<script type="text/javascript">
-		$('#formRegistro').submit(function () {
+		$('#formRegistro').submit(function (e) {
+			e.preventDefault();
 			$.ajax({
-				type: 'POST',
 				url: 'php/registro.php',
+				type: 'POST',
 				data: $('#formRegistro').serialize(),
-				success: function () {
-					window.location.replace("../index.html");
-					alert('Registro completado.');
+				success: function (result) {
+					if(result=="Usuario registrado correctamente."){
+						alert(result);
+						window.location.replace("torneos.html");
+					}else{
+						alert(result);
+					}
+				},
+				error: function (response){
+					alert(result);
 				}
 			});
 		});

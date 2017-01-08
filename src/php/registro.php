@@ -32,9 +32,10 @@ Jose Antonio Barbero
 	$password = $_POST['passwordReg'];
 	$cpassword = $_POST['c_password'];
 	$radio = $_POST['optradio'];
+
+	
 	$passwordHash = password_hash($password, PASSWORD_BCRYPT);
 	if($password == $cpassword){
-
 		$conn = mysqli_connect("localhost","root","","torneos2x2db");
 		if (mysqli_connect_errno())
 		{
@@ -54,11 +55,12 @@ Jose Antonio Barbero
 			if ($conn->query($insertUser) === FALSE) {
 				echo "Error: " . $insertUser . "<br>" . $conn->error;   
 			}
+			echo "Usuario registrado correctamente.";
 		} else {
-			echo "<script type='text/javascript'>alert('Ya existe un usuario con ese correo electrónico.')</script>";
+			echo "Ya existe un usuario con ese correo electrónico.";
 		}
 	} else {
-		echo "<script type='text/javascript'>alert('Las contraseñas no coinciden.')</script>";
+		echo "Las contraseñas no coinciden.";
 	}
 	$conn->close();
 ?>
