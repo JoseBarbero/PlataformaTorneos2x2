@@ -69,7 +69,7 @@ Jose Antonio Barbero
 					if ($conn->query($insertPayoffs) === FALSE) {
 						echo "Error: " . $insertPayoffs . "<br>" . $conn->error;
 					}
-
+					echo "Torneo creado correctamente.";
 		        }
 		    }
 		} else {
@@ -80,5 +80,4 @@ Jose Antonio Barbero
 		echo "Debes estar logeado como profesor para crear un torneo.";
 	}
 	$conn->close();
-	echo "Torneo creado correctamente.";
 ?>

@@ -94,7 +94,7 @@
 				<label for="nombreTorneo" class="col-sm-4 control-label">Nombre</label>
 				<div class="col-sm-5">
 					<input type="text" id="nombreTorneo" name="nombreTorneo" placeholder="Nombre del Torneo"
-						class="form-control" autofocus>
+						class="form-control" autofocus required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -113,33 +113,33 @@
 				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Cooperar-Cooperar</label>
 				<div class="col-sm-5">
 					<input type="number" id="reward" name="reward" placeholder="Mutual Cooperation Reward"
-						class="form-control" autofocus>
+						class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Cooperar-Traicionar</label>
 				<div class="col-sm-5">
 					<input type="number" id="sucker" name="sucker" placeholder="Sucker's Payoff"
-						class="form-control" autofocus>
+						class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Traicionar-Cooperar</label>
 				<div class="col-sm-5">
 					<input type="number" id="defect" name="defect" placeholder="Temptation to defect"
-						class="form-control" autofocus>
+						class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="nombreTorneo" class="col-sm-4 control-label">Payoff Traicionar-Traicionar</label>
 				<div class="col-sm-5">
 					<input type="number" id="punishment" name="punishment" placeholder="Punishment for mutual defection"
-						class="form-control" autofocus>
+						class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-3 col-sm-offset-4 ">
-					<button id="buttonForm" class="btn btn-primary btn-block">Enviar</button>
+					<button id="buttonForm" name="buttonNuevoTorneo" type="submit" class="btn btn-primary btn-block">Enviar</button>
 				</div>
 			</div>
 		</form>
@@ -180,7 +180,8 @@
 		});
 	</script>
 	<script type="text/javascript">
-		$('#buttonForm').click(function() { 
+		$('#torneoForm').submit(function (e) {
+			e.preventDefault();
         	$.ajax({
 	            url: 'php/iniciarTorneo.php',
 	            type: 'POST',
@@ -191,8 +192,12 @@
 	            		'defect': $('#defect').val(),
 	            		'punishment': $('#punishment').val()},
 		        success: function (result) {
-                	window.location.replace("torneos.html");
-                	alert(result);
+                	if(result=="Torneo creado correctamente."){
+						alert(result);
+						window.location.replace("torneos.html");
+					}else{
+						alert(result);
+					}
 		        }
         	});
 		});
