@@ -8,12 +8,7 @@
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" href="../css/styles.css" />
 </head>
-<body onload="confirmations()">
-	<script type="text/javascript">
-		function confirmations(){
-			$('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});
-		}	
-	</script>
+<body>
 	<header>
 		<!-- Navbar por defecto de Bootstrap -->
 		<nav class="navbar navbar-inverse">
@@ -31,11 +26,11 @@
 
 				<div class="collapse navbar-collapse" id="menusuperior">
 					<ul class="nav navbar-nav">
-						<li><a href="../index.html">Inicio </a></li>
-						<li class="active"><a href="torneos.html">Torneos</a></li>
+						<li class="active"><a href="../index.html">Inicio </a></li>
+						<li><a href="torneos.html">Torneos</a></li>
 						<li id="nuevoTorneo"><a href="nuevotorneo.html">Nuevo Torneo</a></li>
 					</ul>
-					
+
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown" id="iniciarSesion"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -67,18 +62,19 @@
 										</div>
 									</div>
 								</li>
-							</ul>
-						</li>
+							</ul></li>
 						<li id="perfil" class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">Perfil <span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="perfil.html">Mi perfil</a></li>
+								<li><a href="#">Mi perfil</a></li>
 								<li role="separator" class="divider"></li>
 								<li id="cerrarSesion"><a href="#">Cerrar sesión</a></li>
 							</ul></li>
+
 					</ul>
+
 				</div>
 			</div>
 		</nav>
@@ -95,16 +91,64 @@
 		<div class="row">
 			<section class="posts col-md-9">
 				<article class="post clearfix">
-					<h2 class="post-title">Torneos finalizados:</h2>
+					<h2 class="post-title">Contacto</h2>
 					<p class="post-content">
-					<section class="posts col-md-12">
-						<div id="listadoResultados" class="list-group">
-						</div>
-					</section>
+					Trabajo de Fin de Grado.
 					</p>
+					<p class="post-content">
+					Autor: Jose Antonio Barbero Aparicio
+					</p>
+					<p class="post-content">
+					Contacto: jba0040@alu.ubu.es
+					</p>
+					</p>
+					<p class="post-content">
+					Tutor: Jose Ignacio Santos Martín
+					</p>
+					<p class="post-content">
+					Grado en Ingeniería Informática. Universidad de Burgos. 2016-2017.
+					</p>
+					<h2 class="post-title">Copyright</h2>
+					<p class="post-content">
+					Plataforma Torneos 2x2
+					</p>
+					<p class="post-content">
+					Plataforma Torneos 2x2 es una aplicación destinada a la simulación
+					de torneos de tipo 2x2 en una plataforma web.
+					Copyright (C) 2017 Jose Antonio Barbero
+					</p>
+					<p class="post-content">
+					Plataforma Torneos 2x2 is free software: you can redistribute it and/or modify
+					it under the terms of the GNU General Public License as published by
+					the Free Software Foundation, either version 3 of the License, or
+					(at your option) any later version.
+					</p>
+					<p class="post-content">
+					Plataforma Torneos 2x2 is distributed in the hope that it will be useful,
+					but WITHOUT ANY WARRANTY; without even the implied warranty of
+					MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+					GNU General Public License for more details.
+					</p>
+
+					<p class="post-content">
+					You should have received a copy of the GNU General Public License
+					along with Plataforma Torneos 2x2.  If not, see <http://www.gnu.org/licenses/>.
+					</p>					
+					<p class="post-content">
+					Contact information:
+					</p>
+					<p class="post-content">
+					Jose Antonio Barbero
+					</p>
+					<p class="post-content">
+					   University of Burgos, Spain. 
+					   </p>
+					   <p class="post-content">
+					   e-mail: jba0040@alu.ubu.es
+					   </p>
 				</article>
 			</section>
-			<aside class="col-md-3 midden-sm">
+			<aside class="col-md-3 hidden-xs midden-sm">
 				<h4>Torneos</h4>
 				<div id="listadoTorneos" class="list-group">
 					<a class="list-group-item">Torneo 1 
@@ -112,45 +156,40 @@
 						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
 						data-btn-ok-label="Sí" data-btn-cancel-label="No"
 						data-singleton="true" data-popout="true">Finalizar Torneo</button>
-						<span id="participantesSala1" class="badge pull-right">0/25</span>
+						<span id="participantesSala1" class="badge pull-right">0</span>
 					</a>
 					<a class="list-group-item">Torneo 2
 						<button id="FinTorneo2" class="btn btn-xs btn-danger pull-right"
 						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
 						data-btn-ok-label="Sí" data-btn-cancel-label="No"
 						data-singleton="true" data-popout="true">Finalizar Torneo</button>
-						<span id="participantesSala2" class="badge pull-right">0/25</span>
+						<span id="participantesSala2" class="badge pull-right">0</span>
 					</a>
 					<a class="list-group-item">Torneo 3 
 						<button id="FinTorneo3" class="btn btn-xs btn-danger pull-right"
 						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
 						data-btn-ok-label="Sí" data-btn-cancel-label="No"
 						data-singleton="true" data-popout="true">Finalizar Torneo</button>
-						<span id="participantesSala3" class="badge pull-right">0/25</span>
+						<span id="participantesSala3" class="badge pull-right">0</span>
 					</a>
 					<a class="list-group-item">Torneo 4 
 						<button id="FinTorneo4" class="btn btn-xs btn-danger pull-right"
 						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
 						data-btn-ok-label="Sí" data-btn-cancel-label="No"
 						data-singleton="true" data-popout="true">Finalizar Torneo</button>
-						<span id="participantesSala4" class="badge pull-right">0/25</span>
+						<span id="participantesSala4" class="badge pull-right">0</span>
 					</a>
 					<a class="list-group-item">Torneo 5 
 						<button id="FinTorneo5" class="btn btn-xs btn-danger pull-right"
 						data-toggle="confirmation" data-title="¿Seguro que deseas finalizar el torneo?" 
 						data-btn-ok-label="Sí" data-btn-cancel-label="No"
 						data-singleton="true" data-popout="true">Finalizar Torneo</button>
-						<span id="participantesSala5" class="badge pull-right">0/25</span>
+						<span id="participantesSala5" class="badge pull-right">0</span>
 					</a>
-				</div>
-				<h4>Torneos Finalizados</h4>
-				<div id="torneosFinalizados" class="list-group" style="height: 200px; overflow: scroll;">
-					
 				</div>
 			</aside>
 		</div>
 	</section>
-
 
 	<footer>
 		<div class="container container-footer">
@@ -162,13 +201,12 @@
 				<div class="col-xs-5">
 					<ul class="list-inline text-right">
 						<li><a href="../index.html">Inicio</a></li>
-						<li><a href="contacto.html">Contacto</a></li>
+						<li><a href="#">Contacto</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</footer>
-
 	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
 	<script src="../js/bootstrap-confirmation.js"></script>
@@ -220,7 +258,7 @@
 	            type: 'GET',
 	            data: {'sala': 1},
 	            success: function (result) {
-	              alert(result);
+	              alert("El torneo ha concluido correctamente.");
 	            }
         	});
 		});
@@ -230,7 +268,7 @@
 	            type: 'GET',
 	            data: {'sala': 2},
 	            success: function (result) {
-	              alert(result);
+	              alert("El torneo ha concluido correctamente.");
 	            }
         	});
 		});
@@ -240,7 +278,7 @@
 	            type: 'GET',
 	            data: {'sala': 3},
 	            success: function (result) {
-	              alert(result);
+	              alert("El torneo ha concluido correctamente.");
 	            }
         	});
 		});
@@ -250,7 +288,7 @@
 	            type: 'GET',
 	            data: {'sala': 4},
 	            success: function (result) {
-	              alert(result);
+	              alert("El torneo ha concluido correctamente.");
 	            }
         	});
 		});
@@ -260,7 +298,7 @@
 	            type: 'GET',
 	            data: {'sala': 5},
 	            success: function (result) {
-	              alert(result);
+	              alert("El torneo ha concluido correctamente.");
 	            }
         	});
 		});
@@ -275,28 +313,5 @@
 	            }});	
 		});
 	</script>
-	<script type="text/javascript">
-		$(document).ready(function() { 
-			$.ajax({
-				type: "GET",
-				url: "php/torneosFinalizados.php",
-	            success: function (result) {
-	              $("#torneosFinalizados").html(result); 
-	            }});	
-		});
-	</script>
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() { 
-			$.ajax({
-				type: "GET",
-				data: {'user': -1},
-				url: "php/resultadosTorneos.php",
-	            success: function (result) {
-	              $("#listadoResultados").html(result); 
-	            }});	
-		});
-	</script>
-
 </body>
 </html>
