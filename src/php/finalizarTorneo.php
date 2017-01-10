@@ -90,7 +90,8 @@ Jose Antonio Barbero
 		fclose($filePayoffs);
 
 		//Ejecutar torneo.
-		exec('php ejecutarTorneo.php');
+		$command = "cd .. && cd .. && ./Torneo";
+		exec ($command);
 
 		//Guardar resultados en la base de datos
 		$csv = array_map('str_getcsv', file('../../Netlogo/Alumnos/Resultados.csv'));
