@@ -31,7 +31,13 @@ to-report estrategiaAlumno
   ;-----------------------------|INICIO|----------------------------
 
 
-
+	ifelse (member? False [past-decisions] of opponent)
+  [
+    set eleccion False
+  ]
+  [
+    set eleccion True
+  ]
 
 
 

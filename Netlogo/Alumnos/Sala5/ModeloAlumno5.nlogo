@@ -31,7 +31,19 @@ to-report estrategiaAlumno
   ;-----------------------------|INICIO|----------------------------
 
 
-
+	ifelse titForTat
+  [
+    ifelse random 100 < 10
+    [
+      set eleccion False
+    ]
+    [
+      set eleccion True
+    ]
+  ]
+  [
+    set eleccion False
+  ]
 
 
 

@@ -32,7 +32,7 @@ to-report estrategiaAlumno
 
 
 
-
+	set eleccion False
 
 
   ;------------------------------|FIN|------------------------------

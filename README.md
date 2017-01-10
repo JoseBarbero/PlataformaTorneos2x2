@@ -3,7 +3,7 @@
 ##TFG Grado en Ingeniería Informática, Universidad de Burgos.
 
 Alumno: Jose Antonio Barbero
-Tutor: José Ignacio Santos
+Tutores: José Ignacio Santos y Virginia Ahedo
 
 ##Resumen
 

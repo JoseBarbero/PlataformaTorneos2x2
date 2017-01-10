@@ -31,9 +31,9 @@ to-report estrategiaAlumno
   ;-----------------------------|INICIO|----------------------------
 
 
+	set eleccion one-of [True False]
 
 
-  ; PRUEBA DE MOVIMIENTO SALA 2
 
   ;------------------------------|FIN|------------------------------
   report eleccion

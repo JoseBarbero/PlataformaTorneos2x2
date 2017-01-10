@@ -1,1 +1,8 @@
+estrategiaAlumno1
+estrategiaAlumno2
+estrategiaAlumno3
+estrategiaAlumno4
+estrategiaAlumno5
+estrategiaAlumno6
+estrategiaAlumno7
 randomSt

@@ -31,7 +31,7 @@ to-report estrategiaAlumno
   ;-----------------------------|INICIO|----------------------------
 
 
-
+	set eleccion one-of [True False]
 
 
 

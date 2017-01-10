@@ -31,7 +31,13 @@ to-report estrategiaAlumno
   ;-----------------------------|INICIO|----------------------------
 
 
-
+	ifelse ticks = 0 or (item (ticks - 1) [past-decisions] of opponent) = True
+  [
+    set eleccion True
+  ]
+  [
+    set eleccion False
+  ]
 
 
 

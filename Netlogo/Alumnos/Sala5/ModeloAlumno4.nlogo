@@ -30,7 +30,13 @@ to-report estrategiaAlumno
   ;     actual a través de la variable elección. Sea True si colabora o False si no lo hace.
   ;-----------------------------|INICIO|----------------------------
 
-
+	ifelse ticks = 0 or (item (ticks - 1) [past-decisions] of opponent) = True
+  [
+    set eleccion True
+  ]
+  [
+    set eleccion False
+  ]
 
 
 
