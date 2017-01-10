@@ -56,6 +56,5 @@ Jose Antonio Barbero
 		}
 	}else{
 		echo "Nombre de usuario incorrecto.";
-		header('Location: ../../index.html');
 	}
 ?>
