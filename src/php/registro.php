@@ -59,8 +59,8 @@ Jose Antonio Barbero
 		} else {
 			echo "Ya existe un usuario con ese correo electrónico.";
 		}
+		$conn->close();
 	} else {
 		echo "Las contraseñas no coinciden.";
 	}
-	$conn->close();
 ?>
