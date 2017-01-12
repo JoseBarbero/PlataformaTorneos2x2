@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-01-2017 a las 19:28:15
+-- Tiempo de generación: 12-01-2017 a las 14:26:39
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -103,6 +103,24 @@ INSERT INTO `participantes` (`nombre`, `apellidos`, `nombreEstrategia`, `idTorne
 ('profesor', 'profesor', 'estr', 103, 1, 'profesor@profesor.com', 0),
 ('profesor', 'profesor', 'A', 111, 1, 'profesor@profesor.com', 0),
 ('profesor', 'profesor', 'k', 112, 1, 'profesor@profesor.com', 0),
+('a', 'a', 'a', 112, 2, 'a@a', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 3, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 4, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 5, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 6, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 7, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 8, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 9, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 10, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 11, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 12, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 13, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 14, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 15, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 16, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 17, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 18, 'Alumno@alu.ubu.es', 0),
+('Alumno', 'Alumno', 'Estrategia Test', 112, 19, 'Alumno@alu.ubu.es', 0),
 ('profesor', 'profesor', '1', 113, 1, 'profesor@profesor.com', 0),
 ('profesor', 'profesor', '3', 114, 1, 'profesor@profesor.com', 0),
 ('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'es1', 115, 1, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
@@ -115,7 +133,38 @@ INSERT INTO `participantes` (`nombre`, `apellidos`, `nombreEstrategia`, `idTorne
 ('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'A', 120, 1, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
 ('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'B', 120, 2, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
 ('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'C', 120, 3, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 0),
-('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'A', 121, 1, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 2295);
+('PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'A', 121, 1, 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', 2295),
+('Alumno', 'Alumno Alumno', 'Estrategia de ejemplo 1', 140, 1, 'alumno@alumno.com', 8451),
+('Richard', 'Dawkins', 'Egoism', 140, 2, 'rdawkins@daw.com', 8423),
+('Neil', 'deGrasse Tyson', 'Journey', 140, 3, 'ndty@cosmos.com', 8528),
+('Carl', 'Sagan', 'Candle', 140, 4, 'csagan@cosmos.com', 8521),
+('Daniel', 'Dennet', 'DenForDan', 140, 5, 'dan@den.com', 8507),
+('Richard', 'Feynman', 'Unlock', 140, 6, 'rfey@caltec.com', 8479),
+('John ', 'Maynard Smith', 'JMS', 140, 7, 'john@maysmith.com', 8514),
+('Elon', 'Musk', 'Tesla', 140, 8, 'elon@tesla.com', 8549),
+('Bill', 'Nye', 'Science', 140, 9, 'bill@nye.com', 8402),
+('Robert', 'Axelrod', 'Tit', 140, 10, 'rob@axel.com', 8563),
+('Michio', 'Kaku', 'Impossible', 140, 11, 'michio@kaku.com', 8542),
+('Profesor', 'Profesor', 'Estrategia de ejemplo 2', 141, 1, 'profesor@profesor.com', 84710),
+('Philip K.', 'Dick', 'Runner', 141, 2, 'Phil@run.com', 96980),
+('Douglas', 'Adams', 'Estrategia42', 141, 3, 'Douglas@adams.com', 87950),
+('George', 'Orwell', 'Big Brother', 141, 4, 'george@orwell.com', 98160),
+('Walter', 'Isaacson', 'Bio', 141, 5, 'wal@isaacson.com', 100650),
+('Isaac', 'Asimov', 'Robot', 141, 6, 'is@mov.com', 103000),
+('Arthur C.', 'Clarke', 'Law', 141, 7, 'art@clark.com', 88600),
+('Profesor', 'Profesor', 'Prof', 142, 1, 'profesor@profesor.com', 0),
+('Walter Hartwell', 'White', 'Heisenberg', 142, 2, 'ww@white.com', 0),
+('Pablo Emilio', 'Escobar Gaviria', 'AgPb', 142, 3, 'pb@esc.com', 0),
+('Tyrion', 'Lannister', 'Pay', 142, 4, 'ty@lann.com', 0),
+('Sheldon Lee', 'Cooper', 'Knock Knock', 142, 5, 'sheldon@cooper.com', 0),
+('Daryl', 'Dixon', 'Crossbow', 142, 6, 'daryl@dixon.com', 0),
+('Rick', 'Grimes', 'Lead', 142, 7, 'rick@rgrimes.com', 0),
+('Alumno', 'Alumno Alumno', 'EstrategiaAlumno', 142, 8, 'alumno@alumno.com', 0),
+('Profesor', 'Profesor', 'ProfesorEst', 143, 1, '', 0),
+('ParticipanteEjemplo1', 'ParticipanteEjemplo1', 'EstrategiaEjemplo1', 144, 1, 'ParticipanteEjemplo1@ParticipanteEjemplo1.com', 0),
+('ParticipanteEjemplo2', 'ParticipanteEjemplo2', 'ParticipanteEjemplo2', 144, 2, 'ParticipanteEjemplo2@ParticipanteEjemplo2.com', 0),
+('ParticipanteEjemplo3', 'ParticipanteEjemplo3', 'ParticipanteEjemplo3', 144, 3, 'ParticipanteEjemplo1@ejemplo.com', 0),
+('ParticipanteEjemplo4', 'ParticipanteEjemplo4', 'ParticipanteEjemplo4', 144, 4, 'ParticipanteEjemplo4@ejemplo.com', 0);
 
 -- --------------------------------------------------------
 
@@ -177,7 +226,30 @@ INSERT INTO `payoffs` (`idTorneo`, `mutualcoop`, `suckerspayoff`, `mutualdefect`
 (118, 6, 1, 10, 3),
 (119, 1, 2, 3, 4),
 (120, 5, 6, 7, 8),
-(121, 1, 2, 3, 4);
+(121, 1, 2, 3, 4),
+(122, 6, 1, 10, 3),
+(123, 1, 2, 34, 4),
+(124, 6, 1, 10, 3),
+(125, 6, 1, 10, 3),
+(126, 6, 1, 10, 3),
+(127, 6, 1, 10, 3),
+(128, 6, 1, 10, 3),
+(129, 6, 1, 10, 3),
+(130, 6, 1, 10, 3),
+(131, 6, 1, 10, 3),
+(132, 6, 1, 10, 3),
+(133, 6, 1, 10, 3),
+(134, 6, 1, 10, 3),
+(135, 6, 1, 10, 3),
+(136, 6, 1, 10, 3),
+(137, 6, 1, 10, 3),
+(138, 6, 1, 10, 3),
+(139, 6, 1, 10, 3),
+(140, 6, 1, 10, 3),
+(141, 60, 10, 100, 30),
+(142, 17, 0, 34, 6),
+(143, 0, 0, 0, 0),
+(144, 3, 0, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -198,8 +270,8 @@ INSERT INTO `salas` (`idSala`, `idTorneo`) VALUES
 (1, NULL),
 (2, NULL),
 (3, NULL),
-(4, NULL),
-(5, 112);
+(4, 144),
+(5, 142);
 
 -- --------------------------------------------------------
 
@@ -221,127 +293,10 @@ CREATE TABLE `torneos` (
 --
 
 INSERT INTO `torneos` (`id`, `nombre`, `idUserCreador`, `finalizado`, `fechaInicio`, `fechaFin`) VALUES
-(1, 'Torneo de prueba', 1, 1, '0000-00-00', '0000-00-00'),
-(2, 'nombreTorneo', 1, 1, '0000-00-00', '0000-00-00'),
-(3, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(4, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(5, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(6, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(7, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(8, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(9, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(10, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(11, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(12, 'nombreTorneo', 1, 0, '0000-00-00', '0000-00-00'),
-(13, 'nombreTorneo', 1, 1, '0000-00-00', '0000-00-00'),
-(14, '', 0, 1, '0000-00-00', '0000-00-00'),
-(15, 'jba0040@alu.ubu.es', 0, 1, '0000-00-00', '0000-00-00'),
-(16, 'jba0040@alu.ubu.es', 1, 1, '0000-00-00', '0000-00-00'),
-(17, 'jba0040@alu.ubu.es', 1, 0, '0000-00-00', '0000-00-00'),
-(18, 'jba0040@alu.ubu.es', 1, 0, '0000-00-00', '0000-00-00'),
-(19, 'jba0040@alu.ubu.es', 1, 1, '0000-00-00', '0000-00-00'),
-(20, 'jba0040@alu.ubu.es', 1, 1, '0000-00-00', '0000-00-00'),
-(21, 'jba0040@alu.ubu.es', 1, 0, '0000-00-00', '0000-00-00'),
-(22, 'jba0040@alu.ubu.es', 1, 1, '0000-00-00', '0000-00-00'),
-(23, 'jba0040@alu.ubu.es', 1, 1, '0000-00-00', '0000-00-00'),
-(24, 'jba0040@alu.ubu.es', 1, 0, '0000-00-00', '0000-00-00'),
-(25, 'jba0040@alu.ubu.es', 1, 1, '0000-00-00', '0000-00-00'),
-(26, 'a', 1, 1, '0000-00-00', '0000-00-00'),
-(27, 'a', 1, 1, '0000-00-00', '0000-00-00'),
-(28, 'a', 1, 1, '0000-00-00', '0000-00-00'),
-(29, 's', 1, 0, '0000-00-00', '0000-00-00'),
-(30, 'a', 16, 1, '0000-00-00', '0000-00-00'),
-(31, 'b', 16, 1, '0000-00-00', '0000-00-00'),
-(32, 'c', 16, 1, '0000-00-00', '0000-00-00'),
-(33, 'd', 16, 1, '0000-00-00', '0000-00-00'),
-(34, 'a', 16, 1, '0000-00-00', '0000-00-00'),
-(35, '2', 16, 1, '0000-00-00', '2016-12-05'),
-(36, '3', 16, 1, '0000-00-00', '2016-12-05'),
-(37, '4', 16, 1, '0000-00-00', '2016-12-05'),
-(38, '5', 16, 1, '0000-00-00', '2016-12-05'),
-(39, 'fecha', 16, 1, '2016-12-05', '2016-12-08'),
-(40, 'Torneo1', 16, 1, '2016-12-21', '2016-12-21'),
-(41, 'fff', 16, 1, '2016-12-21', '2016-12-21'),
-(42, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(43, 'torneoprueba', 16, 1, '2016-12-21', '2016-12-21'),
-(44, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(45, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(46, 'payoffs', 16, 1, '2016-12-21', '2016-12-21'),
-(47, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(48, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(49, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(50, 'h', 16, 1, '2016-12-21', '2016-12-21'),
-(51, 'h', 16, 1, '2016-12-21', '2016-12-21'),
-(52, 'h', 16, 1, '2016-12-21', '2016-12-21'),
-(53, 'h', 16, 1, '2016-12-21', '2016-12-21'),
-(54, 'j', 16, 1, '2016-12-21', '2016-12-21'),
-(55, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(56, 'aaaa', 16, 1, '2016-12-21', '2016-12-21'),
-(57, 's', 16, 1, '2016-12-21', '2016-12-21'),
-(58, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(59, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(60, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(61, 'n', 16, 1, '2016-12-21', '2016-12-21'),
-(62, 'n', 16, 1, '2016-12-21', '2016-12-21'),
-(63, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(64, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(65, 'k', 16, 1, '2016-12-21', '2016-12-21'),
-(66, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(67, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(68, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(69, 'k', 16, 1, '2016-12-21', '2016-12-21'),
-(70, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(71, 'q', 16, 1, '2016-12-21', '2016-12-21'),
-(72, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(73, 'j', 16, 1, '2016-12-21', '2016-12-21'),
-(74, 'j', 16, 1, '2016-12-21', '2016-12-21'),
-(75, 'j', 16, 1, '2016-12-21', '2016-12-21'),
-(76, 'k', 16, 1, '2016-12-21', '2016-12-21'),
-(77, 'k', 16, 1, '2016-12-21', '2016-12-21'),
-(78, 'l', 16, 1, '2016-12-21', '2016-12-21'),
-(79, 'o', 16, 1, '2016-12-21', '2016-12-21'),
-(80, 'Tor', 16, 1, '2016-12-21', '2016-12-21'),
-(81, 'TorneoPruebaPayoffs', 16, 1, '2016-12-21', '2016-12-21'),
-(82, 'To', 16, 1, '2016-12-21', '2016-12-21'),
-(83, 'TorneoPruebaPayoffs', 16, 1, '2016-12-21', '2016-12-21'),
-(84, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(85, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(86, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(87, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(88, 'k', 16, 1, '2016-12-21', '2016-12-21'),
-(89, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(90, 'u', 16, 1, '2016-12-21', '2016-12-21'),
-(91, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(92, 'j', 16, 1, '2016-12-21', '2016-12-21'),
-(93, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(94, 'h', 16, 1, '2016-12-21', '2016-12-21'),
-(95, 'q', 16, 1, '2016-12-21', '2016-12-21'),
-(96, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(97, 'q', 16, 1, '2016-12-21', '2016-12-21'),
-(98, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(99, 'a', 16, 1, '2016-12-21', '2016-12-21'),
-(100, '1', 16, 1, '2016-12-21', '2016-12-21'),
-(101, 'a', 16, 1, '2016-12-24', '2016-12-24'),
-(102, '1', 16, 1, '2016-12-24', '2016-12-24'),
-(103, '2', 16, 1, '2016-12-24', '2016-12-24'),
-(104, 'a', 16, 1, '2016-12-24', '2016-12-24'),
-(105, '', 16, 1, '2016-12-24', '2016-12-24'),
-(106, 'k', 16, 1, '2016-12-24', '2016-12-24'),
-(107, 'k', 16, 1, '2016-12-24', '2016-12-24'),
-(108, 'a', 16, 1, '2016-12-24', '2016-12-24'),
-(109, 'a', 16, 1, '2016-12-24', '2016-12-24'),
-(110, 'a', 16, 1, '2016-12-24', '2016-12-24'),
-(111, 'a', 16, 1, '2016-12-24', '2016-12-24'),
-(112, 'm', 16, 0, '2016-12-24', '0000-00-00'),
-(113, 'T', 16, 1, '2016-12-24', '2016-12-24'),
-(114, '1', 16, 1, '2016-12-24', '2016-12-24'),
-(115, 'a', 19, 1, '2017-01-03', '2017-01-05'),
-(116, '', 19, 1, '2017-01-05', '2017-01-05'),
-(117, '1', 19, 1, '2017-01-05', '2017-01-05'),
-(118, 'Torneo', 19, 1, '2017-01-05', '2017-01-05'),
-(119, 'A', 19, 1, '2017-01-05', '2017-01-05'),
-(120, 'A', 19, 1, '2017-01-05', '2017-01-05'),
-(121, 'a', 19, 1, '2017-01-05', '2017-01-05');
+(140, 'Torneo de ejemplo 1', 22, 1, '2017-01-10', '2017-01-10'),
+(141, 'Torneo de ejemplo 2', 22, 1, '2017-01-10', '2017-01-10'),
+(142, 'Torneo A', 22, 0, '2017-01-10', '0000-00-00'),
+(144, 'Torneo de ejemplo 4', 22, 0, '2017-01-12', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -364,12 +319,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `nombre`, `apellidos`, `email`, `password`, `profesor`) VALUES
-(1, 'jba0040', 'Jose Antonio', 'Barbero Aparicio', 'jba0040@alu.ubu.es', '1234', 1),
-(15, 'alumno', 'alumno', 'alumno', 'alumno@alu.ubu.es', 'alumno', 0),
-(16, 'profesor', 'profesor', 'profesor', 'profesor@profesor.com', 'profesor', 1),
-(18, 'PruebaRegistroEncrip', 'PruebaRegistroEncrip', 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.', '$2y$10$5MVfKyU8EJw9P', 1),
 (19, 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado', 'PruebaRegistroEncriptado@PruebaRegistroEncriptado.com', '$2y$10$rjF0zzofuX5fBA17YaAT4OxZlvv./mI9oM0NM6o0qyjLkwNokQgZO', 1),
-(20, 'profesor', 'profesor', 'profesor', 'profesor@ubu.es', '$2y$10$swfy/16zC5C9./9VXCWn/ud1.jxYWB9Ygpmt9QsnGDOrUafd8XYOq', 1);
+(20, 'profesor', 'profesor', 'profesor', 'profesor@ubu.es', '$2y$10$swfy/16zC5C9./9VXCWn/ud1.jxYWB9Ygpmt9QsnGDOrUafd8XYOq', 1),
+(21, 'Alumno', 'Alumno', 'Alumno', 'alumno@alu.ubu.es', '$2y$10$LO46Nwkw3/kcVE8m9f0bQ.N6xzP1Yd.vbn2ZhvgGwdQpFUrmXVX8a', 0),
+(22, 'Profesor', 'Profesor', 'Profesor', 'profesor@profesor.com', '$2y$10$/9.5m3O42A2thqSHSRJVT...yB5/bsweRlrSAFOo80BUt803tjIzi', 1),
+(56, 'Repetido', 'Repetido', 'Repetido', 'Repetido@Repetido.com', '$2y$10$sGqDFf66.knbYRY7xDSohea1381UXJBICq4PSRqT1NS39sh9168HS', 0),
+(57, 'Test', 'Test', 'Test', 'Test@Test.com', '$2y$10$fXa49I6UT7NEhif09lR0xODW2v1fLqmCFRcoBsfDOXXSVUbL3nIyq', 0),
+(82, 'Alumno', 'Alumno', 'Alumno Alumno', 'Alumno@alumno.com', '$2y$10$COEweoqi/uW7PpmYkqJ48.4di18oqeJlm34y2f2jVOtB7ggjOwVrm', 0);
 
 --
 -- Índices para tablas volcadas
@@ -413,12 +369,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `torneos`
 --
 ALTER TABLE `torneos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
