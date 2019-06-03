@@ -20,4 +20,4 @@ Since it is a learning tool, we have taken into account the adaptation process o
 Finally a model has been created to perform the final tournament simulation. This tournament interprets the strategies provided by the participants and performs pairings in order to confront the strategies with each other one. To conclude, the tournament uses the scores recorded in every single pairing and creates a set of global scores. Based on those scores the most optimal strategies in that particular environment are established.
 
 ## Contacto
-Jose Antonio Barbero - jba0040@alu.ubu.es
+Jose Antonio Barbero - jabarbero@ubu.es
